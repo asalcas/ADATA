@@ -13,8 +13,13 @@ public class ejercicioAleatorioNumLetras {
 
         try (RandomAccessFile lector = new RandomAccessFile(rutaArchivoInput, "r");
             RandomAccessFile escritor = new RandomAccessFile(rutaArchivoOutput, "rw")){
-                for (long i = 5; i < lector.length()-1; i--){
-                    lector.seek(lector.length()-1);
+                for (long i = lector.length()-1; i>= 0; i--){
+                    lector.seek(i);
+
+
+
+
+                    /*lector.seek(lector.length()-1);
                     char primeraLetra = (char)lector.readByte();
                     primeraLetra = Character.toLowerCase(primeraLetra);
                     if (Character.isLetter(primeraLetra)){
@@ -43,7 +48,8 @@ public class ejercicioAleatorioNumLetras {
                         i++;
                     }
                     // UN SWITCH CON INDEX OF 0 = case "a", "b"...
-                }
+                */
+            }
 
         }catch(IOException error) {
             System.out.println("Ha ocurrido un error inesperado: " + error);
