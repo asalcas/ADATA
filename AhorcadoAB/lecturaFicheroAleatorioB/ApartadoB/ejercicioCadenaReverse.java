@@ -15,8 +15,7 @@ public class ejercicioCadenaReverse {
         try (RandomAccessFile lector = new RandomAccessFile(rutaArchivoInput, "r");
             RandomAccessFile escritor = new RandomAccessFile(rutaArchivoOutput, "rw")){
 
-                for (long i = lector.length()-1; i >= 0; i-=3){
-                    
+                for (long i = lector.length()-1; i >= 0; i-=3){ 
                     lector.seek(i);
                     letra= lector.readLine();
                     escritor.writeBytes(letra);
@@ -24,7 +23,7 @@ public class ejercicioCadenaReverse {
                         escritor.writeBytes("\n");
                     }
 
-                    /*if (letra == "\n"){
+                    /*if (letra == "\n"){  PARA NO TENER QUE DECREMENTAR 3
                         i--;
                     }
                     */
