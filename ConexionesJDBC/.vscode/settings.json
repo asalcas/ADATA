@@ -1,7 +1,10 @@
 {
-    "java.project.sourcePaths": ["src"],
+    "java.project.sourcePaths": [
+        "src",
+        "lib"
+    ],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
-        "lib/**/*.jar"
+        "c:\\Users\\alvaro.salvador\\Desktop\\GitHub\\ADATA\\ConexionesJDBC\\lib\\mysql-connector-j-9.1.0.jar"
     ]
 }

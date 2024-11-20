@@ -1,12 +1,12 @@
-package crearClase;
+package crearDB;
 
 import ejercicioConexionProfesor.ConexionPcProfesor;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class JDBCrearClase {
-    public JDBCrearClase() {
+public class JDBCrearDB {
+    public JDBCrearDB() {
     }
 
     public static void main(String[] args) {
