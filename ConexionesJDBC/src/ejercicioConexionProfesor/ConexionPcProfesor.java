@@ -1,4 +1,4 @@
-package ejercicioconexionprofesor;
+package ejercicioConexionProfesor;
 
 
 import java.sql.Connection;
