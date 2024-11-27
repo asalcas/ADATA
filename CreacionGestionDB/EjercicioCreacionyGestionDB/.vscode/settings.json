@@ -1,0 +1,10 @@
+{
+    "java.project.sourcePaths": [
+        "src",
+        "lib"
+    ],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "c:\\Users\\alvaro.salvador\\Desktop\\GitHub\\ADATA\\CreacionGestionDB\\EjercicioCreacionyGestionDB\\lib\\mysql-connector-j-9.1.0.jar"
+    ]
+}

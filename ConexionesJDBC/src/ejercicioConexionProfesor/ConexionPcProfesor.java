@@ -27,7 +27,7 @@ public class ConexionPcProfesor {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(url, usuario, password);
-            System.out.println("Se ha hecho la conexi\u00f3n :) ");
+            System.out.println("Se ha hecho la conexion :) ");
         } catch (SQLException var5) {
             var5.printStackTrace();
         } catch (ClassNotFoundException var6) {
