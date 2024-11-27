@@ -1,4 +1,4 @@
-package InsertarDatos;
+package insertardatos;
 
 public class ArrayInsertDB {
     // String[] inserts = new String[200], //? DECLARACION

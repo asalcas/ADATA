@@ -1,10 +1,10 @@
-package InsertarDatos;
+package insertardatos;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import ejercicioConexionProfesor.ConexionPcProfesor;
+import ejercicioconexionprofesor.ConexionPcProfesor;
 
 public class InsertValues {
 
