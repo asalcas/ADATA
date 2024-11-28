@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class funciones {
 public static void main(String[] args) throws SQLException {
-    crearTabla();
+    crearTabla(conectar());
 }
     public static Connection conectar() throws SQLException {
 
