@@ -8,7 +8,7 @@ public class InterfazAplicacion {
             System.out.println("|                                            |");
             System.out.println("==============================================");
             System.out.println("1. Conectar a la DATABASE."); //*Hecho */
-            System.out.println("2. Crear TABLAS en la DATABASE."); //TODO
+            System.out.println("2. Crear TABLAS en la DATABASE."); //*hecho */
             System.out.println("3. Insertar datos."); //TODO
             System.out.println("4. ListarDatos."); //TODO
             System.out.println("5. Modificar datos."); //TODO
