@@ -152,8 +152,11 @@ public class funciones {
         }
 
     }
+
     /**
-     * Funcion que inserta los datos en una tabla específica (Usuarios, Posts o Likes)
+     * Funcion que inserta los datos en una tabla específica (Usuarios, Posts o
+     * Likes)
+     * 
      * @param conn
      * @throws SQLException
      */
@@ -177,41 +180,41 @@ public class funciones {
         try {
             conn = conectar();
             stmt = conn.createStatement();
-        while (funcionando) {
-            System.out.println("===========================================");
-            System.out.println("|  ¿En que tabla quieres insertar datos?  |");
-            System.out.println("===========================================");
-            System.out.println("1. Usuarios");
-            System.out.println("2. Posts");
-            System.out.println("3. Likes");
-            System.out.println("4. SALIR");
-            System.out.println("Escribe el Nº:  ");
-            System.out.print("Tu respuesta: ");
-            int respuestaUser = lector.nextInt();
-            switch (respuestaUser) {
-                case 1:
-                    
-                    break;
-                case 2:
-                    // TODO POST 3 campos
-                    break;
-                case 3:
-                    // TODO LIKES 2 campso
-                    break;
-                case 4:
-                    funcionando = false;
-                    break;
-                default:
-                    break;
+            while (funcionando) {
+                System.out.println("===========================================");
+                System.out.println("|  ¿En que tabla quieres insertar datos?  |");
+                System.out.println("===========================================");
+                System.out.println("1. Usuarios");
+                System.out.println("2. Posts");
+                System.out.println("3. Likes");
+                System.out.println("4. SALIR");
+                System.out.println("Escribe el Nº:  ");
+                System.out.print("Tu respuesta: ");
+                int respuestaUser = lector.nextInt();
+                System.out.println("Introduce los datos a introducir: ");
+                switch (respuestaUser) {
+                    case 1:
+                        System.out.println("");
+                        break;
+                    case 2:
+                        // TODO POST 3 campos
+                        break;
+                    case 3:
+                        // TODO LIKES 2 campso
+                        break;
+                    case 4:
+                        funcionando = false;
+                        break;
+                    default:
+                        break;
+                }
+                // PARA CREAR MODELO DE QUERY podria usar un Switch con una variable llamada
+                // tipoConsulta, que dependiendo
+
             }
-            // PARA CREAR MODELO DE QUERY podria usar un Switch con una variable llamada tipoConsulta, que dependiendo 
-
+        } catch (Exception e) {
+            System.err.println("Ha ocurrido un error en la conexión con la DB: " + e);
         }
-    } catch (Exception e) {
-        System.err.println("Ha ocurrido un error en la conexión con la DB: " + e);
-    }
-
-
 
     }
 }
