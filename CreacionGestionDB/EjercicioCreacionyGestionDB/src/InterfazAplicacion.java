@@ -1,5 +1,9 @@
 public class InterfazAplicacion {
     public static void main(String[] args) throws Exception {
+        // DECLARAR SCANNER AQUI Y LOS STRING PARA LA CONEXION
+
+
+
         boolean funcionando = true;
         while(funcionando) {
             System.out.println("==============================================");
