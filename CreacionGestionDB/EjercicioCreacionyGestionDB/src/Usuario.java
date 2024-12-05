@@ -1,4 +1,4 @@
-public class Usuarios {
+public class Usuario {
     private int idUsuarios;
     private String Nombre;
     private String Apellidos;
@@ -6,10 +6,10 @@ public class Usuarios {
     private String Password;
     private String Email;
 
-    public Usuarios() {
+    public Usuario() {
     }
 
-    public Usuarios(String nombre, String apellidos, String username, String password, String email) {
+    public Usuario(String nombre, String apellidos, String username, String password, String email) {
         Nombre = nombre;
         Apellidos = apellidos;
         Username = username;

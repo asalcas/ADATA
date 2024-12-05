@@ -1,12 +1,12 @@
+import java.io.Console;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 import java.util.Scanner;
-import java.sql.Date;
-import java.io.Console;
-import java.lang.Thread.State;
 
 public class funciones {
     public static void main(String[] args) throws SQLException {
@@ -221,19 +221,18 @@ public class funciones {
                         System.out.print("Username: ");
                         usuarioUsername = lector.nextLine();
                         Console console = System.console();
-                        lector.nextLine(); // Limpiamos el caché del Scanner
 
                         // ESTO HACE QUE NO SALGA NADA AL INTRODUCIR LA CONTRASEÑA EN LA TERMINAL ( PERO
                         // SI SE ALMACENA EN LA VARIABLE "usuarioPassword")
                         char[] passwordArray = console.readPassword("Introduce tu contraseña: ");
                         usuarioPassword = new String(passwordArray); // Convertir el array de caracteres a un String si
                                                                      // es necesario
-                        java.util.Arrays.fill(passwordArray, ' '); // Por seguridad, limpia el array después de usarlo
+                        Arrays.fill(passwordArray, ' '); // Por seguridad, limpia el array después de usarlo
                         System.out.println("Contraseña capturada de forma segura.");
 
                         System.out.print("Email: ");
                         usuarioEmail = lector.nextLine();
-                        Usuarios paraInsertarUsuarios = new Usuarios(usuarioNombre, usuarioApellidos, usuarioUsername,
+                        Usuario paraInsertarUsuarios = new Usuario(usuarioNombre, usuarioApellidos, usuarioUsername,
                                 usuarioPassword, usuarioEmail);
 
                         // PREPARAMOS EL PreparedStatement
@@ -244,6 +243,7 @@ public class funciones {
                         pstmt.setString(3, paraInsertarUsuarios.getUsername());
                         pstmt.setString(4, paraInsertarUsuarios.getPassword());
                         pstmt.setString(5, paraInsertarUsuarios.getEmail());
+                        
                         pstmt.executeUpdate(); // Sin esto no ejecuta
                         System.out.println("Has introducido al usuario con exito!");
                         break;

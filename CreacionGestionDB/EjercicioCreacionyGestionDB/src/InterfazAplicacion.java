@@ -1,6 +1,7 @@
 public class InterfazAplicacion {
+    //SCANNER AQUI
     public static void main(String[] args) throws Exception {
-        // DECLARAR SCANNER AQUI Y LOS STRING PARA LA CONEXION
+        //Y LOS STRING PARA LA CONEXION
 
 
 
@@ -20,5 +21,13 @@ public class InterfazAplicacion {
             System.out.println("0. SALIR.");
         }
 
-    }
+
+
+
+        // ORDEN PROGRAMAS:
+        //? 1. INTERFAZ GRAFICA (MAIN)
+        //? 2.
+        // Menus siempre en una funcion para llamarlas desde ahi, desgranar las funciones a lo más básico, 1 funcion == 1 funcionalidad.ç
+        // Dividir por modelos
+    }   
 }
