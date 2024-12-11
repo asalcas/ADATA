@@ -3,6 +3,16 @@ public class Likes {
     private int idUsuarios;
     private int idPost;
 
+    public Likes(){
+
+    }
+    public Likes(int idLikes, int idUsuarios, int idPost){
+        this.idLikes = idLikes;
+        this.idUsuarios = idUsuarios;
+        this.idPost = idPost;
+
+    }
+
     // Getters
     public int getIdLikes(){
         return idLikes;
@@ -13,6 +23,7 @@ public class Likes {
     public int getIdPost(){
         return idPost;
     }
+
 
     //// Setters
     //public void setIdLikes(int newIdLikes){

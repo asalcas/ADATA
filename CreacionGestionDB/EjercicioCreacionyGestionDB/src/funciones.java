@@ -23,7 +23,7 @@ public class funciones {
      * @return Connection conn
      * @throws SQLException
      */
-    public static Connection conectar() throws SQLException {
+    public static Connection conectar(url, usuario, password) throws SQLException {
 
         String url = "jdbc:mysql://dns11036.phdns11.es:3306/ad2425_alvaro_salvador";
         String usuario = "alvaro_salvador";
@@ -260,14 +260,25 @@ public class funciones {
                         // PREPARAMOS EL "PreparedStatement"
                         // --------------------------------
                         Posts paraInsertarPost = new Posts(postIdUsuarios, postCreate_at, postUpdated_at);
-
+                        
                         pstmt = conn.prepareStatement(insertarPost);
                         pstmt.setInt(1, paraInsertarPost.getIdUsuarios());
                         pstmt.setDate(2, paraInsertarPost.getCreated_at());
                         pstmt.setDate(3, paraInsertarPost.getUpdated_at());
                         pstmt.executeUpdate(); // Sin esto no ejecuta
+
+                        break;
                     case 3:
-                        // TODO LIKES 2 campso
+
+
+                        Likes paraInsertarLikes = new Likes(likesIdLikes , likesIdUsuarios, likesIdPost);
+
+                        pstmt = conn.prepareStatement(insertarLikes);
+                        pstmt.setInt(1, paraInsertarLikes.getIdLikes());
+                        pstmt.setInt(2, paraInsertarLikes.getIdUsuarios());
+                        pstmt.setInt(3, paraInsertarLikes.getIdPost());
+                        pstmt.executeUpdate(); // Sin esto no ejecuta
+
                         break;
                     case 4:
                         funcionando = false;
