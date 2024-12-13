@@ -24,11 +24,18 @@ public class InterfazAplicacion {
             respuestauser = lector.nextInt();
             lector.nextLine();
             switch (respuestauser) {
+                // CREAR CONTROL DE FLUJO PARA EVITAR ERRORES 
                 case 1:
                     conn = FuncionConexion.conectar(url, usuario, password);
+
                     break;
                 case 2:
-                    FuncionCrearTablas.crearTabla(conn, lector, stmt); //TODO por aqui voy, esto esta por preguntarse
+                try {
+                    FuncionCrearTablas.crearTabla(conn, lector, stmt);
+                    //TODO por aqui voy, esto esta por preguntarse   
+                } catch (Exception e) {
+                    System.err.println("Ha ocurrido algo inesperado, pruebe mas tarde");
+                }
                     break;
                 case 3:
                     //pintarInsertarDatos();

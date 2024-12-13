@@ -16,7 +16,7 @@ public class FuncionCrearTablas {
         boolean funcionando = true;
 
         // QUERYS PARA CREAR TABLAS:
-        final String crearTablaUsuarios = "CREATE TABLE Usuarios (\n" + //
+        String crearTablaUsuarios = "CREATE TABLE Usuarios (\n" + //
                 "idUsuarios INT AUTO_INCREMENT PRIMARY KEY,\n" + //
                 "Nombre VARCHAR (45),\n" + //
                 "Apellidos VARCHAR (45),\n" + //
@@ -25,7 +25,7 @@ public class FuncionCrearTablas {
                 "email VARCHAR (50)\n" + //
                 ");";
 
-        final String crearTablaPosts = "CREATE TABLE Posts (\n" + //
+        String crearTablaPosts = "CREATE TABLE Posts (\n" + //
                 "idPost INT AUTO_INCREMENT PRIMARY KEY,\n" + //
                 "idUsuarios INT,\n" + //
                 "created_at DATE,\n" + //
@@ -33,7 +33,7 @@ public class FuncionCrearTablas {
                 "CONSTRAINT fk_idUsuarios FOREIGN KEY (idUsuarios) REFERENCES Usuarios(idUsuarios)\n" + //
                 ");";
 
-        final String crearTablaLikes = "CREATE TABLE Likes (\n" + //
+        String crearTablaLikes = "CREATE TABLE Likes (\n" + //
                 "idLikes INT AUTO_INCREMENT PRIMARY KEY,\n" + //
                 "idUsuarios INT,\n" + //
                 "idPost INT,\n" + //
@@ -90,6 +90,7 @@ public class FuncionCrearTablas {
             }while (funcionando);
         } catch (SQLException sqlConnectException) {
             System.out.println("Ha ocurrido un error de conexion a la DATABASE: " + sqlConnectException);
+            // TODO Hacer formateos de las excepciones para saber que errores son
 
         } finally {
             conn.close();
