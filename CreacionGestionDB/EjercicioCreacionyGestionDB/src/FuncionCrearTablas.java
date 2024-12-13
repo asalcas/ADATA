@@ -89,8 +89,9 @@ public class FuncionCrearTablas {
 
             }while (funcionando);
         } catch (SQLException sqlConnectException) {
+            sqlConnectException.getMessage(); // Para que me de el mensaje y posteriormente tratar el numero
             System.out.println("Ha ocurrido un error de conexion a la DATABASE: " + sqlConnectException);
-            // TODO Hacer formateos de las excepciones para saber que errores son
+            
 
         } finally {
             conn.close();
