@@ -1,25 +1,12 @@
 import java.io.Console;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class funciones {
-    public static void main(String[] args) throws SQLException {
-
-        // crearTabla(conectar());
-        
-
-    }
-
-    
-
-    
-
+public class FuncionInsertarDatos {
     /**
      * Funcion que inserta los datos en una tabla específica (Usuarios, Posts o
      * Likes)
@@ -27,8 +14,7 @@ public class funciones {
      * @param conn
      * @throws SQLException
      */
-    public static void insertarDatos(Connection conn) throws SQLException {
-        Scanner lector = new Scanner(System.in);
+    public static void insertarDatos(Connection conn, Scanner lector) throws SQLException {
 
         // Variables Usuarios
         PreparedStatement pstmt = null;
@@ -46,6 +32,13 @@ public class funciones {
         int likesIdLikes = 0;
         int likesIdUsuarios = 0;
         int likesIdPost = 0;
+        // #region Códigos ANSI COLOREAR TEXTO
+        String reset = "\033[0m"; // Resetear color al predeterminado
+        String rojo = "\033[31m";
+        String verde = "\033[32m";
+        String amarillo = "\033[33m";
+        String azul = "\033[34m";
+        // #endregion
 
         // QUERYS PARA INSERTAR DATOS:
 
@@ -59,8 +52,7 @@ public class funciones {
         // Condición para el bucle while
         boolean funcionando = true;
         try {
-            conn = conectar();
-            while (funcionando) { //! PASAR TODO LOS ENTRYS A LA CLASE 
+            while (funcionando) { // ! PASAR TODO LOS ENTRYS A LA CLASE
                 Pintar.menuInsertarDatos();
                 int respuestaUser = lector.nextInt();
                 lector.nextLine();
@@ -96,9 +88,9 @@ public class funciones {
                         pstmt.setString(3, paraInsertarUsuarios.getUsername());
                         pstmt.setString(4, paraInsertarUsuarios.getPassword());
                         pstmt.setString(5, paraInsertarUsuarios.getEmail());
-                        
+
                         pstmt.executeUpdate(); // Sin esto no ejecuta
-                        System.out.println("Has introducido al usuario con exito!");
+                        System.out.println(verde + "Has introducido al usuario con exito!" + reset);
                         break;
                     case 2:
                         System.out.print("Escribe el ID del usuario que hizo el Post: ");
@@ -113,7 +105,7 @@ public class funciones {
                         // PREPARAMOS EL "PreparedStatement"
                         // --------------------------------
                         Posts paraInsertarPost = new Posts(postIdUsuarios, postCreate_at, postUpdated_at);
-                        
+
                         pstmt = conn.prepareStatement(insertarPost);
                         pstmt.setInt(1, paraInsertarPost.getIdUsuarios());
                         pstmt.setDate(2, paraInsertarPost.getCreated_at());
@@ -123,8 +115,7 @@ public class funciones {
                         break;
                     case 3:
 
-
-                        Likes paraInsertarLikes = new Likes(likesIdLikes , likesIdUsuarios, likesIdPost);
+                        Likes paraInsertarLikes = new Likes(likesIdLikes, likesIdUsuarios, likesIdPost);
 
                         pstmt = conn.prepareStatement(insertarLikes);
                         pstmt.setInt(1, paraInsertarLikes.getIdLikes());
@@ -139,12 +130,10 @@ public class funciones {
                     default:
                         break;
                 }
-                // PARA CREAR MODELO DE QUERY podria usar un Switch con una variable llamada
-                // tipoConsulta, que dependiendo
 
             }
         } catch (Exception e) {
-            System.err.println("Ha ocurrido un error en la conexión con la DB: " + e);
+            System.err.println(rojo + "No estas conectado a la Base de Datos, primero tienes que conectarte!!" + reset);
         }
 
     }

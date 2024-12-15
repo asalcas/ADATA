@@ -30,15 +30,15 @@ public class FuncionCrearTablas {
                 "idUsuarios INT,\n" + //
                 "created_at DATE,\n" + //
                 "updated_at DATE,\n" + //
-                "CONSTRAINT fk_idUsuarios FOREIGN KEY (idUsuarios) REFERENCES Usuarios(idUsuarios)\n" + //
+                "CONSTRAINT fk_idUsuarios FOREIGN KEY (idUsuarios) REFERENCES Usuarios(idUsuarios) ON UPDATE CASCADE\n" + //
                 ");";
 
         String crearTablaLikes = "CREATE TABLE Likes (\n" + //
                 "idLikes INT AUTO_INCREMENT PRIMARY KEY,\n" + //
                 "idUsuarios INT,\n" + //
                 "idPost INT,\n" + //
-                "CONSTRAINT fk_idPost FOREIGN KEY (idPost) REFERENCES Posts(idPost),\n" + //
-                "CONSTRAINT fk_idUsuario FOREIGN KEY (idUsuarios) REFERENCES Usuarios(idUsuarios)\n" + //
+                "CONSTRAINT fk_idPost FOREIGN KEY (idPost) REFERENCES Posts(idPost) ON UPDATE CASCADE,\n" + //
+                "CONSTRAINT fk_idUsuario FOREIGN KEY (idUsuarios) REFERENCES Usuarios(idUsuarios) ON UPDATE CASCADE\n" + //
                 ");";
 
         try {

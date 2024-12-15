@@ -34,9 +34,9 @@ public class FuncionListarDatos {
             switch (respuestaUsuario) {
                 case 1:
                     tablaConsulta = "Usuarios";
-                    Pintar.subMenuListarUSUARIO();
-                    respuestaUsuario = lector.nextInt();
                     do {
+                        Pintar.subMenuListarUSUARIO();
+                        respuestaUsuario = lector.nextInt();
 
                         switch (respuestaUsuario) {
                             case 1:
@@ -69,10 +69,9 @@ public class FuncionListarDatos {
                     break;
                 case 2:
                     tablaConsulta = "Posts";
-                    Pintar.subMenuListarPOSTS();
-                    respuestaUsuario = lector.nextInt();
                     do {
-
+                        Pintar.subMenuListarPOSTS();
+                        respuestaUsuario = lector.nextInt();
                         switch (respuestaUsuario) {
                             case 1:
                                 campoConsultar = "idPost";
@@ -86,6 +85,9 @@ public class FuncionListarDatos {
                             case 4:
                                 campoConsultar = "updated_at";
                                 break;
+                            case 5:
+                                campoConsultar = "*";
+                                break;
 
                             default:
                                 System.out.println("Has introducido un valor invalido, intentelo de nuevo.");
@@ -96,9 +98,31 @@ public class FuncionListarDatos {
                     break;
                 case 3:
                     tablaConsulta = "Likes";
-                    Pintar.subMenuListarLIKES();
+                    do {
+                        Pintar.subMenuListarLIKES();
+                        respuestaUsuario = lector.nextInt();
+                        switch (respuestaUsuario) {
+                            case 1:
+                                campoConsultar = "idLikes";
+                                break;
+                            case 2:
+                                campoConsultar = "idUsuarios";
+                                break;
+                            case 3:
+                                campoConsultar = "idPost";
+                                break;
+                            case 4:
+                                campoConsultar = "*";
+                                break;
+                            default:
+                                break;
+                        }
+                        dejarDeFuncionar = true;
+                    } while (!dejarDeFuncionar);
+
                     break;
                 case 0:
+                    dejarDeFuncionar = true;
                     break;
             }
         } while (!dejarDeFuncionar);
@@ -107,7 +131,8 @@ public class FuncionListarDatos {
 
             cadenaCompleta = String.format(
                     "SELECT " + campoConsultar + " FROM " + tablaConsulta); // ! a cambiar
-            if (tablaConsulta.equals("Usuarios")) {
+            if (tablaConsulta.equals("Usuarios")) { // ? --------------------------------------- TABLA SELECCIONADA
+                                                    // USUARIOS
                 if (campoConsultar.equals("*")) {
                     pstmt = conn.prepareStatement(cadenaCompleta);
                     ResultSet rs = pstmt.executeQuery(); // Ejecución
@@ -135,88 +160,141 @@ public class FuncionListarDatos {
                         System.out.println(amarillo + "=======================================" + reset);
                     }
 
-                } else if (campoConsultar.equals("idUsuarios")) {
+                } else {
+                    if (campoConsultar.equals("idUsuarios")) {
 
-                    imprimir = "ID: ";
+                        imprimir = "ID: ";
 
-                } else if (campoConsultar.equals("Nombre")) {
-                    imprimir = "Nombre: ";
+                    } else if (campoConsultar.equals("Nombre")) {
+                        imprimir = "Nombre: ";
 
-                } else if (campoConsultar.equals("Apellidos")) {
-                    imprimir = "Apellido: ";
+                    } else if (campoConsultar.equals("Apellidos")) {
+                        imprimir = "Apellido: ";
 
-                } else if (campoConsultar.equals("Username")) {
-                    imprimir = "Username: ";
+                    } else if (campoConsultar.equals("Username")) {
+                        imprimir = "Username: ";
 
-                } else if (campoConsultar.equals("Password")) {
-                    imprimir = "Password: ";
+                    } else if (campoConsultar.equals("Password")) {
+                        imprimir = "Password: ";
 
-                } else if (campoConsultar.equals("email")) {
-                    imprimir = "Correo electronico: ";
-                }
-                pstmt = conn.prepareStatement(cadenaCompleta);
-                ResultSet rs = pstmt.executeQuery(); // Ejecución
-                System.out.println("");
-                System.out.println("Resultados de la consulta: ");
-                System.out.println(amarillo + "=======================================" + reset);
-                while (rs.next()) {
-                    // Datos obtenidos: (Nombre)
-                    variableResultado = rs.getString(campoConsultar);
-                    System.out.println(rojo + imprimir + reset + variableResultado);
-                    System.out.println(amarillo + "=======================================" + reset);
-                }
-            } else if (tablaConsulta.equals("Posts")) { // !------------------------------------------------------------ CREO QUE DEBERIA AÑADIR EL ID A TODAS LAS BUSQUEDAS INDIVIDUALES
-                                                        // A PARTIR DE AQUI HAY QUE ADECUAR EL CODIGO
-                if (campoConsultar.equals("*")) {
+                    } else if (campoConsultar.equals("email")) {
+                        imprimir = "Correo electronico: ";
+                    }
                     pstmt = conn.prepareStatement(cadenaCompleta);
                     ResultSet rs = pstmt.executeQuery(); // Ejecución
                     System.out.println("");
                     System.out.println("Resultados de la consulta: ");
-
+                    System.out.println(amarillo + "=======================================" + reset);
                     while (rs.next()) {
-                        // Datos obtenidos: (idUsuarios, Nombre, Apellidos, Username, Password, email)
-                        int idPost = rs.getInt("idPost");
-                        int idUser = rs.getInt("idUsuarios");
-                        Date creado_fecha = rs.getDate("created_at");
-                        Date actualizado_fecha = rs.getDate("updated_at");
+                        // Datos obtenidos: (Nombre)
+                        variableResultado = rs.getString(campoConsultar);
+                        System.out.println(rojo + imprimir + reset + variableResultado);
+                        System.out.println(amarillo + "=======================================" + reset);
 
-                        if (idPost == 1) {
+                    }
+                }
+
+            } else {
+                if (tablaConsulta.equals("Posts")) { // ? --------------------------------------- TABLA SELECCIONADA
+                                                     // POST
+                                                     // CREO QUE DEBERIA AÑADIR EL ID A TODAS LAS BUSQUEDAS
+                                                     // INDIVIDUALES
+                    if (campoConsultar.equals("*")) {
+                        pstmt = conn.prepareStatement(cadenaCompleta);
+                        ResultSet rs = pstmt.executeQuery(); // Ejecución
+                        System.out.println("");
+                        System.out.println("Resultados de la consulta: ");
+
+                        while (rs.next()) {
+                            // Datos obtenidos: (idPost, idUsuarios, created_at, updated_at)
+                            int idPost = rs.getInt("idPost");
+                            int idUser = rs.getInt("idUsuarios");
+                            Date creado_fecha = rs.getDate("created_at");
+                            Date actualizado_fecha = rs.getDate("updated_at");
+
+                            if (idPost == 1) {
+                                System.out.println(amarillo + "=======================================" + reset);
+                            }
+
+                            System.out.println(rojo + "ID-Post: " + reset + idPost);
+                            System.out.println(rojo + "ID-Usuario: " + reset + idUser);
+                            System.out.println(rojo + "Fue creado el: " + reset + creado_fecha);
+                            System.out.println(rojo + "Fue actualizado el: " + reset + actualizado_fecha);
                             System.out.println(amarillo + "=======================================" + reset);
                         }
 
-                        System.out.println(rojo + "ID-Post: " + reset + idPost);
-                        System.out.println(rojo + "ID-Usuario: " + reset + idUser);
-                        System.out.println(rojo + "Fue creado el: " + reset + creado_fecha);
-                        System.out.println(rojo + "Fue actualizado el: " + reset + actualizado_fecha);
+                    } else {
+                        if (campoConsultar.equals("idPost")) {
+                            imprimir = "ID-Post: ";
+
+                        } else if (campoConsultar.equals("idUsuarios")) {
+                            imprimir = "ID-Usuario: ";
+
+                        } else if (campoConsultar.equals("created_at")) {
+                            imprimir = "Fue creado el: ";
+
+                        } else if (campoConsultar.equals("updated_at")) {
+                            imprimir = "Fue actualizado el: ";
+                        }
+                        pstmt = conn.prepareStatement(cadenaCompleta);
+                        ResultSet rs = pstmt.executeQuery(); // Ejecución
+                        System.out.println("");
+                        System.out.println("Resultados de la consulta: ");
                         System.out.println(amarillo + "=======================================" + reset);
+                        while (rs.next()) {
+                            // Datos obtenidos: (Nombre)
+                            variableResultado = rs.getString(campoConsultar);
+                            System.out.println(rojo + imprimir + reset + variableResultado);
+                            System.out.println(amarillo + "=======================================" + reset);
+                        }
                     }
+                } else if (tablaConsulta.equals("Likes")) { // ? --------------------------------------- TABLA
+                                                            // SELECCIONADA
+                                                            // LIKES
+                    if (campoConsultar.equals("*")) {
+                        pstmt = conn.prepareStatement(cadenaCompleta);
+                        ResultSet rs = pstmt.executeQuery(); // Ejecución
+                        System.out.println("");
+                        System.out.println("Resultados de la consulta: ");
 
-                } else if (campoConsultar.equals("idPosts")) {
+                        while (rs.next()) {
+                            // Datos obtenidos: (idLikes, idUsuarios, idPost)
+                            int idLikes = rs.getInt("idLikes");
+                            int idUser = rs.getInt("idUsuarios");
+                            int idPost = rs.getInt("idPost");
 
-                    imprimir = "ID-Like: ";
+                            if (idPost == 1) {
+                                System.out.println(amarillo + "=======================================" + reset);
+                            }
 
-                } else if (campoConsultar.equals("idUsuarios")) {
-                    imprimir = "ID-Usuario: ";
+                            System.out.println(rojo + "ID-Likes: " + reset + idLikes);
+                            System.out.println(rojo + "ID-Usuario: " + reset + idUser);
+                            System.out.println(rojo + "ID-Post: " + reset + idPost);
+                            System.out.println(amarillo + "=======================================" + reset);
+                        }
 
-                } else if (campoConsultar.equals("created_at")) {
-                    imprimir = "Fue creado el: ";
-
-                } else if (campoConsultar.equals("updated_at")) {
-                    imprimir = "Fue actualizado el: ";
-                }
-                pstmt = conn.prepareStatement(cadenaCompleta);
-                ResultSet rs = pstmt.executeQuery(); // Ejecución
-                System.out.println("");
-                System.out.println("Resultados de la consulta: ");
-                System.out.println(amarillo + "=======================================" + reset);
-                while (rs.next()) {
-                    // Datos obtenidos: (Nombre)
-                    variableResultado = rs.getString(campoConsultar);
-                    System.out.println(rojo + imprimir + reset + variableResultado);
-                    System.out.println(amarillo + "=======================================" + reset);
+                    } else {
+                        if (campoConsultar.equals("idLikes")) {
+                            imprimir = "ID-Like: ";
+                        } else if (campoConsultar.equals("idUsuarios")) {
+                            imprimir = "ID-Usuario: ";
+                        } else if (campoConsultar.equals("idPost")) {
+                            imprimir = "ID-Post: ";
+                        }
+                        pstmt = conn.prepareStatement(cadenaCompleta);
+                        ResultSet rs = pstmt.executeQuery(); // Ejecución
+                        System.out.println("");
+                        System.out.println("Resultados de la consulta: ");
+                        System.out.println(amarillo + "=======================================" + reset);
+                        while (rs.next()) {
+                            // Datos obtenidos: (Nombre)
+                            variableResultado = rs.getString(campoConsultar);
+                            System.out.println(rojo + imprimir + reset + variableResultado);
+                            System.out.println(amarillo + "=======================================" + reset);
+                        }
+                    }
                 }
             }
-
         } catch (Exception e) {
             System.err.println("Ha ocurrido un error inesperado: " + e);
         }

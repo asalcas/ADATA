@@ -48,7 +48,13 @@ public class InterfazAplicacion {
                     }
                     break;
                 case 3:
-                    // pintarInsertarDatos();
+                    try {
+                    
+                    FuncionInsertarDatos.insertarDatos(conn, lector);
+                    } catch (Exception e) {
+                        System.err.println("Ha ocurrido algo inesperado, pruebe mas tarde");
+                    }
+                    
                     break;
                 case 4:
 

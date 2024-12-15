@@ -72,7 +72,7 @@ public class Pintar {
         System.out.println("1. Usuarios");
         System.out.println("2. Posts");
         System.out.println("3. Likes");
-        System.out.println("4. SALIR");
+        System.out.println("0. SALIR");
         System.out.print("Tu respuesta (Nº): ");
 
     }
@@ -88,7 +88,6 @@ public class Pintar {
         System.out.println("5. Password");
         System.out.println("6. email");
         System.out.println("7. TODOS");
-        System.out.println("0. SALIR");
         System.out.print("Tu respuesta (Nº): ");
 
     }
@@ -101,7 +100,7 @@ public class Pintar {
         System.out.println("2. ID del USUARIO que creo el POST"); // FK
         System.out.println("3. Cuando se creo");
         System.out.println("4. Ultima vez actualizado");
-        System.out.println("0. SALIR");
+        System.out.println("5. TODOS");
         System.out.print("Tu respuesta (Nº): ");
 
     }
@@ -113,7 +112,7 @@ public class Pintar {
         System.out.println("1. ID del LIKE");
         System.out.println("2. ID del USUARIO que dio LIKE"); // FK
         System.out.println("3. ID del POST");
-        System.out.println("0. SALIR");
+        System.out.println("4. TODOS");
         System.out.print("Tu respuesta (Nº): ");
 
     }
