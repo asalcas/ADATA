@@ -1,11 +1,11 @@
 public class Pintar {
 
     // #region Códigos ANSI COLOREAR TEXTO
-    String reset = "\033[0m"; // Resetear color al predeterminado
-    String rojo = "\033[31m";
-    String verde = "\033[32m";
-    String amarillo = "\033[33m";
-    String azul = "\033[34m";
+    static String reset = "\033[0m"; // Resetear color al predeterminado
+    static String rojo = "\033[31m";
+    static String verde = "\033[32m";
+    static String amarillo = "\033[33m";
+    static String azul = "\033[34m";
     // #endregion
 
     // #region Menu principal
@@ -15,9 +15,9 @@ public class Pintar {
         System.out.println("|             ¿QUE QUIERES HACER?            |");
         System.out.println("|                                            |");
         System.out.println("==============================================");
-        System.out.println("1. Conectar a la DATABASE."); // *Hecho */
-        System.out.println("2. Crear TABLAS en la DATABASE."); // *hecho */
-        System.out.println("3. Insertar datos."); // *Hecho */
+        System.out.println("1. Conectar a la DATABASE.");
+        System.out.println("2. Crear TABLAS en la DATABASE."); 
+        System.out.println("3. Insertar datos.");
         System.out.println("4. ListarDatos."); // TODO
         System.out.println("5. Modificar datos."); // TODO
         System.out.println("6. Borrar datos."); // TODO
@@ -42,7 +42,7 @@ public class Pintar {
         System.out.println("|  ¿Que tabla quieres crear?  |");
         System.out.println("===============================");
         System.out.println("Recuerda que debes crear las tablas en orden:");
-        System.out.println("ATENCION, el orden debe ser: 1º Usuarios, 2º Posts y 3º la tabla Likes");
+        System.out.println(rojo + "ATENCION" + reset + ", el orden debe ser:"+ amarillo + "1º Usuarios, 2º Posts y 3º la tabla Likes" + reset);
         System.out.println("1. Usuarios");
         System.out.println("2. Posts");
         System.out.println("3. Likes");
@@ -116,5 +116,28 @@ public class Pintar {
         System.out.print("Tu respuesta (Nº): ");
 
     }
+
+    public static void menuFiltrarSelect() {
+        System.out.println("==================================");
+        System.out.println("|  ¿Quieres filtrar la consulta? |");
+        System.out.println("==================================");
+        System.out.print("Tu respuesta (Y/N): ");
+
+    }
+
+    public static void selectFiltrado() {
+        System.out.println("=======================================");
+        System.out.println("|  ¿Como quieres filtrar la consulta? |");
+        System.out.println("=======================================");
+        System.out.print("1. idUsuario: ");
+        System.out.print("2. Nombre: ");
+        System.out.print("3. Apellidos: ");
+        System.out.print("4. Username: ");
+        System.out.print("5. Password: ");
+        System.out.print("6. email: ");
+        System.out.print("Tu respuesta (Nº): ");
+    }
+
+    
     // #endregion
 }

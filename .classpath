@@ -5,5 +5,6 @@
 	<classpathentry kind="src" path="AhorcadoAB/lecturaFicheroAleatorioB"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="ConexionesJDBC/src/insertardatos"/>
+	<classpathentry kind="src" path="CreacionGestionDB/EjercicioCreacionyGestionDB/src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -13,11 +13,14 @@ public class FuncionListarDatos {
     public static boolean listarDatos(Connection conn, Scanner lector) throws SQLException {
         PreparedStatement pstmt = null;
         int respuestaUsuario;
+        String respuestaUsuarioString = "";
         String tablaConsulta = "";
         String cadenaCompleta;
         String campoConsultar = "";
         String imprimir = "";
         String variableResultado = "";
+        String comparacionConsulta = "";
+        String variableBusqueda = "";
 
         // #region Códigos ANSI COLOREAR TEXTO
         String reset = "\033[0m"; // Resetear color al predeterminado
@@ -101,6 +104,7 @@ public class FuncionListarDatos {
                     do {
                         Pintar.subMenuListarLIKES();
                         respuestaUsuario = lector.nextInt();
+                        lector.nextLine();
                         switch (respuestaUsuario) {
                             case 1:
                                 campoConsultar = "idLikes";
@@ -128,9 +132,42 @@ public class FuncionListarDatos {
         } while (!dejarDeFuncionar);
 
         try {
+            Pintar.menuFiltrarSelect();
+            respuestaUsuarioString = lector.nextLine().toUpperCase();
+            if (respuestaUsuarioString.equals("Y")) {
+                respuestaUsuario = lector.nextInt();
+                switch (respuestaUsuario) {
+                    case 1:
+                        comparacionConsulta = "idUsuarios"; // TODO: ES INT, SI ES INT HAY QUE TRATARLO DISTINTO POR QUE HAY QUE ORDENARLO
+                        break;
+                    case 2:
+                        comparacionConsulta = "Nombre";
+                        break;
+                    case 3:
+                        comparacionConsulta = "Apellidos";
+                        break;
+                    case 4:
+                        comparacionConsulta = "Username";
+                        break;
+                    case 5:
+                        comparacionConsulta = "Password";
+                        break;
+                    case 6:
+                        comparacionConsulta = "email";
+                        break;
+
+                    default:
+                        break;
+                }
+                cadenaCompleta = String.format(
+                        "SELECT " + campoConsultar + " FROM " + tablaConsulta + " WHERE" + comparacionConsulta + "LIKE"
+                                + "'%"
+                                + variableBusqueda + "'");
+            }
 
             cadenaCompleta = String.format(
-                    "SELECT " + campoConsultar + " FROM " + tablaConsulta); // ! a cambiar
+                    "SELECT " + campoConsultar + " FROM " + tablaConsulta);
+
             if (tablaConsulta.equals("Usuarios")) { // ? --------------------------------------- TABLA SELECCIONADA
                                                     // USUARIOS
                 if (campoConsultar.equals("*")) {
