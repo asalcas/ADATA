@@ -49,12 +49,12 @@ public class InterfazAplicacion {
                     break;
                 case 3:
                     try {
-                    
-                    FuncionInsertarDatos.insertarDatos(conn, lector);
+
+                        FuncionInsertarDatos.insertarDatos(conn, lector);
                     } catch (Exception e) {
                         System.err.println("Ha ocurrido algo inesperado, pruebe mas tarde");
                     }
-                    
+
                     break;
                 case 4:
 
@@ -63,25 +63,24 @@ public class InterfazAplicacion {
                     } while (!dejarDeFuncionar);
                     break;
                 case 5:
-                    // pintarModificarDatos();
+                    FuncionModificarDatos.modificarDatos(conn, lector);
                     break;
                 case 6:
                     // pintarBorrarDatos();
                     break;
                 case 0:
                     funcionando = false;
+                    if (stmt != null) {
+                        stmt.close();
+                    }
+                    if (pstmt != null) {
+                        pstmt.close();
+                    }
+                    lector.close();
                     break;
                 default:
                     break;
             }
-            // CERRAR CONEXION Y STATEMENT AQUI
         }
-
-        // ORDEN PROGRAMAS:
-        // ? 1. INTERFAZ GRAFICA (MAIN)
-        // ? 2.
-        // Menus siempre en una funcion para llamarlas desde ahi, desgranar las
-        // funciones a lo más básico, 1 funcion == 1 funcionalidad.ç
-        // Dividir por modelos
     }
 }

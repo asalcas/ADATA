@@ -15,12 +15,15 @@ public class FuncionListarDatos {
         int respuestaUsuario;
         String respuestaUsuarioString = "";
         String tablaConsulta = "";
-        String cadenaCompleta;
+        String cadenaCompleta = "";
         String campoConsultar = "";
         String imprimir = "";
         String variableResultado = "";
         String comparacionConsulta = "";
-        String variableBusqueda = "";
+        String variableUsuarioComparacion = "";
+        String signo = "";
+        boolean fechaValida = true;
+        boolean opcionCorrecta;
 
         // #region Códigos ANSI COLOREAR TEXTO
         String reset = "\033[0m"; // Resetear color al predeterminado
@@ -40,6 +43,7 @@ public class FuncionListarDatos {
                     do {
                         Pintar.subMenuListarUSUARIO();
                         respuestaUsuario = lector.nextInt();
+                        lector.nextLine();
 
                         switch (respuestaUsuario) {
                             case 1:
@@ -75,6 +79,7 @@ public class FuncionListarDatos {
                     do {
                         Pintar.subMenuListarPOSTS();
                         respuestaUsuario = lector.nextInt();
+                        lector.nextLine();
                         switch (respuestaUsuario) {
                             case 1:
                                 campoConsultar = "idPost";
@@ -132,42 +137,231 @@ public class FuncionListarDatos {
         } while (!dejarDeFuncionar);
 
         try {
-            Pintar.menuFiltrarSelect();
-            respuestaUsuarioString = lector.nextLine().toUpperCase();
-            if (respuestaUsuarioString.equals("Y")) {
-                respuestaUsuario = lector.nextInt();
-                switch (respuestaUsuario) {
-                    case 1:
-                        comparacionConsulta = "idUsuarios"; // TODO: ES INT, SI ES INT HAY QUE TRATARLO DISTINTO POR QUE HAY QUE ORDENARLO
-                        break;
-                    case 2:
-                        comparacionConsulta = "Nombre";
-                        break;
-                    case 3:
-                        comparacionConsulta = "Apellidos";
-                        break;
-                    case 4:
-                        comparacionConsulta = "Username";
-                        break;
-                    case 5:
-                        comparacionConsulta = "Password";
-                        break;
-                    case 6:
-                        comparacionConsulta = "email";
-                        break;
+            if (tablaConsulta.equals("Usuarios")) {
+                Pintar.menuFiltrarSelect();
+                respuestaUsuarioString = lector.nextLine().toUpperCase().trim();
+                opcionCorrecta = false;
+                while (!opcionCorrecta) {
+                    
+                    if (respuestaUsuarioString.equals("Y")) {
+                        Pintar.selectFiltradoUSUARIO();
+                        respuestaUsuario = lector.nextInt();
+                        lector.nextLine();
+                        switch (respuestaUsuario) {
+                            case 1:
+                                comparacionConsulta = "idUsuarios"; // Campo int
 
-                    default:
-                        break;
+                                break;
+                            case 2:
+                                comparacionConsulta = "Nombre"; // Campo String
+                                break;
+                            case 3:
+                                comparacionConsulta = "Apellidos"; // Campo String
+                                break;
+                            case 4:
+                                comparacionConsulta = "Username"; // Campo String
+                                break;
+                            case 5:
+                                comparacionConsulta = "Password"; // Campo String
+                                break;
+                            case 6:
+                                comparacionConsulta = "email"; // Campo String
+                                break;
+
+                            default:
+                                System.out.println("Opcion no valida.");
+                                break;
+                        }
+
+                        if (comparacionConsulta.equals("idUsuarios")) { // Si seleccionan 'idUsuarios' es un campo INT,
+                                                                        // hay
+                                                                        // que pedir un signo y el valor
+                            Pintar.mayorOmenor();
+                            respuestaUsuario = lector.nextInt();
+                            lector.nextLine();
+                            if (respuestaUsuario == 1) {
+                                signo = ">";
+                            } else if (respuestaUsuario == 2) {
+                                signo = "<";
+                            } else {
+                                System.out.println("Tienes que introducir un numero valido.");
+                            }
+                            System.out.print("Introduce el valor a buscar: ");
+                            variableUsuarioComparacion = lector.nextLine();
+
+                            cadenaCompleta = "SELECT " + campoConsultar +
+                                    " FROM " + tablaConsulta +
+                                    " WHERE " + comparacionConsulta + " " + signo + " " + variableUsuarioComparacion;
+                            System.out.println("Consulta generada: " + cadenaCompleta);
+
+                        } else {
+                            System.out.print("Introduce el valor a buscar (%letra%): ");
+                            variableUsuarioComparacion = lector.nextLine();
+                            variableUsuarioComparacion = "'%" + variableUsuarioComparacion + "%'";
+                            cadenaCompleta = ("SELECT " + campoConsultar + " FROM " + tablaConsulta + " WHERE " +
+                                    comparacionConsulta + " LIKE " + variableUsuarioComparacion);
+                            System.out.println("Consulta generada: " + cadenaCompleta);
+                            opcionCorrecta = true;
+                        }
+
+                    }else if(respuestaUsuarioString.equals("N")){
+                        System.out.println("No se aplicara ningun filtro.");
+                        opcionCorrecta = true;
+                        cadenaCompleta = ("SELECT " + campoConsultar + " FROM " + tablaConsulta);
+                    }else {
+                        System.out.println("Entrada inválida. Debes ingresar 'Y' para continuar filtrando o 'N' para continuar sin filtrar.");
+                        respuestaUsuarioString = lector.nextLine().toUpperCase().trim();
+                        
+                    }
+                    
                 }
-                cadenaCompleta = String.format(
-                        "SELECT " + campoConsultar + " FROM " + tablaConsulta + " WHERE" + comparacionConsulta + "LIKE"
-                                + "'%"
-                                + variableBusqueda + "'");
+                
+            } else if (tablaConsulta.equals("Posts")) {
+                Pintar.menuFiltrarSelect();
+                respuestaUsuarioString = lector.nextLine().toUpperCase().trim();
+                opcionCorrecta = false;
+                while (!opcionCorrecta) { // !------------------------------------------------------------------------------
+                    if (respuestaUsuarioString.equals("Y")) {
+                        Pintar.selectFiltradoPOST();
+                        respuestaUsuario = lector.nextInt();
+                        lector.nextLine();
+                        switch (respuestaUsuario) {
+                            case 1:
+                                comparacionConsulta = "idPost"; // Campo int
+
+                                break;
+                            case 2:
+                                comparacionConsulta = "idUsuarios"; // Campo int
+                                break;
+                            case 3:
+                                comparacionConsulta = "created_at"; // Campo String
+                                break;
+                            case 4:
+                                comparacionConsulta = "updated_at"; // Campo String
+                                break;
+                            default:
+                                System.out.println(
+                                        "Opcion no valida, recuerda que en ID introducimos un Nº y en los campos respectivos a las fechas \n son con este formato: (yyyy-mm--dd)");
+                                break;
+                        }
+
+                        Pintar.mayorOmenor();
+                        respuestaUsuario = lector.nextInt();
+                        lector.nextLine();
+                        if (respuestaUsuario == 1) {
+                            signo = ">";
+                        } else if (respuestaUsuario == 2) {
+                            signo = "<";
+                        } else {
+                            System.out.println("Tienes que introducir un numero valido.");
+                        }
+                        System.out.print("Introduce el valor a buscar: ");
+                        if (comparacionConsulta.equals("created_at") || comparacionConsulta.equals("updated_at")) {
+
+                            System.out
+                                    .println("Debes introducir una fecha valida (yyyy-mm-dd), por ejemplo: 2000-12-25");
+                            fechaValida = false;
+                            while (!fechaValida) {
+                                String fechaUsuario = lector.nextLine();
+                                // Expresión regular para verificar el formato yyyy-MM-dd
+                                if (fechaUsuario.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                                    // Comprobamos que el día está en el rango correcto de 01 a 31, el mes de 01 a
+                                    // 12
+                                    String[] fechaPartes = fechaUsuario.split("-");
+                                    int mes = Integer.parseInt(fechaPartes[1]);
+                                    int dia = Integer.parseInt(fechaPartes[2]);
+
+                                    if (mes >= 1 && mes <= 12 && dia >= 1 && dia <= 31) {
+                                        cadenaCompleta = "SELECT " + campoConsultar +
+                                                " FROM " + tablaConsulta +
+                                                " WHERE " + comparacionConsulta + " " + signo + " "
+                                                + fechaUsuario;
+                                        System.out.println("Consulta generada: " + cadenaCompleta);
+                                        fechaValida = true;
+                                    } else {
+                                        System.err.println(
+                                                "Fecha inválida, por favor ingresa una fecha en el formato (yyyy-mm-dd), por ejemplo: 2000-12-25");
+                                    }
+                                } else {
+                                    System.err.println(
+                                            "Fecha inválida, por favor ingresa una fecha en el formato (yyyy-mm-dd), por ejemplo: 2000-12-25");
+                                }
+                            }
+                        } else {
+                            variableUsuarioComparacion = lector.nextLine();
+
+                            cadenaCompleta = "SELECT " + campoConsultar +
+                                    " FROM " + tablaConsulta +
+                                    " WHERE " + comparacionConsulta + " " + signo + " " + variableUsuarioComparacion;
+                            System.out.println("Consulta generada: " + cadenaCompleta);
+                            opcionCorrecta = true;
+                        }
+
+                    }else if(respuestaUsuarioString.equals("N")){
+                        System.out.println("No se aplicara ningun filtro.");
+                        opcionCorrecta = true;
+                        cadenaCompleta = ("SELECT " + campoConsultar + " FROM " + tablaConsulta);
+                    }else {
+                        System.out.println("Entrada inválida. Debes ingresar 'Y' para continuar filtrando o 'N' para continuar sin filtrar.");
+                        respuestaUsuarioString = lector.nextLine().toUpperCase().trim();
+                        
+                    }
+                    
+                }
+            } else if (tablaConsulta.equals("Likes")) {
+                Pintar.menuFiltrarSelect();
+                respuestaUsuarioString = lector.nextLine().toUpperCase();
+                opcionCorrecta = false;
+                while (!opcionCorrecta) {
+                    if (respuestaUsuarioString.equals("Y")) {
+                        Pintar.selectFiltradoLIKES();
+                        respuestaUsuario = lector.nextInt();
+                        lector.nextLine();
+                        switch (respuestaUsuario) {
+                            case 1:
+                                comparacionConsulta = "idLikes"; // Campo int
+
+                                break;
+                            case 2:
+                                comparacionConsulta = "idUsuarios"; // Campo String
+                                break;
+                            case 3:
+                                comparacionConsulta = "idPost"; // Campo String
+                                break;
+
+                            default:
+                                System.out.println("Opcion no valida.");
+                                break;
+                        }
+                        Pintar.mayorOmenor();
+                        respuestaUsuario = lector.nextInt();
+                        lector.nextLine();
+                        if (respuestaUsuario == 1) {
+                            signo = ">";
+                        } else if (respuestaUsuario == 2) {
+                            signo = "<";
+                        } else {
+                            System.out.println("Tienes que introducir un numero valido.");
+                        }
+                        System.out.print("Introduce el valor a buscar: ");
+                        variableUsuarioComparacion = lector.nextLine();
+
+                        cadenaCompleta = "SELECT " + campoConsultar +
+                                " FROM " + tablaConsulta +
+                                " WHERE " + comparacionConsulta + " " + signo + " " + variableUsuarioComparacion;
+                        System.out.println("Consulta generada: " + cadenaCompleta);
+                        opcionCorrecta = true;
+                    }else if(respuestaUsuarioString.equals("N")){
+                        System.out.println("No se aplicara ningun filtro.");
+                        opcionCorrecta = true;
+                        cadenaCompleta = ("SELECT " + campoConsultar + " FROM " + tablaConsulta);
+                    }else {
+                        System.out.println("Entrada inválida. Debes ingresar 'Y' para continuar filtrando o 'N' para continuar sin filtrar.");
+                        respuestaUsuarioString = lector.nextLine().toUpperCase().trim();
+                    }
+                }
+
             }
-
-            cadenaCompleta = String.format(
-                    "SELECT " + campoConsultar + " FROM " + tablaConsulta);
-
             if (tablaConsulta.equals("Usuarios")) { // ? --------------------------------------- TABLA SELECCIONADA
                                                     // USUARIOS
                 if (campoConsultar.equals("*")) {
@@ -241,7 +435,7 @@ public class FuncionListarDatos {
                         ResultSet rs = pstmt.executeQuery(); // Ejecución
                         System.out.println("");
                         System.out.println("Resultados de la consulta: ");
-
+                        System.out.println(amarillo + "=======================================" + reset);
                         while (rs.next()) {
                             // Datos obtenidos: (idPost, idUsuarios, created_at, updated_at)
                             int idPost = rs.getInt("idPost");
@@ -286,8 +480,7 @@ public class FuncionListarDatos {
                         }
                     }
                 } else if (tablaConsulta.equals("Likes")) { // ? --------------------------------------- TABLA
-                                                            // SELECCIONADA
-                                                            // LIKES
+
                     if (campoConsultar.equals("*")) {
                         pstmt = conn.prepareStatement(cadenaCompleta);
                         ResultSet rs = pstmt.executeQuery(); // Ejecución
@@ -332,8 +525,8 @@ public class FuncionListarDatos {
                     }
                 }
             }
-        } catch (Exception e) {
-            System.err.println("Ha ocurrido un error inesperado: " + e);
+        } catch (SQLException conexion) {
+            System.err.println(rojo + "Tienes que estar conectado para realizar consultas!" + reset);
         }
 
         return dejarDeFuncionar;

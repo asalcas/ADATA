@@ -16,7 +16,7 @@ public class Pintar {
         System.out.println("|                                            |");
         System.out.println("==============================================");
         System.out.println("1. Conectar a la DATABASE.");
-        System.out.println("2. Crear TABLAS en la DATABASE."); 
+        System.out.println("2. Crear TABLAS en la DATABASE.");
         System.out.println("3. Insertar datos.");
         System.out.println("4. ListarDatos."); // TODO
         System.out.println("5. Modificar datos."); // TODO
@@ -42,7 +42,8 @@ public class Pintar {
         System.out.println("|  ¿Que tabla quieres crear?  |");
         System.out.println("===============================");
         System.out.println("Recuerda que debes crear las tablas en orden:");
-        System.out.println(rojo + "ATENCION" + reset + ", el orden debe ser:"+ amarillo + "1º Usuarios, 2º Posts y 3º la tabla Likes" + reset);
+        System.out.println(rojo + "ATENCION" + reset + ", el orden debe ser:" + amarillo
+                + "1º Usuarios, 2º Posts y 3º la tabla Likes" + reset);
         System.out.println("1. Usuarios");
         System.out.println("2. Posts");
         System.out.println("3. Likes");
@@ -125,19 +126,74 @@ public class Pintar {
 
     }
 
-    public static void selectFiltrado() {
+    public static void selectFiltradoUSUARIO() {
         System.out.println("=======================================");
         System.out.println("|  ¿Como quieres filtrar la consulta? |");
         System.out.println("=======================================");
-        System.out.print("1. idUsuario: ");
-        System.out.print("2. Nombre: ");
-        System.out.print("3. Apellidos: ");
-        System.out.print("4. Username: ");
-        System.out.print("5. Password: ");
-        System.out.print("6. email: ");
+        System.out.println("1. idUsuario: ");
+        System.out.println("2. Nombre: ");
+        System.out.println("3. Apellidos: ");
+        System.out.println("4. Username: ");
+        System.out.println("5. Password: ");
+        System.out.println("6. email: ");
+        System.out.println("Tu respuesta (Nº): ");
+    }
+
+    public static void selectFiltradoPOST() {
+        System.out.println("=======================================");
+        System.out.println("|  ¿Como quieres filtrar la consulta? |");
+        System.out.println("=======================================");
+        System.out.println("1. idPost: ");
+        System.out.println("2. idUsuario: ");
+        System.out.println("3. Fecha de creacion: ");
+        System.out.println("4. Fecha de actualizacion: ");
+        System.out.println("Tu respuesta (Nº): ");
+    }
+
+    public static void selectFiltradoLIKES() {
+        System.out.println("=======================================");
+        System.out.println("|  ¿Como quieres filtrar la consulta? |");
+        System.out.println("=======================================");
+        System.out.println("1. idLikes: ");
+        System.out.println("2. idUsuarios: ");
+        System.out.println("3. idPost: ");
+        System.out.println("Tu respuesta (Nº): ");
+    }
+
+    public static void mayorOmenor() {
+        System.out.println("=======================================");
+        System.out.println("|  ¿Como quieres filtrar la consulta? |");
+        System.out.println("=======================================");
+        System.out.println("1. Los que son MAYORES al numero que dijiste (>): ");
+        System.out.println("2. Los que son MENORES al numero que dijiste (<): ");
         System.out.print("Tu respuesta (Nº): ");
     }
 
-    
     // #endregion
+    //#region ModificarDatos
+    public static void modificarRegistros() {
+        System.out.println("==================================");
+        System.out.println("|  ¿Que tabla quieres modificar? |");
+        System.out.println("==================================");
+        System.out.println(amarillo + "No podemos modificar todas las tablas por que tienen Foreign Key" + reset);
+        System.out.println("1. Usuarios: ");
+        System.out.println("2. Posts: ");
+        System.out.println("0. SALIR: ");
+        System.out.println("Tu respuesta (Nº): ");
+    }
+    public static void modificarUsuarios() {
+        System.out.println("==================================");
+        System.out.println("|  ¿Que tabla quieres modificar? |");
+        System.out.println("==================================");
+        System.out.println("1. Nombre: ");
+        System.out.println("2. Apellidos: ");
+        System.out.println("3. Username: ");
+        System.out.println("4. Password: ");
+        System.out.println("5. email: ");
+        System.out.println("0. SALIR: ");
+        System.out.println("Tu respuesta (Nº): ");
+    }
+    //#endregion
+
 }
+

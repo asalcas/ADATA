@@ -133,7 +133,7 @@ public class FuncionInsertarDatos {
 
             }
         } catch (Exception e) {
-            System.err.println(rojo + "No estas conectado a la Base de Datos, primero tienes que conectarte!!" + reset);
+            System.err.println(rojo + "No estas conectado a la Base de Datos, primero tienes que conectarte!. Intentalo de nuevo" + reset);
         }
 
     }
