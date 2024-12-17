@@ -18,58 +18,71 @@ public class FuncionEliminarTabla {
         int opcionUsuario;
         String tabla = "";
         String borrarTablaQuery;
+        boolean opcionCorrecta = false;
+        String borrarRegistro = "";
 
         Pintar.eliminarTablaORegistro();
         opcionUsuario = lector.nextInt();
-        switch (opcionUsuario) {
-            case 1:
-                
-                break;
-                case 2:
-                
-                break;
-                case 0:
-                
-                break;
-        
-            default:
-                break;
-        }
-    
-        public static void eliminarRegistrosMenu() {
-            System.out.println(verde + "====================================");
-            System.out.println("|  ¿Que registro quieres eliminar? |");
-            System.out.println("====================================" + reset);
-            System.out.print("Tu respuesta (Introduce un ID): ");
-        }
-        Pintar.eliminarTablasMenu();
-        opcionUsuario = lector.nextInt();
+        do {
+            switch (opcionUsuario) {
+                case 1:
 
-        // Validar que el orden de eliminación sea correcto
-        switch (opcionUsuario) {
-            case 1:
-                tabla = "Usuarios";
-                break;
-            case 2:
-                tabla = "Posts";
-                break;
-            case 3:
-                tabla = "Likes";
-                break;
-            default:
-                System.out.println("Nombre de tabla no válido.");
-                break;
-        }
-        borrarTablaQuery = "DROP TABLE IF EXISTS " + tabla;
-        try (PreparedStatement stmt = conn.prepareStatement(borrarTablaQuery)) {
-            stmt.executeUpdate();
-            System.out.println("Tabla " + tabla + " eliminada correctamente.");
-        } catch (SQLException e) {
-            if (e.getSQLState().equals("23000")) {
-                System.err.println(
-                        rojo + "No se puede eliminar esta tabla por que otras la referencian con Foreign Keys. Borra primero LIKES y POSTS"
-                                + reset);
+                    Pintar.registroTablaEliminar();
+                    switch (opcionUsuario) {
+                        case 1:
+                            tabla = "Usuarios";
+                            break;
+                        case 0:
+                            opcionCorrecta = true;
+                            break;
+                        default:
+                            System.out.println("Nombre de tabla no valido.");
+                            break;
+                    }
+                    Pintar.eliminarRegistrosMenu();
+                    opcionUsuario = lector.nextInt();
+                    // INTRODUCIR QUERY BORRAR
+                    break;
+                case 2:
+                    Pintar.eliminarTablasMenu();
+                    opcionUsuario = lector.nextInt();
+
+                    // Validar que el orden de eliminación sea correcto
+                    switch (opcionUsuario) {
+                        case 1:
+                            tabla = "Usuarios";
+                            break;
+                        case 2:
+                            tabla = "Posts";
+                            break;
+                        case 3:
+                            tabla = "Likes";
+                            break;
+                        default:
+                            System.out.println("Nombre de tabla no válido.");
+                            break;
+                    }
+                    borrarTablaQuery = "DROP TABLE IF EXISTS " + tabla;
+                    try (PreparedStatement stmt = conn.prepareStatement(borrarTablaQuery)) {
+                        stmt.executeUpdate();
+                        System.out.println("Tabla " + tabla + " eliminada correctamente.");
+                    } catch (SQLException e) {
+                        if (e.getSQLState().equals("23000")) {
+                            System.err.println(
+                                    rojo + "No se puede eliminar esta tabla por que otras la referencian con Foreign Keys. Borra primero LIKES y POSTS"
+                                            + reset);
+                        }
+                    }
+                    opcionCorrecta = true;
+                    break;
+                case 0:
+                    opcionCorrecta = true;
+                    break;
+
+                default:
+                    System.err.println("Has introducido una opcion no valida");
+                    break;
             }
-        }
+        } while (!opcionCorrecta);
     }
 }

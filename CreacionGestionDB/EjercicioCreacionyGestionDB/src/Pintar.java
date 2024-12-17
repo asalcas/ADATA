@@ -232,5 +232,14 @@ public class Pintar {
         System.out.println("====================================" + reset);
         System.out.print("Tu respuesta (Introduce un ID): ");
     }
+    public static void registroTablaEliminar() {
+        System.out.println(verde + "============================================");
+        System.out.println("|  Elige una tabla para eliminar registros |");
+        System.out.println("============================================" + reset);
+        System.out.println(amarillo + "Solo podras eliminar datos de 'Usuarios', por que las otras dos tablas tienen Foreign Keys de Usuario");
+        System.out.println("1. Usuarios: ");
+        System.out.println("0. SALIR: ");
+        System.out.print("Tu respuesta (Nº): ");
+    }
     // #endregion
 }

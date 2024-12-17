@@ -18,10 +18,8 @@ public class FuncionModificarDatos {
 
         // #region Códigos ANSI COLOREAR TEXTO
         String reset = "\033[0m"; // Resetear color al predeterminado
-        String rojo = "\033[31m";
-        String verde = "\033[32m";
         String amarillo = "\033[33m";
-        String azul = "\033[34m";
+
         // #endregion
         try {
             conn.setAutoCommit(false);
