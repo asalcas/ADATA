@@ -142,7 +142,7 @@ public class FuncionListarDatos {
                 respuestaUsuarioString = lector.nextLine().toUpperCase().trim();
                 opcionCorrecta = false;
                 while (!opcionCorrecta) {
-                    
+
                     if (respuestaUsuarioString.equals("Y")) {
                         Pintar.selectFiltradoUSUARIO();
                         respuestaUsuario = lector.nextInt();
@@ -183,6 +183,12 @@ public class FuncionListarDatos {
                                 signo = ">";
                             } else if (respuestaUsuario == 2) {
                                 signo = "<";
+                            } else if (respuestaUsuario == 3) {
+                                signo = "=";
+                            } else if (respuestaUsuario == 4) {
+                                signo = ">=";
+                            } else if (respuestaUsuario == 5) {
+                                signo = "<=";
                             } else {
                                 System.out.println("Tienes que introducir un numero valido.");
                             }
@@ -193,6 +199,7 @@ public class FuncionListarDatos {
                                     " FROM " + tablaConsulta +
                                     " WHERE " + comparacionConsulta + " " + signo + " " + variableUsuarioComparacion;
                             System.out.println("Consulta generada: " + cadenaCompleta);
+                            opcionCorrecta = true;
 
                         } else {
                             System.out.print("Introduce el valor a buscar (%letra%): ");
@@ -204,18 +211,19 @@ public class FuncionListarDatos {
                             opcionCorrecta = true;
                         }
 
-                    }else if(respuestaUsuarioString.equals("N")){
+                    } else if (respuestaUsuarioString.equals("N")) {
                         System.out.println("No se aplicara ningun filtro.");
                         opcionCorrecta = true;
                         cadenaCompleta = ("SELECT " + campoConsultar + " FROM " + tablaConsulta);
-                    }else {
-                        System.out.println("Entrada inválida. Debes ingresar 'Y' para continuar filtrando o 'N' para continuar sin filtrar.");
+                    } else {
+                        System.out.println(
+                                "Entrada inválida. Debes ingresar 'Y' para continuar filtrando o 'N' para continuar sin filtrar.");
                         respuestaUsuarioString = lector.nextLine().toUpperCase().trim();
-                        
+
                     }
-                    
+
                 }
-                
+
             } else if (tablaConsulta.equals("Posts")) {
                 Pintar.menuFiltrarSelect();
                 respuestaUsuarioString = lector.nextLine().toUpperCase().trim();
@@ -252,9 +260,16 @@ public class FuncionListarDatos {
                             signo = ">";
                         } else if (respuestaUsuario == 2) {
                             signo = "<";
+                        } else if (respuestaUsuario == 3) {
+                            signo = "=";
+                        } else if (respuestaUsuario == 4) {
+                            signo = ">=";
+                        } else if (respuestaUsuario == 5) {
+                            signo = "<=";
                         } else {
                             System.out.println("Tienes que introducir un numero valido.");
                         }
+
                         System.out.print("Introduce el valor a buscar: ");
                         if (comparacionConsulta.equals("created_at") || comparacionConsulta.equals("updated_at")) {
 
@@ -278,6 +293,7 @@ public class FuncionListarDatos {
                                                 + fechaUsuario;
                                         System.out.println("Consulta generada: " + cadenaCompleta);
                                         fechaValida = true;
+                                        opcionCorrecta = true;
                                     } else {
                                         System.err.println(
                                                 "Fecha inválida, por favor ingresa una fecha en el formato (yyyy-mm-dd), por ejemplo: 2000-12-25");
@@ -297,16 +313,17 @@ public class FuncionListarDatos {
                             opcionCorrecta = true;
                         }
 
-                    }else if(respuestaUsuarioString.equals("N")){
+                    } else if (respuestaUsuarioString.equals("N")) {
                         System.out.println("No se aplicara ningun filtro.");
                         opcionCorrecta = true;
                         cadenaCompleta = ("SELECT " + campoConsultar + " FROM " + tablaConsulta);
-                    }else {
-                        System.out.println("Entrada inválida. Debes ingresar 'Y' para continuar filtrando o 'N' para continuar sin filtrar.");
+                    } else {
+                        System.out.println(
+                                "Entrada inválida. Debes ingresar 'Y' para continuar filtrando o 'N' para continuar sin filtrar.");
                         respuestaUsuarioString = lector.nextLine().toUpperCase().trim();
-                        
+
                     }
-                    
+
                 }
             } else if (tablaConsulta.equals("Likes")) {
                 Pintar.menuFiltrarSelect();
@@ -340,6 +357,12 @@ public class FuncionListarDatos {
                             signo = ">";
                         } else if (respuestaUsuario == 2) {
                             signo = "<";
+                        } else if (respuestaUsuario == 3) {
+                            signo = "=";
+                        } else if (respuestaUsuario == 4) {
+                            signo = ">=";
+                        } else if (respuestaUsuario == 5) {
+                            signo = "<=";
                         } else {
                             System.out.println("Tienes que introducir un numero valido.");
                         }
@@ -351,12 +374,13 @@ public class FuncionListarDatos {
                                 " WHERE " + comparacionConsulta + " " + signo + " " + variableUsuarioComparacion;
                         System.out.println("Consulta generada: " + cadenaCompleta);
                         opcionCorrecta = true;
-                    }else if(respuestaUsuarioString.equals("N")){
+                    } else if (respuestaUsuarioString.equals("N")) {
                         System.out.println("No se aplicara ningun filtro.");
                         opcionCorrecta = true;
                         cadenaCompleta = ("SELECT " + campoConsultar + " FROM " + tablaConsulta);
-                    }else {
-                        System.out.println("Entrada inválida. Debes ingresar 'Y' para continuar filtrando o 'N' para continuar sin filtrar.");
+                    } else {
+                        System.out.println(
+                                "Entrada inválida. Debes ingresar 'Y' para continuar filtrando o 'N' para continuar sin filtrar.");
                         respuestaUsuarioString = lector.nextLine().toUpperCase().trim();
                     }
                 }

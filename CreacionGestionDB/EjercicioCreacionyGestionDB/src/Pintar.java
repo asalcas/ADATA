@@ -10,11 +10,11 @@ public class Pintar {
 
     // #region Menu principal
     public static void menuPrincipal() {
-        System.out.println("==============================================");
+        System.out.println(verde + "==============================================");
         System.out.println("|                                            |");
         System.out.println("|             ¿QUE QUIERES HACER?            |");
         System.out.println("|                                            |");
-        System.out.println("==============================================");
+        System.out.println("==============================================" + reset);
         System.out.println("1. Conectar a la DATABASE.");
         System.out.println("2. Crear TABLAS en la DATABASE.");
         System.out.println("3. Insertar datos.");
@@ -28,9 +28,9 @@ public class Pintar {
     // #endregion
     // #region Tablas de la función crear tablas
     public static void menuCrearTablaOpcionPrincipal() {
-        System.out.println("================================================");
+        System.out.println(verde + "================================================");
         System.out.println("|  ¿Quieres crear una tabla o todas a la vez?  |");
-        System.out.println("================================================");
+        System.out.println("================================================" + reset);
         System.out.println("1. Una a una");
         System.out.println("2. Todas");
         System.out.println("3. Salir");
@@ -38,9 +38,9 @@ public class Pintar {
     }
 
     public static void menuCrearTablaSeleccionada() {
-        System.out.println("===============================");
+        System.out.println(verde + "===============================");
         System.out.println("|  ¿Que tabla quieres crear?  |");
-        System.out.println("===============================");
+        System.out.println("===============================" + reset);
         System.out.println("Recuerda que debes crear las tablas en orden:");
         System.out.println(rojo + "ATENCION" + reset + ", el orden debe ser:" + amarillo
                 + "1º Usuarios, 2º Posts y 3º la tabla Likes" + reset);
@@ -53,9 +53,9 @@ public class Pintar {
     // #endregion
     // #region Insertar datos
     public static void menuInsertarDatos() {
-        System.out.println("===========================================");
+        System.out.println(verde +"===========================================");
         System.out.println("|  ¿En que tabla quieres insertar datos?  |");
-        System.out.println("===========================================");
+        System.out.println("===========================================" + reset);
         System.out.println("1. Usuarios");
         System.out.println("2. Posts");
         System.out.println("3. Likes");
@@ -67,9 +67,9 @@ public class Pintar {
 
     // #region ListarDatos
     public static void menuListarDatos() {
-        System.out.println("================================");
+        System.out.println(verde + "================================");
         System.out.println("|  ¿Que tabla quieres listar?  |");
-        System.out.println("================================");
+        System.out.println("================================" + reset);
         System.out.println("1. Usuarios");
         System.out.println("2. Posts");
         System.out.println("3. Likes");
@@ -79,9 +79,9 @@ public class Pintar {
     }
 
     public static void subMenuListarUSUARIO() {
-        System.out.println("=====================================");
+        System.out.println(verde + "=====================================");
         System.out.println("|  ¿Que columna quieres consultar?  |");
-        System.out.println("=====================================");
+        System.out.println("=====================================" + reset);
         System.out.println("1. ID");
         System.out.println("2. Nombre");
         System.out.println("3. Apellidos");
@@ -94,9 +94,9 @@ public class Pintar {
     }
 
     public static void subMenuListarPOSTS() {
-        System.out.println("=====================================");
+        System.out.println(verde + "=====================================");
         System.out.println("|  ¿Que columna quieres consultar?  |");
-        System.out.println("=====================================");
+        System.out.println("====================================="+ reset);
         System.out.println("1. ID del POST");
         System.out.println("2. ID del USUARIO que creo el POST"); // FK
         System.out.println("3. Cuando se creo");
@@ -107,9 +107,9 @@ public class Pintar {
     }
 
     public static void subMenuListarLIKES() {
-        System.out.println("=====================================");
+        System.out.println(verde + "=====================================");
         System.out.println("|  ¿Que columna quieres consultar?  |");
-        System.out.println("=====================================");
+        System.out.println("=====================================" + reset);
         System.out.println("1. ID del LIKE");
         System.out.println("2. ID del USUARIO que dio LIKE"); // FK
         System.out.println("3. ID del POST");
@@ -119,17 +119,17 @@ public class Pintar {
     }
 
     public static void menuFiltrarSelect() {
-        System.out.println("==================================");
+        System.out.println(verde+ "==================================");
         System.out.println("|  ¿Quieres filtrar la consulta? |");
-        System.out.println("==================================");
+        System.out.println("==================================" + reset);
         System.out.print("Tu respuesta (Y/N): ");
 
     }
 
     public static void selectFiltradoUSUARIO() {
-        System.out.println("=======================================");
+        System.out.println(verde + "=======================================");
         System.out.println("|  ¿Como quieres filtrar la consulta? |");
-        System.out.println("=======================================");
+        System.out.println("=======================================" + reset);
         System.out.println("1. idUsuario: ");
         System.out.println("2. Nombre: ");
         System.out.println("3. Apellidos: ");
@@ -140,9 +140,9 @@ public class Pintar {
     }
 
     public static void selectFiltradoPOST() {
-        System.out.println("=======================================");
+        System.out.println(verde +"=======================================");
         System.out.println("|  ¿Como quieres filtrar la consulta? |");
-        System.out.println("=======================================");
+        System.out.println("=======================================" + reset);
         System.out.println("1. idPost: ");
         System.out.println("2. idUsuario: ");
         System.out.println("3. Fecha de creacion: ");
@@ -151,9 +151,9 @@ public class Pintar {
     }
 
     public static void selectFiltradoLIKES() {
-        System.out.println("=======================================");
+        System.out.println(verde + "=======================================");
         System.out.println("|  ¿Como quieres filtrar la consulta? |");
-        System.out.println("=======================================");
+        System.out.println("=======================================" + reset);
         System.out.println("1. idLikes: ");
         System.out.println("2. idUsuarios: ");
         System.out.println("3. idPost: ");
@@ -161,20 +161,23 @@ public class Pintar {
     }
 
     public static void mayorOmenor() {
-        System.out.println("=======================================");
+        System.out.println(verde + "=======================================");
         System.out.println("|  ¿Como quieres filtrar la consulta? |");
-        System.out.println("=======================================");
+        System.out.println("=======================================" + reset);
         System.out.println("1. Los que son MAYORES al numero que dijiste (>): ");
         System.out.println("2. Los que son MENORES al numero que dijiste (<): ");
+        System.out.println("3. Los que son IGUALES al numero que dijiste (=): ");
+        System.out.println("4. Los que son MAYORES o IGUALES al numero que dijiste (>=): ");
+        System.out.println("5. Los que son MENORES o IGUALES al numero que dijiste (<=): ");
         System.out.print("Tu respuesta (Nº): ");
     }
 
     // #endregion
     //#region ModificarDatos
     public static void modificarRegistros() {
-        System.out.println("==================================");
+        System.out.println(verde + "==================================");
         System.out.println("|  ¿Que tabla quieres modificar? |");
-        System.out.println("==================================");
+        System.out.println("==================================" + reset);
         System.out.println(amarillo + "No podemos modificar todas las tablas por que tienen Foreign Key" + reset);
         System.out.println("1. Usuarios: ");
         System.out.println("2. Posts: ");
@@ -182,9 +185,9 @@ public class Pintar {
         System.out.println("Tu respuesta (Nº): ");
     }
     public static void modificarUsuarios() {
-        System.out.println("==================================");
-        System.out.println("|  ¿Que tabla quieres modificar? |");
-        System.out.println("==================================");
+        System.out.println(verde + "==================================");
+        System.out.println("|  ¿Que registro quieres modificar? |");
+        System.out.println("==================================" + reset);
         System.out.println("1. Nombre: ");
         System.out.println("2. Apellidos: ");
         System.out.println("3. Username: ");
@@ -194,6 +197,21 @@ public class Pintar {
         System.out.println("Tu respuesta (Nº): ");
     }
     //#endregion
+    //region eliminarTablas
 
+    public static void eliminarTablasMenu(){
+        System.out.println(verde + "=================================");
+        System.out.println("|  ¿Que tabla quieres eliminar? |");
+        System.out.println("=================================" + reset);
+        System.out.println(amarillo + "No es posible eliminar todas las tablas a la vez debido a las dependencias entre ellas." + reset);
+        System.out.println(amarillo + "Se deben eliminar en el siguiente orden: Likes -> Posts -> Usuarios."+ reset);
+        System.out.println(amarillo + "¿Qué tabla deseas eliminar primero? (Likes/Posts/Usuarios): " + reset);
+        System.out.println("1. Usuarios: ");
+        System.out.println("2. Posts: ");
+        System.out.println("3. Likes: ");
+        System.out.println("0. SALIR: ");
+        System.out.println("Tu respuesta (Nº): ");
+    }
+    //#endregion
 }
 

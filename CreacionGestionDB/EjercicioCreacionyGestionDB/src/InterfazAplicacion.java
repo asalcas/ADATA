@@ -5,13 +5,7 @@ import java.util.Scanner;
 
 public class InterfazAplicacion {
     private static Scanner lector = new Scanner(System.in);
-    // #region Códigos ANSI COLOREAR TEXTO
-    String reset = "\033[0m"; // Resetear color al predeterminado
-    String rojo = "\033[31m";
-    String verde = "\033[32m";
-    String amarillo = "\033[33m";
-    String azul = "\033[34m";
-    // #endregion
+    
 
     // SCANNER AQUI
     public static void main(String[] args) throws Exception {
@@ -66,7 +60,7 @@ public class InterfazAplicacion {
                     FuncionModificarDatos.modificarDatos(conn, lector);
                     break;
                 case 6:
-                    // pintarBorrarDatos();
+                    FuncionEliminarTabla.eliminarTablas(conn, lector);
                     break;
                 case 0:
                     funcionando = false;
