@@ -18,8 +18,8 @@ public class Pintar {
         System.out.println("1. Conectar a la DATABASE.");
         System.out.println("2. Crear TABLAS en la DATABASE.");
         System.out.println("3. Insertar datos.");
-        System.out.println("4. ListarDatos."); // TODO
-        System.out.println("5. Modificar datos."); // TODO
+        System.out.println("4. ListarDatos.");
+        System.out.println("5. Modificar datos.");
         System.out.println("6. Borrar datos."); // TODO
         System.out.println("0. SALIR.");
         System.out.print("Tu respuesta (Nº): ");
@@ -53,7 +53,7 @@ public class Pintar {
     // #endregion
     // #region Insertar datos
     public static void menuInsertarDatos() {
-        System.out.println(verde +"===========================================");
+        System.out.println(verde + "===========================================");
         System.out.println("|  ¿En que tabla quieres insertar datos?  |");
         System.out.println("===========================================" + reset);
         System.out.println("1. Usuarios");
@@ -96,7 +96,7 @@ public class Pintar {
     public static void subMenuListarPOSTS() {
         System.out.println(verde + "=====================================");
         System.out.println("|  ¿Que columna quieres consultar?  |");
-        System.out.println("====================================="+ reset);
+        System.out.println("=====================================" + reset);
         System.out.println("1. ID del POST");
         System.out.println("2. ID del USUARIO que creo el POST"); // FK
         System.out.println("3. Cuando se creo");
@@ -119,7 +119,7 @@ public class Pintar {
     }
 
     public static void menuFiltrarSelect() {
-        System.out.println(verde+ "==================================");
+        System.out.println(verde + "==================================");
         System.out.println("|  ¿Quieres filtrar la consulta? |");
         System.out.println("==================================" + reset);
         System.out.print("Tu respuesta (Y/N): ");
@@ -136,18 +136,18 @@ public class Pintar {
         System.out.println("4. Username: ");
         System.out.println("5. Password: ");
         System.out.println("6. email: ");
-        System.out.println("Tu respuesta (Nº): ");
+        System.out.print("Tu respuesta (Nº): ");
     }
 
     public static void selectFiltradoPOST() {
-        System.out.println(verde +"=======================================");
+        System.out.println(verde + "=======================================");
         System.out.println("|  ¿Como quieres filtrar la consulta? |");
         System.out.println("=======================================" + reset);
         System.out.println("1. idPost: ");
         System.out.println("2. idUsuario: ");
         System.out.println("3. Fecha de creacion: ");
         System.out.println("4. Fecha de actualizacion: ");
-        System.out.println("Tu respuesta (Nº): ");
+        System.out.print("Tu respuesta (Nº): ");
     }
 
     public static void selectFiltradoLIKES() {
@@ -157,7 +157,7 @@ public class Pintar {
         System.out.println("1. idLikes: ");
         System.out.println("2. idUsuarios: ");
         System.out.println("3. idPost: ");
-        System.out.println("Tu respuesta (Nº): ");
+        System.out.print("Tu respuesta (Nº): ");
     }
 
     public static void mayorOmenor() {
@@ -173,7 +173,7 @@ public class Pintar {
     }
 
     // #endregion
-    //#region ModificarDatos
+    // #region ModificarDatos
     public static void modificarRegistros() {
         System.out.println(verde + "==================================");
         System.out.println("|  ¿Que tabla quieres modificar? |");
@@ -182,8 +182,9 @@ public class Pintar {
         System.out.println("1. Usuarios: ");
         System.out.println("2. Posts: ");
         System.out.println("0. SALIR: ");
-        System.out.println("Tu respuesta (Nº): ");
+        System.out.print("Tu respuesta (Nº): ");
     }
+
     public static void modificarUsuarios() {
         System.out.println(verde + "==================================");
         System.out.println("|  ¿Que registro quieres modificar? |");
@@ -194,24 +195,42 @@ public class Pintar {
         System.out.println("4. Password: ");
         System.out.println("5. email: ");
         System.out.println("0. SALIR: ");
-        System.out.println("Tu respuesta (Nº): ");
+        System.out.print("Tu respuesta (Nº): ");
     }
-    //#endregion
-    //region eliminarTablas
+    // #endregion
+    // region eliminarTablas
 
-    public static void eliminarTablasMenu(){
+    public static void eliminarTablasMenu() {
         System.out.println(verde + "=================================");
         System.out.println("|  ¿Que tabla quieres eliminar? |");
         System.out.println("=================================" + reset);
-        System.out.println(amarillo + "No es posible eliminar todas las tablas a la vez debido a las dependencias entre ellas." + reset);
-        System.out.println(amarillo + "Se deben eliminar en el siguiente orden: Likes -> Posts -> Usuarios."+ reset);
+        System.out.println(amarillo
+                + "No es posible eliminar todas las tablas a la vez debido a las dependencias entre ellas." + reset);
+        System.out.println(amarillo + "Se deben eliminar en el siguiente orden: Likes -> Posts -> Usuarios." + reset);
         System.out.println(amarillo + "¿Qué tabla deseas eliminar primero? (Likes/Posts/Usuarios): " + reset);
         System.out.println("1. Usuarios: ");
         System.out.println("2. Posts: ");
         System.out.println("3. Likes: ");
         System.out.println("0. SALIR: ");
-        System.out.println("Tu respuesta (Nº): ");
+        System.out.print("Tu respuesta (Nº): ");
     }
-    //#endregion
-}
 
+    public static void eliminarTablaORegistro() {
+
+        System.out.println(verde + "========================");
+        System.out.println("|  ¿Que quieres hacer? |");
+        System.out.println("========================" + reset);
+        System.out.println("1. Eliminar registros: ");
+        System.out.println("2. Eliminar tablas: ");
+        System.out.println("0. SALIR: ");
+        System.out.print("Tu respuesta (Nº): ");
+    }
+
+    public static void eliminarRegistrosMenu() {
+        System.out.println(verde + "====================================");
+        System.out.println("|  ¿Que registro quieres eliminar? |");
+        System.out.println("====================================" + reset);
+        System.out.print("Tu respuesta (Introduce un ID): ");
+    }
+    // #endregion
+}
