@@ -114,7 +114,7 @@ public class FuncionEliminarTabla {
                             System.out.println("Nombre de tabla no válido.");
                             break;
                     }
-                    borrarTablaQuery = "DROP TABLE IF EXISTS " + tabla;
+                    borrarTablaQuery = "DROP TABLE IF EXISTS " + tabla + ";";
                     try (PreparedStatement stmt = conn.prepareStatement(borrarTablaQuery)) {
                         stmt.executeUpdate();
                         System.out.println("Tabla " + tabla + " eliminada correctamente.");
@@ -123,6 +123,9 @@ public class FuncionEliminarTabla {
                             System.err.println(
                                     rojo + "No se puede eliminar esta tabla por que otras la referencian con Foreign Keys. Borra primero LIKES y POSTS"
                                             + reset);
+
+                        }else {
+                            System.err.println("No se puede eliminar la tabla " + tabla + " por que no esta en la base de datos");
                         }
                     }
                     opcionCorrecta = true;
