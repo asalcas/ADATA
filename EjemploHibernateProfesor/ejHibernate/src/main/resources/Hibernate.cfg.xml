@@ -1,0 +1,25 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Configuración de la conexión JDBC -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://dns11036.phdns11.es:3306/ad2425_alvaro_salvador</property>
+        <property name="hibernate.connection.username">alvaro_salvador</property>
+        <property name="hibernate.connection.password">12345</property>
+        <!-- Configuración del  pool de conexiones JDBC... utilizamos el pool de test integrado -->
+        <property name="hibernate.connection.pool_size">1</property>
+        <!--Seleccionamos el dialecto SQL-->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+
+        <!-- Configurar SQL para salida estándar -->
+        <property name="show_sql">true</property>
+        <!-- Establece el contexto de la sesion-->
+        <property name="current_session_context_class">thread</property>
+        <property name="hbm2ddl.auto">update</property>
+        <mapping class="Alumnado"/>
+        <mapping class="Direccion"/>
+        <mapping class="Email"/>
+    </session-factory>
+</hibernate-configuration>
