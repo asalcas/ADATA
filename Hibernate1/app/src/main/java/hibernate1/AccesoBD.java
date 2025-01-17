@@ -32,6 +32,7 @@ public class AccesoBD {
         setUp();
         sesion = sf.openSession();
         transaction = sesion.beginTransaction();
+        
     }
     public void cerrar(){
         try {
@@ -41,7 +42,11 @@ public class AccesoBD {
         }
         sf.close();
     }
-    public Object guardar(Object cosa){
-        return sesion.save(cosa);
+    public void guardar(Object cosa){
+        sesion.persist(cosa); //! ERROR ESTA AQUI
+        System.out.println("Has guardado el Objeto con exito");
+    }
+    public Session get_sesion(){
+        return sesion;
     }
 }

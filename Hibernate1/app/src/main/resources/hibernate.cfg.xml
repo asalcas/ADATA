@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
     "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+    "http://www.hibernate.org/dtd/hibernate-configuration">
 
 <hibernate-configuration>
     <session-factory>
@@ -11,9 +11,6 @@
         <property name="hibernate.connection.username">alvaro_salvador</property>
         <property name="hibernate.connection.password">12345</property>
 
-        <!-- Dialecto de Hibernate -->
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-
         <!-- Opciones de depuración -->
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
@@ -22,7 +19,8 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- Mapeo de clases de entidad -->
-        <mapping class="com.tuempresa.entidades.TuEntidad" />
+        <mapping class="models.Persona"/>
+
     </session-factory>
 </hibernate-configuration>
 
