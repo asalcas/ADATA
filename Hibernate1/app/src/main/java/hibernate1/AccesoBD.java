@@ -25,10 +25,12 @@ public class AccesoBD {
             // Es como el 'gestor' de las sesiones que nos ayudará a conectar cada vez que lo necesitemos
             sf = new MetadataSources(registro).buildMetadata().buildSessionFactory();
         }catch(Exception e){
+            System.err.println(e.getMessage());
             StandardServiceRegistryBuilder.destroy(registro);
         }
     }
     public void abrir() throws Exception{
+        
         setUp();
         sesion = sf.openSession();
         transaction = sesion.beginTransaction();
@@ -43,8 +45,8 @@ public class AccesoBD {
         sf.close();
     }
     public void guardar(Object cosa){
-        sesion.persist(cosa); //! ERROR ESTA AQUI
-        System.out.println("Has guardado el Objeto con exito");
+        sesion.save(cosa);
+        System.out.println("Has guardado el Objeto con exito: \n"+ cosa);
     }
     public Session get_sesion(){
         return sesion;

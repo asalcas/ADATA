@@ -22,10 +22,10 @@ dependencies {
     implementation 'javax.persistence:javax.persistence-api:2.2'
 
     // Hibernate (implementación JPA)
-    implementation 'org.hibernate:hibernate-core:6.3.2.Final'
+    implementation 'org.hibernate:hibernate-core:5.6.1.Final'
 
     // Controlador JDBC (Ejemplo: MySQL)
-    runtimeOnly 'mysql:mysql-connector-java:8.0.33'
+    runtimeOnly 'mysql:mysql-connector-java:8.0.29'
 
     // Herramienta de testing (opcional)
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'

@@ -9,8 +9,8 @@ public class Principal {
     public static void main(String[] args) throws Exception {
         instancia=new Accesobd();
         ejemplo1a1();
-        ejemplo1a1bi();
-        ejemplo1amuchos();
+        //ejemplo1a1bi();
+        //ejemplo1amuchos();
     }
 
     private static void ejemplo1amuchos() throws Exception {

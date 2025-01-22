@@ -1,6 +1,7 @@
 package models;
 import javax.persistence.*;
 import java.io.Serializable;
+import  hibernate1.Principal.*;
 
 @Entity
 @Table(name= "Personas")
@@ -47,7 +48,6 @@ public class Persona implements Serializable{
         public void set_Saldo(double saldo){
             this.saldo = saldo;
         }
-    
     
     }
     
