@@ -1,6 +1,6 @@
 package hibernate1;
 import org.hibernate.Session;
-import hibernate1.Colores;
+import hibernate1.Imprimir;
 import models.Persona;
 
 public class Principal {
@@ -9,20 +9,15 @@ public class Principal {
     public static void main(String[] args) throws Exception {
         instancia = new AccesoBD();
 
-        //guardarPersona("alvaro", 3000);
-        showPersona(1);
+        //guardarPersona("El mejor", 3000);
+        showPersonaID(1);
     }
 
     public static void guardarPersona(String nombre, int saldo) throws Exception{
         Persona persona = new Persona(nombre, saldo);
         instancia.abrir();
         instancia.guardar(persona);
-        System.out.println( Colores.GREEN + "\n==============================");
-        System.out.println("=  Resultado de la busqueda  =");
-        System.out.println("==============================");
-        System.out.println("Id: " + persona.getId());
-        System.out.println("Nombre: " +  persona.getNombre());
-        System.out.println("Saldo: " + persona.getSaldo()+ "\n" + Colores.Blanco);
+        Imprimir.mensajeGuardarPersonas(persona);
         instancia.cerrar();
 
     // ABRIR() es esto de abajo
@@ -39,31 +34,17 @@ public class Principal {
         //sessionFactory.close();
 
     }
-    public static void showPersona(int id)throws Exception{
+    public static void showPersonaID(int id)throws Exception{
         instancia.abrir();
         sesion = instancia.get_sesion();
         Persona persona = sesion.get(Persona.class, id);
-        System.out.println( Colores.GREEN + "\n==============================");
-        System.out.println("=  Resultado de la busqueda  =");
-        System.out.println("==============================" + Colores.CYAN);
-        System.out.println("Id: " + persona.getId());
-        System.out.println("Nombre: " +  persona.getNombre());
-        System.out.println("Saldo: " + persona.getSaldo()+ "\n" + Colores.Blanco);
+        Imprimir.showPersonaID(persona);
         instancia.cerrar();
-
-    // ABRIR()
-        //setUp();
-        //sesion=sf.openSession();
-        //Transaction transaction=session.beginTransaction();
-
-    // Nuestro GET()/LOAD()
-        //PersonasEntity persona = session.load(PersonasEntity.class, id);
-        //PersonasEntity persona = session.get(PersonasEntity.class, id); // Esta línea también funcionaría como la anterior
-
-    // CERRAR()
-        //System.out.println(persona.getNombre());
-        //transaction.commit();
-        //instancia.cerrar();
+    }
+    public static void showPersonaNombre(String nombre) throws Exception{
+        instancia.abrir();
+        sesion = instancia.get_sesion();
+        sesion.createNativeQuery(""); //TODO
     }
     public void updatePersona() throws Exception{
 
