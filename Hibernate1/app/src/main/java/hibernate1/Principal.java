@@ -1,6 +1,5 @@
 package hibernate1;
 import org.hibernate.Session;
-import hibernate1.Imprimir;
 import models.Persona;
 
 public class Principal {
@@ -17,7 +16,7 @@ public class Principal {
         Persona persona = new Persona(nombre, saldo);
         instancia.abrir();
         instancia.guardar(persona);
-        Imprimir.mensajeGuardarPersonas(persona);
+        Imprimir.mensajeGuardarPersonas(persona); //! ESTO RETORNARLO EN LA CLASE INTERFAZ DE USUARIO y LLAMAR ALLI IMPRIMIR
         instancia.cerrar();
 
     // ABRIR() es esto de abajo
