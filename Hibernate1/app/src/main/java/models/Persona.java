@@ -1,7 +1,7 @@
 package models;
 import javax.persistence.*;
 import java.io.Serializable;
-import  hibernate1.Principal.*;
+import  hibernate1.Funciones.*;
 
 @Entity
 @Table(name= "Personas")
