@@ -27,5 +27,27 @@ public class ImprimirRespuestas {
         System.out.println("Nombre: " +  persona.getNombre());
         System.out.println("Saldo: " + persona.getSaldo()+ "\n" + Colores.Blanco);
     }
+    public static void imprimirListaPersonas(Persona persona){
+        System.out.println(Colores.GREEN+ "========================================" + Colores.CYAN);
+        System.out.println("Id: " + persona.getId());
+        System.out.println("Nombre: " +  persona.getNombre());
+        System.out.println("Saldo: " + persona.getSaldo()+ "\n" + Colores.Blanco);
+    }
+    public static void imprimirListaPersonasPorSaldo(Persona persona){
+        System.out.println( Colores.GREEN + "\n========================================");
+        System.out.println("=  Resultado de la busqueda por Saldo =");
+        System.out.println("========================================" + Colores.CYAN);
+        System.out.println("Id: " + persona.getId());
+        System.out.println("Nombre: " +  persona.getNombre());
+        System.out.println("Saldo: " + persona.getSaldo()+ "\n" + Colores.Blanco);
+    }
+    public static void updatePersona(Persona persona){
+        System.out.println( Colores.GREEN + "\n========================================");
+        System.out.println("=   Resultado de la modificación  =");
+        System.out.println("========================================" + Colores.CYAN);
+        System.out.println("Id: " + persona.getId());
+        System.out.println("Nombre: " +  persona.getNombre());
+        System.out.println("Saldo: " + persona.getSaldo()+ "\n" + Colores.Blanco);
+    }
     
 }

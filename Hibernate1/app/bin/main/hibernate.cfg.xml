@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Configuración de conexión a la base de datos -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://dns11036.phdns11.es:3306/ad2425_alvaro_salvador</property>
+        <property name="hibernate.connection.username">alvaro_salvador</property>
+        <property name="hibernate.connection.password">12345</property>
+
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+
+
+        <!-- Opciones de depuración -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Configuración de la estrategia de creación de tablas -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Mapeo de clases de entidad-->
+        <mapping class="models.Persona"/> <!-- Funciona correctamente por ahora, sino mover a 'hibernate1' y poner "hibernate1.models"-->
+        
+
+    </session-factory>
+</hibernate-configuration>
+
+<!--Explicación de los Campos Importantes
+1. hibernate.connection.driver_class:
+Especifica el controlador JDBC de la base de datos. Aquí se usa MySQL como ejemplo, pero puede cambiar dependiendo de tu base de datos.
+
+hibernate.connection.url:
+La URL para conectar a tu base de datos. Personalízala para que coincida con la configuración de tu base.
+
+hibernate.connection.username y hibernate.connection.password:
+Credenciales para acceder a la base de datos.
+
+hibernate.dialect:
+Especifica el dialecto SQL que Hibernate usará para interactuar con tu base de datos.
+
+hibernate.hbm2ddl.auto:
+Configura cómo manejar la creación y actualización de tablas:
+- create: Crea las tablas cada vez (borra los datos existentes).
+- update: Actualiza las tablas según los cambios.
+- validate: Verifica las tablas sin modificarlas.
+- none: No realiza ninguna acción.
+
+<mapping class>:
+Lista las clases de entidad que se mapean a tablas en la base de datos.
+
+¿Qué Sigue?
+Crea las clases de entidad en tu paquete com.tuempresa.entidades.
+Configura un esquema de base de datos para probar tus operaciones CRUD.
+Usa SessionFactory para abrir una sesión y comenzar a realizar operaciones.
+Si necesitas ayuda con un ejemplo básico de cómo usar SessionFactory, dime y te lo proporciono.-->
