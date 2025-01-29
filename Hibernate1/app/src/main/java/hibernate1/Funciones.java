@@ -71,7 +71,7 @@ public class Funciones {
     }
 
     /**
-     * Funcion que modifica una persona de la DB
+     * Funcion que modifica una persona de la BD
      * @param idPersona id de la persona a modificar
      * @param nombrePersona nuevo nombre de la persona
      * @param saldo el nuevo saldo de la persona
