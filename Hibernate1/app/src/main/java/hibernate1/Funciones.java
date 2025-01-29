@@ -1,13 +1,12 @@
 package hibernate1;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import models.Persona;
 
+/**
+ * Clase que recoge todas las funciones del CRUD
+ */
 public class Funciones {
     static AccesoBD instancia;
     static Session sesion;
