@@ -21,15 +21,14 @@ public class Funciones {
         return persona;
     }
 
-    public static void showPersonas() throws Exception {
+    public static List<Persona> showPersonas() throws Exception {
         instancia = new AccesoBD();
         instancia.abrir();
         sesion = instancia.get_sesion();
-        List<Persona> personas = sesion.createNativeQuery("SELECT * from Personas",Persona.class).list();
-        for (Persona persona : personas) {
-            ImprimirRespuestas.imprimirListaPersonas(persona); // ! DEBERIA IR AL MAIN, PERO NO SE COMO SACARLO
-        }
+        List<Persona> personas = sesion.createNativeQuery("SELECT * from Personas", Persona.class).list();
+
         instancia.cerrar();
+        return personas;
     }
 
     public static void showPersonaID(int id) throws Exception {
@@ -71,32 +70,70 @@ public class Funciones {
 
     }
 
+    /**
+     * Funcion que modifica una persona de la DB
+     * @param idPersona id de la persona a modificar
+     * @param nombrePersona nuevo nombre de la persona
+     * @param saldo el nuevo saldo de la persona
+     * @throws Exception enviará la excepción si no es correcto el acceso a la DB
+     */
     public static void updatePersona(int idPersona, String nombrePersona, int saldo) throws Exception {
         instancia = new AccesoBD();
-        try {
-            instancia.abrir();
-            sesion = instancia.get_sesion();
-            Persona persona = sesion.get(Persona.class, idPersona);
-            persona.set_Nombre(nombrePersona);
-            persona.set_Saldo(saldo);
-            sesion.update(persona);
-        } catch (Exception errorUpdatePersona) {
-            System.err.println("No se pudo completar la actualización de la persona con ID:" + idPersona + ". "
-                    + errorUpdatePersona.getMessage());
-        }
+        instancia.abrir();
+        // Para probar que capturo la excepción en el main mando una excepción de
+        // prueba:
+        // throw new Exception();
+        sesion = instancia.get_sesion();
+        Persona persona = sesion.get(Persona.class, idPersona);
+        persona.set_Nombre(nombrePersona);
+        persona.set_Saldo(saldo);
+        sesion.update(persona);
         instancia.cerrar();
     }
 
+
+    // public static Persona updatePersona2(int idPersona, String nombrePersona, int saldo) throws Exception {
+    //     Persona personaUpdated = null;
+    //     instancia = new AccesoBD();
+    //     instancia.abrir();
+    //     sesion = instancia.get_sesion();
+    //     personaUpdated = sesion.get(Persona.class, idPersona);
+    //     personaUpdated.set_Nombre(nombrePersona);
+    //     personaUpdated.set_Saldo(saldo);
+    //     sesion.update(personaUpdated);
+    //     instancia.cerrar();
+
+    //     return personaUpdated;
+    // }
+
+    // public static void updatePersona(int idPersona, String nombrePersona, int
+    // saldo) throws Exception {
+    // instancia = new AccesoBD();
+    // try {
+    // instancia.abrir();
+    // sesion = instancia.get_sesion();
+    // Persona persona = sesion.get(Persona.class, idPersona);
+    // persona.set_Nombre(nombrePersona);
+    // persona.set_Saldo(saldo);
+    // sesion.update(persona);
+    // } catch (Exception errorUpdatePersona) {
+    // System.err.println("No se pudo completar la actualización de la persona con
+    // ID:" + idPersona + ". "
+    // + errorUpdatePersona.getMessage());
+    // }
+    // instancia.cerrar();
+    // }
+
     public static void deletePersona(int idPersona, String respuesta) throws Exception {
         instancia.abrir();
-        sesion = instancia.get_sesion();    
+        sesion = instancia.get_sesion();
         Persona persona = sesion.get(Persona.class, idPersona);
         if (respuesta.equals("Y")) {
             sesion.delete(persona);
-            instancia.cerrar();   
-        }else if(respuesta.equals("N")){
-            System.out.println("Operación cancelada con éxito"); 
-        }else{
+            instancia.cerrar();
+        } else if (respuesta.equals("N")) {
+            System.out.println("Operación cancelada con éxito");
+        } else {
             System.out.println("Ha ocurrido un error.");
         }
     }

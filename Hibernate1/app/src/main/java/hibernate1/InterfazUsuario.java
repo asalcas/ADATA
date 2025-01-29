@@ -1,8 +1,10 @@
 package hibernate1;
 
+import java.util.List;
 import java.util.Scanner;
 
 import models.Persona;
+
 
 public class InterfazUsuario {
     public static void main(String[] args) {
@@ -19,7 +21,7 @@ public class InterfazUsuario {
             ImprimirInterfaz.interfazPrincipal();
             respuestaUsuario = sc.nextInt();
             sc.nextLine();
-            if (respuestaUsuario >= 0 && respuestaUsuario < 5) {
+            
                 switch (respuestaUsuario) {
                     case 1:
                         /*
@@ -123,7 +125,10 @@ public class InterfazUsuario {
                                     break;
                                 case 4:
                                     try {
-                                        Funciones.showPersonas();
+                                        List<Persona> personas = Funciones.showPersonas();
+                                        for (Persona persona1 : personas) {
+                                            ImprimirRespuestas.imprimirListaPersonas(persona1); // ! EJEMPLO PARA PONER COSAS EN MAIN (impresiones listaobjetos)
+                                        }
                                     } catch (Exception errorShow) {
                                         System.out.println(Colores.RED+"Error al listar Personas: " + errorShow.getMessage()+Colores.Blanco);
                                     }
@@ -186,7 +191,7 @@ public class InterfazUsuario {
                     default:
                         break;
                 }
-            }
+            
 
         } while (respuestaUsuario != 0);
         sc.close();

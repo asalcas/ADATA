@@ -21,7 +21,7 @@ public class ImprimirInterfaz {
     }
     public static void subMenuObtenerPersonas(){
         System.out.println(Colores.YELLOW+"===============================================");
-        System.out.println("==            ¿Como filtramos?            ==");
+        System.out.println("==            ¿Como filtramos?             ==");
         System.out.println("==============================================="+Colores.PURPLE);  
         System.out.println("1. "+Colores.Blanco+"Obtener por ID"+ Colores.PURPLE); 
         System.out.println("2. "+ Colores.Blanco +"Obtener por Nombre"+Colores.PURPLE);
