@@ -38,9 +38,6 @@ public class Persona implements Serializable{
         public double getSaldo(){
             return saldo;
         }
-        public void set_Id(int idPersona){
-            this.idPersona = idPersona;
-        }
         public void set_Nombre(String nombre){
             this.nombre = nombre;
         }
