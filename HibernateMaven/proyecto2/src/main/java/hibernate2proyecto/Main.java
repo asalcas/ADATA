@@ -54,6 +54,7 @@ public class Main {
                     break;
                 case 0:
                     condicionDoWhiles = respuestaMenuUsuario;
+                    System.out.println("Volviendo atrás...");
                     break;
                 default:
                 System.err.println("Opción no válida, intentelo de nuevo...");
