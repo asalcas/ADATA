@@ -22,8 +22,9 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- Mapeo de clases de entidad-->
-        <mapping class="models.Persona"/> <!-- Funciona correctamente por ahora, sino mover a 'hibernate1' y poner "hibernate1.models"-->
-        
+        <mapping class="Models.Usuarios"/> <!-- Funciona correctamente por ahora, sino mover a 'hibernate1' y poner "hibernate1.models"-->
+        <mapping class="Models.Post"/>
+        <mapping class="Models.Likes"/>
 
     </session-factory>
 </hibernate-configuration>
