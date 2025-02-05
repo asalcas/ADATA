@@ -1,4 +1,6 @@
 package hibernate2proyecto;
+import java.util.logging.Level;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -22,6 +24,8 @@ public class AccesoBD {
      * return: none, pero asigna un valor a 'sf'
      */
     protected void setUp(){
+        java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
+
         final StandardServiceRegistry registro = new StandardServiceRegistryBuilder()
                                                 .configure() // por defecto usa la configuración de: hibernate.cfg.xml
                                                 .build();

@@ -1,20 +1,18 @@
 package Models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 @Table (name = "Usuarios")
 public class Usuarios {
     @Id
-    @OneToMany(cascade = CascadeType.ALL)
+    //@OneToMany(cascade = CascadeType.ALL)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idUsuarios")
     private int idUsuario;
@@ -29,6 +27,19 @@ public class Usuarios {
     private String password;
     @Column(name = "Email")
     private String email;
+
+    public Usuarios()
+    {
+        
+    }
+
+    public Usuarios(String Nombre, String Apellidos, String Username, String Password, String Email) {
+        this.nombre = Nombre;
+        this.apellidos = Apellidos;
+        this.username= Username;
+        this.password = Password; //! hashearlo
+        this.email = Email;
+    }
 
     // Getters y Setters
 

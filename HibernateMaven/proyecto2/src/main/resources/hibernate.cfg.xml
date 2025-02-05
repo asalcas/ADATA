@@ -12,8 +12,6 @@
         <property name="hibernate.connection.password">12345</property>
 
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
-
-
         <!-- Opciones de depuración -->
         <property name="hibernate.show_sql">false</property>
         <property name="hibernate.format_sql">true</property>
