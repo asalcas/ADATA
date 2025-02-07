@@ -47,11 +47,24 @@ public class ImpresionesRespuestas {
         System.out.println("Email: " + usuario.getEmail());
     }
 
-    public static void respuestaShowUsuarioPorParametro(List<Usuarios> listaUsuarios, String tabla) {
-
-        System.out.println("----------------------------------------");
-        System.out.println(String.format("-  Resultados del Usuario por: %s  -", tabla));
-        System.out.println("----------------------------------------");
+    public static void respuestaShowUsuarioPorParametro(List<Usuarios> listaUsuarios, String columna) {
+        switch (columna) {
+            case "Apellidos":
+                System.out.println("-------------------------------------------");
+                System.out.println(String.format("-  Resultados del Usuario por: %s  -", columna));
+                System.out.println("-------------------------------------------");
+                break;
+            case "Username":
+                System.out.println("------------------------------------------");
+                System.out.println(String.format("-  Resultados del Usuario por: %s  -", columna));
+                System.out.println("------------------------------------------");
+                break;
+            default:
+                System.out.println("----------------------------------------");
+                System.out.println(String.format("-  Resultados del Usuario por: %s  -", columna));
+                System.out.println("----------------------------------------");
+                break;
+        }
         for (Usuarios usuario : listaUsuarios) {
             System.out.println("ID: " + usuario.getIdUsuario());
             System.out.println("Nombre: " + usuario.getNombre());
@@ -59,6 +72,7 @@ public class ImpresionesRespuestas {
             System.out.println("Username: " + usuario.getUsername());
             System.out.println("Password: " + usuario.getPassword().hashCode());
             System.out.println("Email: " + usuario.getEmail());
+            System.out.println();
         }
     }
 

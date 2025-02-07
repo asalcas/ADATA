@@ -1,16 +1,20 @@
 package hibernate2proyecto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.Session;
 
+import Models.Post;
 import Models.Usuarios;
 
 public class Funciones {
     static AccesoBD instancia;
     static Session sesion;
 
-    public static Usuarios guardarPersona(String Nombre, String Apellidos, String Username, String Password, String Email) throws Exception {
+    // #region USUARIOS
+    public static Usuarios guardarUsuarios(String Nombre, String Apellidos, String Username, String Password,
+            String Email) throws Exception {
         instancia = new AccesoBD();
         Usuarios usuarioGuardar = new Usuarios(Nombre, Apellidos, Username, Password, Email);
         instancia.abrir();
@@ -18,7 +22,6 @@ public class Funciones {
         instancia.cerrar();
         return usuarioGuardar;
     }
-
 
     public static List<Usuarios> obtenerTodosLosUsuarios() throws Exception {
         instancia = new AccesoBD();
@@ -38,16 +41,33 @@ public class Funciones {
         return usuarioObtenido;
     }
 
-    public static List<Usuarios> obtenerUsuariosPor(String inputUsuario, String tabla) throws Exception {
+    public static List<Usuarios> obtenerUsuariosPor(String inputUsuario, String columna) throws Exception {
         instancia = new AccesoBD();
         instancia.abrir();
         sesion = instancia.get_sesion();
         List<Usuarios> UsuariosPorParametro = sesion
-                .createNativeQuery("SELECT idUsuarios, Nombre, Apellidos, Username, Email FROM "+tabla+" WHERE Nombre LIKE :inputUsuario",
+                .createNativeQuery(
+                        "SELECT idUsuarios, Nombre, Apellidos, Username, Email, Password FROM Usuarios WHERE " + columna
+                                + " LIKE :inputUsuario",
                         Usuarios.class)
                 .setParameter("inputUsuario", "%" + inputUsuario + "%").getResultList();
         return UsuariosPorParametro;
     }
-    
-}
 
+    // #endregion
+    // #region POST
+    //! CUANDO MODIFIQUE EL POST, QUE LA FECHA DEL UPDATED PASE DE NULL A LA DEL EQUIPO
+
+    public static Post guardarPost(Usuarios usuario, LocalDate create_at)
+            throws Exception {
+        instancia = new AccesoBD();
+        Post postGuardar = new Post();
+        instancia.abrir();
+        instancia.guardar(postGuardar);
+        instancia.cerrar();
+        return postGuardar;
+
+        // #endregion
+
+    }
+}

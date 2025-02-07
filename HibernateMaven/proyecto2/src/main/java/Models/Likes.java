@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,20 +15,20 @@ public class Likes {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="IdLikes")
     private int idLike;
-    //@ManyToOne
-    @JoinColumn(name="idUsuarios")
-    private int idUsuario;
-    //@ManyToOne
-    @JoinColumn(name="IdPost")
-    private int idPost;
+    @ManyToOne
+    @JoinColumn(name="idUsuarios", nullable=false)
+    private Usuarios idUsuario;
+    @ManyToOne
+    @JoinColumn(name="IdPost", nullable=false)
+    private Post idPost;
     
     public int getIdLike(){
         return idLike;
     }
-    public int getIdUsuario(){
+    public Usuarios getIdUsuario(){
         return idUsuario;
     }
-    public int getIdPost(){
+    public Post getIdPost(){
         return idPost;
     }
 }

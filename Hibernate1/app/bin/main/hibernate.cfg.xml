@@ -15,7 +15,7 @@
 
 
         <!-- Opciones de depuración -->
-        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.show_sql">false</property>
         <property name="hibernate.format_sql">true</property>
 
         <!-- Configuración de la estrategia de creación de tablas -->

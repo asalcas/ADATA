@@ -12,7 +12,6 @@ import jakarta.persistence.Id;
 @Table (name = "Usuarios")
 public class Usuarios {
     @Id
-    //@OneToMany(cascade = CascadeType.ALL)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idUsuarios")
     private int idUsuario;
@@ -37,7 +36,7 @@ public class Usuarios {
         this.nombre = Nombre;
         this.apellidos = Apellidos;
         this.username= Username;
-        this.password = Password; //! hashearlo
+        this.password = Password; // Hashed al hacer la consulta
         this.email = Email;
     }
 

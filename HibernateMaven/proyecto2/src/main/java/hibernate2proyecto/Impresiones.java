@@ -12,17 +12,34 @@ public class Impresiones {
         System.out.println("0. SALIR.");
     }
 
-    public static void guardarDatos() {
+    public static void menuGuardar() {
+
+        System.out.println("---------------------------------------------------");
+        System.out.println("-  Estás en Guardar Datos, seleccione una opción  -");
+        System.out.println("---------------------------------------------------");
+        System.out.println("1. Guardar datos de los Usuarios.");
+        System.out.println("2. Guardar datos de los Post."); // Por hacer
+        System.out.println("3. Guardar datos de los Likes."); // Por hacer
+        System.out.println("0. SALIR.");
+
+    }
+
+    public static void guardarDatosUSUARIO() {
         System.out.println("---------------------------------------------------");
         System.out.println("-   Para guardar un Usuario debemos introducir:   -");
         System.out.println("---------------------------------------------------");
+    }
+    public static void guardarDatosPOST() {
+        System.out.println("------------------------------------------------");
+        System.out.println("-   Para guardar un Post debemos introducir:   -");
+        System.out.println("------------------------------------------------");
     }
 
     public static void menuObtenerDatos() {
         System.out.println("---------------------------------------------------");
         System.out.println("-  Estás en Obtener Datos, seleccione una opción  -");
         System.out.println("---------------------------------------------------");
-        System.out.println("1. Obtener datos de los Usuarios."); // Por hacer
+        System.out.println("1. Obtener datos de los Usuarios.");
         System.out.println("2. Obtener datos de los Post."); // Por hacer
         System.out.println("3. Obtener datos de los Likes."); // Por hacer
         System.out.println("0. SALIR.");
@@ -38,6 +55,18 @@ public class Impresiones {
         System.out.println("4. Obtener Usuarios por Apellidos.");
         System.out.println("5. Obtener Usuarios por Username.");
         System.out.println("6. Obtener Usuarios por Email.");
+        System.out.println("0. SALIR.");
+    }
+
+    public static void menuObtenerDatosPost() {
+        System.out.println("----------------------------------------------------------");
+        System.out.println("-  Obteniendo datos de los Posts, seleccione una opción  -");
+        System.out.println("----------------------------------------------------------");
+        System.out.println("1. Obtener todos los Post.");
+        System.out.println("2. Obtener Post por ID de Post.");
+        System.out.println("3. Obtener Post por ID de Usuario.");
+        System.out.println("4. Obtener Post por fecha de Creación.");
+        System.out.println("5. Obtener Post por fecha de Actualización.");
         System.out.println("0. SALIR.");
     }
 
