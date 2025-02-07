@@ -61,13 +61,14 @@ public class Funciones {
     public static Post guardarPost(Usuarios usuario, LocalDate create_at)
             throws Exception {
         instancia = new AccesoBD();
-        Post postGuardar = new Post();
+        Post postGuardar = new Post(usuario, create_at, null);
         instancia.abrir();
         instancia.guardar(postGuardar);
         instancia.cerrar();
         return postGuardar;
 
-        // #endregion
+        
 
     }
+    // #endregion
 }

@@ -2,10 +2,11 @@ package hibernate2proyecto;
 
 import java.util.List;
 
+import Models.Post;
 import Models.Usuarios;
 
 public class ImpresionesRespuestas {
-
+//#region USUARIOS
     public static void usuarioGuardado(Usuarios usuario) {
 
         System.out.println("---------------------------------------------");
@@ -19,6 +20,7 @@ public class ImpresionesRespuestas {
         System.out.println("Email: " + usuario.getEmail());
 
     }
+
 
     public static void respuestaShowTODOPersonas(List<Usuarios> listaUsuarios) {
 
@@ -74,6 +76,26 @@ public class ImpresionesRespuestas {
             System.out.println("Email: " + usuario.getEmail());
             System.out.println();
         }
+
+        
+    }
+    //#endregion
+    //#region POST
+    public static void PostGuardado(Post post) {
+
+        System.out.println("------------------------------------------");
+        System.out.println("-  ¡Resultados del nuevo Post guardado!  -");
+        System.out.println("------------------------------------------");
+        System.out.println("ID del Post: " + post.getIdPost());
+        System.out.println("ID del Usuario: " + post.getUsuario().getIdUsuario());
+        System.out.println("Fecha de creación del Post: " + post.getCreated_at());
+        System.out.println("Fecha de actualización del post: " + post.getUpdated_at());
     }
 
+
+
+
+
+    
+    //#endregion
 }

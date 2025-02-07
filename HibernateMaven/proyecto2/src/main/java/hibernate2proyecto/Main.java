@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
+import Models.Post;
 import Models.Usuarios;
 
 public class Main {
@@ -64,6 +65,7 @@ public class Main {
         String email;
         int idUsuarioPOST;
         LocalDate create_at;
+        LocalDate updated_at;
 
         Impresiones.menuGuardar();
         int eleccionDatoGuardar = sc.nextInt();
@@ -87,14 +89,17 @@ public class Main {
                 break;
             case 2:
                 
-                Funciones.obtenerTodosLosUsuarios();
+                List<Usuarios> listaUsuarios = Funciones.obtenerTodosLosUsuarios();
+                ImpresionesRespuestas.respuestaShowTODOPersonas(listaUsuarios);
                 Impresiones.guardarDatosPOST();
-                System.out.print("1. Id del Usuario del post: ");
+                System.out.print("Id del Usuario del post: ");
 
                 idUsuarioPOST = sc.nextInt();
                 Usuarios usuarioPost = Funciones.obtenerUsuarioPorID(idUsuarioPOST);
                 create_at = LocalDate.now();
-                Funciones.guardarPost(usuarioPost, create_at);
+                updated_at = null;
+                Post postGuardado = Funciones.guardarPost(usuarioPost, create_at);
+                ImpresionesRespuestas.PostGuardado(postGuardado);
 
                 break;
             default:
@@ -111,6 +116,7 @@ public class Main {
                 menuObtenerDatosPost(sc);
                 break;
             case 3:
+                
                 break;
             case 0:
                 break;

@@ -38,7 +38,7 @@ public class Post {
     public int getIdPost(){
         return idPost;
     }
-    public Usuarios getIdUsuario(){
+    public Usuarios getUsuario(){
         return usuario;
     }
     public LocalDate getCreated_at(){

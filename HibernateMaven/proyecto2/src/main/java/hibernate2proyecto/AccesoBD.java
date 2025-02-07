@@ -72,7 +72,7 @@ public class AccesoBD {
      */
     public void guardar(Object cosa){
         sesion.persist(cosa);
-        System.out.println("Has guardado el Objeto con exito: \n"+ cosa);
+        System.out.println("Has guardado el Objeto con exito.");
     }
     public Session get_sesion(){
         return sesion;

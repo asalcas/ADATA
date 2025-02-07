@@ -69,5 +69,15 @@ public class Impresiones {
         System.out.println("5. Obtener Post por fecha de Actualización.");
         System.out.println("0. SALIR.");
     }
+    public static void menuObtenerDatosLikes() {
+        System.out.println("----------------------------------------------------------");
+        System.out.println("-  Obteniendo datos de los Likes, seleccione una opción  -");
+        System.out.println("----------------------------------------------------------");
+        System.out.println("1. Obtener todos los Likes.");
+        System.out.println("2. Obtener Likes por ID de Likes.");
+        System.out.println("3. Obtener Likes por ID de Usuario.");
+        System.out.println("4. Obtener Likes por ID de Post.");
+        System.out.println("0. SALIR.");
+    }
 
 }
