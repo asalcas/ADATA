@@ -16,7 +16,7 @@ public class Likes {
     @Column(name="IdLikes")
     private int idLike;
     @ManyToOne
-    @JoinColumn(name="idUsuarios", nullable=false)
+    @JoinColumn(name="IdUsuarios", nullable=false)
     private Usuarios idUsuario;
     @ManyToOne
     @JoinColumn(name="IdPost", nullable=false)

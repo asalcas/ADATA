@@ -14,7 +14,6 @@ public class Impresiones {
         System.out.println("4. Borrar datos."); // Por hacer
         System.out.println("0. SALIR.");
     }
-
     public static void menuGuardar() {
 
         System.out.println("---------------------------------------------------");
@@ -26,7 +25,6 @@ public class Impresiones {
         System.out.println("0. SALIR.");
 
     }
-
     public static void guardarDatosUSUARIO() {
         System.out.println("---------------------------------------------------");
         System.out.println("-   Para guardar un Usuario debemos introducir:   -");
@@ -37,7 +35,11 @@ public class Impresiones {
         System.out.println("-   Para guardar un Post debemos introducir:   -");
         System.out.println("------------------------------------------------");
     }
-
+    public static void guardarDatosLikes() {
+        System.out.println("------------------------------------------------");
+        System.out.println("-   Para guardar un Like debemos introducir:   -");
+        System.out.println("------------------------------------------------");
+    }
     public static void menuObtenerDatos() {
         System.out.println("---------------------------------------------------");
         System.out.println("-  Estás en Obtener Datos, seleccione una opción  -");
@@ -48,6 +50,14 @@ public class Impresiones {
         System.out.println("0. SALIR.");
     }
 
+    public static void selectOperadores() {
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-  ¿Que operacion realizar?, seleccione una opción  -");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("1. Mayor o igual que (>=)");
+        System.out.println("2. Menor o igual que (<=)");
+        System.out.println("3. Igual que (=)");
+    }
     public static void menuObtenerDatosUsuarios() {
         System.out.println("---------------------------------------------------------");
         System.out.println("-  Obteniendo datos de Usuarios, seleccione una opción  -");
@@ -71,13 +81,6 @@ public class Impresiones {
         System.out.println("4. Obtener Post por fecha de Creación.");
         System.out.println("5. Obtener Post por fecha de Actualización.");
         System.out.println("0. SALIR.");
-    }
-
-    
-    public static void guardarDatosLikes() {
-        System.out.println("------------------------------------------------");
-        System.out.println("-   Para guardar un Post debemos introducir:   -");
-        System.out.println("------------------------------------------------");
     }
 
 

@@ -104,9 +104,6 @@ public class ImpresionesRespuestas {
             System.out.println("Fecha de actualización del post: " + post.getUpdated_at());
         }
 
-        
-    
-
     }
 
     public static void respuestaShowPostPorID(Post post) {
@@ -117,6 +114,19 @@ public class ImpresionesRespuestas {
         System.out.println("ID del Usuario: " + post.getUsuario().getIdUsuario());
         System.out.println("Fecha de creación: " + post.getCreated_at());
         System.out.println("Fecha de actualización: " + post.getUpdated_at());
+
+    }
+    public static void respuestaShowPostPorIDORDENADO(List<Post> listaPost) {
+
+        System.out.println("-----------------------------------------------------");
+        System.out.println("-  ¡Resultados del filtro en la tabla Post por ID!  -");
+        System.out.println("-----------------------------------------------------");
+        for (Post post : listaPost) {
+            System.out.println("ID del Post: " + post.getIdPost());
+            System.out.println("ID del Usuario: " + post.getUsuario().getIdUsuario());
+            System.out.println("Fecha de creación del Post: " + post.getCreated_at());
+            System.out.println("Fecha de actualización del post: " + post.getUpdated_at());
+        }
 
     }
     

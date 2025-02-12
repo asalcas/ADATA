@@ -85,13 +85,17 @@ public class Funciones {
         postObtenido = sesion.get(Post.class, idPost);
         return postObtenido;
     }
-    public static Post obtenerPostPorIDUsuario(int idUsuario) throws Exception {
-        Post postObtenido;
+    public static List<Post> obtenerPostPor(int ID, String operador) throws Exception {
         instancia = new AccesoBD();
         instancia.abrir();
         sesion = instancia.get_sesion();
-        postObtenido = sesion.get(Post.class, idUsuario);
-        return postObtenido;
+        List<Post> UsuariosPorParametro = sesion
+                .createNativeQuery(
+                        "SELECT IdPost, IdUsuarios, Created_at, Updated_at FROM Usuarios WHERE IdUsuarios" + operador
+                                + " :ID",
+                        Post.class)
+                .setParameter("ID", ID).getResultList();
+        return UsuariosPorParametro;
     }
     // #endregion
 
@@ -124,14 +128,19 @@ public class Funciones {
         likeObtenido = sesion.get(Likes.class, idLike);
         return likeObtenido;
     }
-    public static Likes obtenerLikesPorIDUsuario(int idUsuario) throws Exception {
-        Likes likeObtenido;
+    /*public static List<Usuarios> obtenerLikesPor(int ID, String columna) throws Exception {
         instancia = new AccesoBD();
         instancia.abrir();
         sesion = instancia.get_sesion();
-        likeObtenido = sesion.get(Likes.class, idUsuario);
-        return likeObtenido;
+        List<Usuarios> UsuariosPorParametro = sesion
+                .createNativeQuery(
+                        "SELECT idUsuarios, Nombre, Apellidos, Username, Email, Password FROM Usuarios WHERE " + columna
+                                + " LIKE :inputUsuario",
+                        Usuarios.class)
+                .setParameter("inputUsuario", "%" + inputUsuario + "%").getResultList();
+        return UsuariosPorParametro;
     }
+*/
     public static Likes obtenerLikesPorIDPost(int idPost) throws Exception {
         Likes likeObtenido;
         instancia = new AccesoBD();

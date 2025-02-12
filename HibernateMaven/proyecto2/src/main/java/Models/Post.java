@@ -19,7 +19,7 @@ public class Post {
     @Column(name="IdPost")
     private int idPost;
     @ManyToOne
-    @JoinColumn(name="idUsuarios", nullable=false)
+    @JoinColumn(name="IdUsuarios", nullable=false)
     private Usuarios usuario;
     @Column(name="Created_at")
     private LocalDate created_at;
