@@ -1,7 +1,10 @@
 package hibernate2proyecto;
 
 public class Impresiones {
+
+
     public static void inicio() {
+        
         System.out.println("---------------------------------------");
         System.out.println("-  ¡Bienvenido!, ¿Que quieres hacer?  -");
         System.out.println("---------------------------------------");
@@ -69,6 +72,16 @@ public class Impresiones {
         System.out.println("5. Obtener Post por fecha de Actualización.");
         System.out.println("0. SALIR.");
     }
+
+    
+    public static void guardarDatosLikes() {
+        System.out.println("------------------------------------------------");
+        System.out.println("-   Para guardar un Post debemos introducir:   -");
+        System.out.println("------------------------------------------------");
+    }
+
+
+
     public static void menuObtenerDatosLikes() {
         System.out.println("----------------------------------------------------------");
         System.out.println("-  Obteniendo datos de los Likes, seleccione una opción  -");

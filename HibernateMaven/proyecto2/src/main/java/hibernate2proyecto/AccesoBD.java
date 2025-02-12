@@ -24,7 +24,7 @@ public class AccesoBD {
      * return: none, pero asigna un valor a 'sf'
      */
     protected void setUp(){
-        java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
+        java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
 
         final StandardServiceRegistry registro = new StandardServiceRegistryBuilder()
                                                 .configure() // por defecto usa la configuración de: hibernate.cfg.xml

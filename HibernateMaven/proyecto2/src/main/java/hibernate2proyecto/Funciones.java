@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import Models.Likes;
 import Models.Post;
 import Models.Usuarios;
 
@@ -56,7 +57,7 @@ public class Funciones {
 
     // #endregion
     // #region POST
-    //! CUANDO MODIFIQUE EL POST, QUE LA FECHA DEL UPDATED PASE DE NULL A LA DEL EQUIPO
+    // ! CUANDO MODIFIQUE EL POST, QUE LA FECHA DEL UPDATED PASE DE NULL A LA DEL EQUIPO
 
     public static Post guardarPost(Usuarios usuario, LocalDate create_at)
             throws Exception {
@@ -67,8 +68,78 @@ public class Funciones {
         instancia.cerrar();
         return postGuardar;
 
-        
+    }
+    public static List<Post> obtenerTodosLosPost() throws Exception {
+        instancia = new AccesoBD();
+        instancia.abrir();
+        sesion = instancia.get_sesion();
+        List<Post> listaPost = sesion.createNativeQuery("SELECT * from Usuarios", Post.class).list();
+        instancia.cerrar();
+        return listaPost;
+    }
+    public static Post obtenerPostPorID(int idPost) throws Exception {
+        Post postObtenido;
+        instancia = new AccesoBD();
+        instancia.abrir();
+        sesion = instancia.get_sesion();
+        postObtenido = sesion.get(Post.class, idPost);
+        return postObtenido;
+    }
+    public static Post obtenerPostPorIDUsuario(int idUsuario) throws Exception {
+        Post postObtenido;
+        instancia = new AccesoBD();
+        instancia.abrir();
+        sesion = instancia.get_sesion();
+        postObtenido = sesion.get(Post.class, idUsuario);
+        return postObtenido;
+    }
+    // #endregion
+
+    // #region Likes
+
+    public static Likes guardarLikes(int idUsuario, int idPost) throws Exception {
+
+        instancia = new AccesoBD();
+        Likes nuevoLike = new Likes();
+        instancia.abrir();
+        instancia.guardar(nuevoLike);
+        instancia.cerrar();
+        return nuevoLike;
 
     }
+    public static List<Likes> obtenerTodosLosLikes() throws Exception {
+        instancia = new AccesoBD();
+        instancia.abrir();
+        sesion = instancia.get_sesion();
+        List<Likes> listaLikes = sesion.createNativeQuery("SELECT * from Usuarios", Likes.class).list();
+        instancia.cerrar();
+        return listaLikes;
+    }
+
+    public static Likes obtenerLikesPorID(int idLike) throws Exception {
+        Likes likeObtenido;
+        instancia = new AccesoBD();
+        instancia.abrir();
+        sesion = instancia.get_sesion();
+        likeObtenido = sesion.get(Likes.class, idLike);
+        return likeObtenido;
+    }
+    public static Likes obtenerLikesPorIDUsuario(int idUsuario) throws Exception {
+        Likes likeObtenido;
+        instancia = new AccesoBD();
+        instancia.abrir();
+        sesion = instancia.get_sesion();
+        likeObtenido = sesion.get(Likes.class, idUsuario);
+        return likeObtenido;
+    }
+    public static Likes obtenerLikesPorIDPost(int idPost) throws Exception {
+        Likes likeObtenido;
+        instancia = new AccesoBD();
+        instancia.abrir();
+        sesion = instancia.get_sesion();
+        likeObtenido = sesion.get(Likes.class, idPost);
+        return likeObtenido;
+    }
+
     // #endregion
 }

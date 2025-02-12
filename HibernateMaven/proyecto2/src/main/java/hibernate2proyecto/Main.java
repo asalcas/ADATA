@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
+import org.hibernate.PropertyValueException;
+
+import Models.Likes;
 import Models.Post;
 import Models.Usuarios;
 
@@ -21,22 +24,17 @@ public class Main {
             try {
                 switch (opcionSwitch) {
                     case 1:
-
-                        menuGuardarDatos(sc);
                         verbo = "POST";
+                        menuGuardarDatos(sc);
                         break;
                     case 2:
-
-                        Impresiones.menuObtenerDatos();
-                        respuestaMenuUsuario = sc.nextInt();
-                        menuObtenerDatosUsuario(sc);
                         verbo = "SELECT";
+                        Impresiones.menuObtenerDatos();
+                        menuObtenerDatos(sc);
                         break;
-
                     case 3:
                         verbo = "UPDATE";
                         break;
-
                     case 4:
                         verbo = "DELETE";
                         break;
@@ -46,11 +44,9 @@ public class Main {
                         System.out.println("( ^-^)/");
                         break;
 
-                    default:
-                        break;
                 }
             } catch (Exception e) {
-                System.err.println(String.format("Ha ocurrido un error con la operación: %s" + e.getMessage(), verbo));
+                System.err.println("Ha ocurrido un error con la operación: " + verbo);
             }
         } while (opcionSwitch != 0);
 
@@ -63,9 +59,12 @@ public class Main {
         String username;
         String password;
         String email;
+        List<Post> listaPost;
         int idUsuarioPOST;
         LocalDate create_at;
         LocalDate updated_at;
+        int likesIDPost;
+        int likesIDUsuarios;
 
         Impresiones.menuGuardar();
         int eleccionDatoGuardar = sc.nextInt();
@@ -88,9 +87,9 @@ public class Main {
                 ImpresionesRespuestas.usuarioGuardado(usuarioNuevo);
                 break;
             case 2:
-                
+
                 List<Usuarios> listaUsuarios = Funciones.obtenerTodosLosUsuarios();
-                ImpresionesRespuestas.respuestaShowTODOPersonas(listaUsuarios);
+                ImpresionesRespuestas.respuestaShowTODOUsuarios(listaUsuarios);
                 Impresiones.guardarDatosPOST();
                 System.out.print("Id del Usuario del post: ");
 
@@ -102,12 +101,50 @@ public class Main {
                 ImpresionesRespuestas.PostGuardado(postGuardado);
 
                 break;
+            case 3:
+
+                listaUsuarios = Funciones.obtenerTodosLosUsuarios();
+                ImpresionesRespuestas.respuestaShowTODOUsuarios(listaUsuarios);
+                Impresiones.guardarDatosLikes();
+                System.out.print("Introduce el Id del Usuario: ");
+                likesIDUsuarios = sc.nextInt();
+                System.out.println();
+                try {
+                    listaPost = Funciones.obtenerTodosLosPost();
+                } catch (Exception e) {
+                    listaPost = null;
+                }
+
+                if (listaPost != null) {
+                    ImpresionesRespuestas.respuestaShowTODOPost(listaPost);
+                    System.out.println("Introduce el Id del Post al que daremos Like: ");
+                    likesIDPost = sc.nextInt();
+                    sc.nextLine();
+                    try {
+                        Likes likeGuardado = Funciones.guardarLikes(likesIDUsuarios, likesIDPost);
+                        ImpresionesRespuestas.LikeGuardado(likeGuardado);
+                    } catch (PropertyValueException e) {
+                        if ("idPost".equals(e.getPropertyName())) {
+                            System.err.println("\n ERROR: No puedes crear un Like si no tenemos un Post válido!\n");
+                        } else if ("idUsuario".equals(e.getPropertyName())) {
+                            System.err.println("\n ERROR: No puedes crear un Like si no tienes un Usuario válido\n!");
+                        }
+                    }
+                } else {
+                    System.out.println("La lista de post está vacía, primero debes CREAR un Post. ");
+
+                }
+                break;
+            case 0:
+                System.out.println("Volviendo atras...");
+                break;
             default:
                 throw new AssertionError();
         }
     }
 
-    public static void menuObtenerDatos(int respuestaMenuUsuario, Scanner sc) throws Exception {
+    public static void menuObtenerDatos(Scanner sc) throws Exception {
+        int respuestaMenuUsuario = sc.nextInt();
         switch (respuestaMenuUsuario) {
             case 1:
                 menuObtenerDatosUsuario(sc);
@@ -116,13 +153,15 @@ public class Main {
                 menuObtenerDatosPost(sc);
                 break;
             case 3:
-                
+                menuObtenerDatosLikes(sc);
                 break;
             case 0:
                 break;
         }
     }
-
+    public static void menuObtenerDatosLikes(Scanner sc) throws Exception{
+        Impresiones.menuObtenerDatosLikes();
+    }
     public static void menuObtenerDatosUsuario(Scanner sc) throws Exception {
         String inputUsuario;
         String columna = "";
@@ -133,7 +172,7 @@ public class Main {
         switch (respuestaSubMenuUsuario) {
             case 1:
                 List<Usuarios> listaUsuarios = Funciones.obtenerTodosLosUsuarios();
-                ImpresionesRespuestas.respuestaShowTODOPersonas(listaUsuarios);
+                ImpresionesRespuestas.respuestaShowTODOUsuarios(listaUsuarios);
                 break;
             case 2:
                 System.out.println("Introduce un ID para realizar la busqueda: ");
@@ -181,7 +220,57 @@ public class Main {
 
     public static void menuObtenerDatosPost(Scanner sc) throws Exception {
         int respuestaSubMenuPost;
+        List<Post> listaPost;
         Impresiones.menuObtenerDatosPost();
+        respuestaSubMenuPost = sc.nextInt();
+        switch(respuestaSubMenuPost){
+            case 1:
+            try{
+                listaPost = Funciones.obtenerTodosLosPost();
+                ImpresionesRespuestas.respuestaShowTODOPost(listaPost);
+            }catch(Exception e){
+                System.err.println("\nLa lista de Post está vacía!\n");
+            } 
+            break;
+
+            case 2:
+            // POR ID POST
+            try {
+                System.out.print("Introduce el ID del Post que quieres obtener: ");
+                int idPost = sc.nextInt();
+                sc.nextLine();
+                Post postObtenido = Funciones.obtenerPostPorID(idPost);
+                ImpresionesRespuestas.respuestaShowPostPorID(postObtenido);
+
+            } catch (Exception e) {
+                System.out.println("\nNo existe ese Post!\n");
+            }
+
+            break;
+            case 3: 
+            try {
+                System.out.print("Introduce el ID del Post que quieres obtener: ");
+                int idUsuario = sc.nextInt();
+                sc.nextLine();
+                Post postObtenido = Funciones.obtenerPostPorID(idUsuario);
+                ImpresionesRespuestas.respuestaShowPostPorID(postObtenido);
+
+            } catch (Exception e) {
+                System.out.println("\nNo existe ese Post!\n");
+            }
+            break;
+            case 4: 
+            // por FECHA DE CREACIÓN
+            // pedir los digitos dia mes año y concatenarlos en: localdate variable = String format ("%d-%2d-%2d")
+            break;
+
+            case 5: 
+            // por fecha de actualización
+            // pedir los digitos dia mes año y concatenarlos en: localdate variable = String format ("%d-%2d-%2d")
+            default: 
+
+            break;
+        }
 
     }
 }
