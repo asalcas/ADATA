@@ -60,6 +60,8 @@ public class Main {
         String password;
         String email;
         List<Post> listaPost;
+        Usuarios usuarioSeleccionado;
+        Post postSeleccionado;
         int idUsuarioPOST;
         LocalDate create_at;
         LocalDate updated_at;
@@ -108,6 +110,7 @@ public class Main {
                 Impresiones.guardarDatosLikes();
                 System.out.print("Introduce el Id del Usuario: ");
                 likesIDUsuarios = sc.nextInt();
+                usuarioSeleccionado = Funciones.obtenerUsuarioPorID(likesIDUsuarios);
                 System.out.println();
                 try {
                     listaPost = Funciones.obtenerTodosLosPost();
@@ -119,9 +122,10 @@ public class Main {
                     ImpresionesRespuestas.respuestaShowTODOPost(listaPost);
                     System.out.println("Introduce el Id del Post al que daremos Like: ");
                     likesIDPost = sc.nextInt();
+                    postSeleccionado = Funciones.obtenerPostPorID(likesIDPost);
                     sc.nextLine();
                     try {
-                        Likes likeGuardado = Funciones.guardarLikes(likesIDUsuarios, likesIDPost);
+                        Likes likeGuardado = Funciones.guardarLikes(usuarioSeleccionado, postSeleccionado);
                         ImpresionesRespuestas.LikeGuardado(likeGuardado);
                     } catch (PropertyValueException e) {
                         if ("idPost".equals(e.getPropertyName())) {
@@ -161,7 +165,55 @@ public class Main {
     }
 
     public static void menuObtenerDatosLikes(Scanner sc) throws Exception {
+        int respuestaMenuLikes;
+        List<Likes> listaLikes;
+        String operador = "";
+        int inputID;
+
         Impresiones.menuObtenerDatosLikes();
+        respuestaMenuLikes = sc.nextInt();
+        sc.nextLine();
+        switch (respuestaMenuLikes) {
+            case 1:
+                listaLikes = Funciones.obtenerTodosLosLikes();
+                ImpresionesRespuestas.respuestaShowTODOLikes(listaLikes);
+                
+                break;
+            case 2:
+                Impresiones.selectOperadores();
+                operador = Funciones.selectOperator(sc);
+                System.out.print("Introduce el ID de Like con el que quieres realizar la búsqueda: ");
+                inputID = sc.nextInt();
+                sc.nextLine();
+                listaLikes = Funciones.obtenerLikesPor(inputID, operador, respuestaMenuLikes);
+                ImpresionesRespuestas.respuestaShowLikesPor(listaLikes, respuestaMenuLikes); // POR ID LIKE
+                break;
+            case 3:
+                Impresiones.selectOperadores();
+                operador = Funciones.selectOperator(sc);
+                System.out.print("Introduce el ID de Usuarios con el que quieres realizar la búsqueda: ");
+                inputID = sc.nextInt();
+                sc.nextLine();
+                listaLikes = Funciones.obtenerLikesPor(inputID, operador, respuestaMenuLikes);
+                ImpresionesRespuestas.respuestaShowLikesPor(listaLikes, respuestaMenuLikes); // POR ID USUARIO
+                break;
+            case 4:
+                Impresiones.selectOperadores();
+                operador = Funciones.selectOperator(sc);
+                System.out.print("Introduce el ID de Post con el que quieres realizar la búsqueda: ");
+                inputID = sc.nextInt();
+                sc.nextLine();
+                listaLikes = Funciones.obtenerLikesPor(inputID, operador, respuestaMenuLikes);
+                ImpresionesRespuestas.respuestaShowLikesPor(listaLikes, respuestaMenuLikes); // POR ID POST
+                break;
+            case 0:
+                // amimi
+                break;
+
+            default:
+                break;
+        }
+
     }
 
     public static void menuObtenerDatosUsuario(Scanner sc) throws Exception {
@@ -222,7 +274,12 @@ public class Main {
 
     public static void menuObtenerDatosPost(Scanner sc) throws Exception {
         int respuestaSubMenuPost;
+        String operador = "";
         List<Post> listaPost;
+        String day = "";
+        String month = "";
+        String year = "";
+        String fecha = "";
         Impresiones.menuObtenerDatosPost();
         respuestaSubMenuPost = sc.nextInt();
         switch (respuestaSubMenuPost) {
@@ -238,11 +295,14 @@ public class Main {
             case 2:
                 // POR ID POST
                 try {
+                    Impresiones.selectOperadores();
+                    operador = Funciones.selectOperator(sc);
+
                     System.out.print("Introduce el ID del Post que quieres obtener: ");
                     int idPost = sc.nextInt();
                     sc.nextLine();
-                    Post postObtenido = Funciones.obtenerPostPorID(idPost);
-                    ImpresionesRespuestas.respuestaShowPostPorID(postObtenido);
+                    List<Post> postObtenido = Funciones.obtenerPostPor(idPost, operador, respuestaSubMenuPost);
+                    ImpresionesRespuestas.respuestaShowPostPorIDPost(postObtenido);
 
                 } catch (Exception e) {
                     System.out.println("\nNo existe ese Post!\n");
@@ -250,49 +310,42 @@ public class Main {
 
                 break;
             case 3:
-                int input;
-                int idUsuario;
-                String operador = "";
                 Impresiones.selectOperadores();
-                System.out.print("Introduce que operación quieres hacer:");
-                input = sc.nextInt();
-                sc.nextLine();
-                switch (input) {
-                    case 1:
-                        operador = ">=";
-                        break;
-                    case 2:
-                        operador = "<=";
-                        break;
-                    case 3:
-                        operador = "=";
-                        break;
-                    default:
-                    System.out.println("Has introducido una respuesta inválida.");
-                        break;
-                }
+                operador = Funciones.selectOperator(sc);
                 try {
-                    Impresiones.selectOperadores();
-                    System.out.print("Introduce el ID del Post que quieres obtener: ");
-                    idUsuario = sc.nextInt();
+                    System.out.print("Introduce el ID del Usuario con el que quieres obtener el Post: ");
+                    int idUsuario = sc.nextInt();
                     sc.nextLine();
-                    List<Post> postObtenido = Funciones.obtenerPostPor(idUsuario, operador);
-                    ImpresionesRespuestas.respuestaShowPostPorIDORDENADO(postObtenido);
+                    List<Post> postObtenido = Funciones.obtenerPostPor(idUsuario, operador, respuestaSubMenuPost);
+                    ImpresionesRespuestas.respuestaShowPostPorIDUsuario(postObtenido);
 
                 } catch (Exception e) {
                     System.out.println("\nNo existe ese Post!\n");
                 }
                 break;
-            case 4:
-                // por FECHA DE CREACIÓN
-                // pedir los digitos dia mes año y concatenarlos en: localdate variable = String
-                // format ("%d-%2d-%2d")
+            case 4, 5:
+
+                Impresiones.selectOperadores();
+                operador = Funciones.selectOperator(sc);
+                if (respuestaSubMenuPost == 4) {
+                    System.out.println("Para poder trabajar con la Fecha de creación debes introducir: ");
+
+                } else {
+                    System.out.println("Para poder trabajar con la Fecha de actualización debes introducir: ");
+
+                }
+                System.out.print("Dias: ");
+                day = sc.nextLine().trim();
+                System.out.print("Mes: ");
+                month = sc.nextLine().trim();
+                System.out.print("Año: ");
+                year = sc.nextLine().trim();
+
+                fecha = String.format("%s-%s-%s", year, month, day);
+                listaPost = Funciones.obtenerPostPorDATE(fecha, operador, respuestaSubMenuPost);
+                ImpresionesRespuestas.respuestaShowPostPorDate(listaPost, respuestaSubMenuPost);
                 break;
 
-            case 5:
-                // por fecha de actualización
-                // pedir los digitos dia mes año y concatenarlos en: localdate variable = String
-                // format ("%d-%2d-%2d")
             default:
 
                 break;

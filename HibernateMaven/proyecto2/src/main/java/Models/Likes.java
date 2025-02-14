@@ -17,18 +17,23 @@ public class Likes {
     private int idLike;
     @ManyToOne
     @JoinColumn(name="IdUsuarios", nullable=false)
-    private Usuarios idUsuario;
+    private Usuarios usuario;
     @ManyToOne
     @JoinColumn(name="IdPost", nullable=false)
-    private Post idPost;
+    private Post post;
+
+    public Likes(Usuarios usuario, Post post){
+        this.usuario = usuario;
+        this.post = post;
+    }
     
     public int getIdLike(){
         return idLike;
     }
-    public Usuarios getIdUsuario(){
-        return idUsuario;
+    public Usuarios getUsuario(){
+        return usuario;
     }
-    public Post getIdPost(){
-        return idPost;
+    public Post getPost(){
+        return post;
     }
 }
