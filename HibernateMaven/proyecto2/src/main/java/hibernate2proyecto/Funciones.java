@@ -1,5 +1,6 @@
 package hibernate2proyecto;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -13,6 +14,7 @@ import Models.Usuarios;
 public class Funciones {
     static AccesoBD instancia;
     static Session sesion;
+    private static Scanner sc = new Scanner(System.in);
 
     // #region USUARIOS
     public static Usuarios guardarUsuarios(String Nombre, String Apellidos, String Username, String Password,
@@ -147,7 +149,7 @@ public class Funciones {
         instancia = new AccesoBD();
         instancia.abrir();
         sesion = instancia.get_sesion();
-        List<Likes> listaLikes = sesion.createNativeQuery("SELECT * from Likes", Likes.class).list();
+        List<Likes> listaLikes = sesion.createNativeQuery("SELECT * FROM Likes", Likes.class).list();
         instancia.cerrar();
         return listaLikes;
     }
@@ -176,11 +178,9 @@ public class Funciones {
 
     // #endregion
 
-    public static String selectOperator(Scanner sc) {
+    public static String selectOperator() {
         String operador = "";
-        System.out.print("Introduce que operación quieres hacer: ");
-        int input = sc.nextInt();
-        sc.nextLine();
+        int input = leerInt("Introduce que operación quieres hacer: ");
         switch (input) {
             case 1 -> operador = ">=";
             case 2 -> operador = "<=";
@@ -188,5 +188,181 @@ public class Funciones {
             default -> System.out.println("Has introducido una respuesta inválida.");
         }
         return operador;
+    }
+
+    public static Post updatePost(int idPost, int eleccionActualizar) throws Exception {
+        int idUsuario;
+        Usuarios nuevoUsuario;
+        LocalDate fecha;
+        String fechaString;
+        instancia = new AccesoBD();
+        instancia.abrir();
+        sesion = instancia.get_sesion();
+        Post postModificar = sesion.get(Post.class, idPost);
+
+        if (postModificar == null) {
+            instancia.cerrar();
+            throw new Exception("El post con ID " + idPost + " no existe.");
+        } else {
+            switch (eleccionActualizar) {
+                case 1 -> {
+                    idUsuario = leerInt("Introduce el ID del nuevo Usuario del Post: ");
+                    nuevoUsuario = obtenerUsuarioPorID(idUsuario);
+                    postModificar = obtenerPostPorID(idPost);
+                    postModificar.setUsuario(nuevoUsuario);
+                    fecha = LocalDate.now();
+                    postModificar.setUpdated_at(fecha);
+                }
+                case 2 -> {
+                    // Actualizar usuario
+                    idUsuario = leerInt("Introduce el ID del nuevo Usuario del Post: ");
+                    nuevoUsuario = obtenerUsuarioPorID(idUsuario);
+                    postModificar = obtenerPostPorID(idPost);
+                    postModificar.setUsuario(nuevoUsuario);
+                }
+                case 3 -> {
+                    // Actualizar creacion
+                    boolean salir = false;
+                    do {
+                        try {
+                            postModificar = obtenerPostPorID(idPost);
+                            fechaString = obtenerFecha();
+                            fecha = LocalDate.parse(fechaString);
+                            postModificar.setCreated_at(fecha);
+                            postModificar.setUpdated_at(LocalDate.now());
+                            salir = true; // Aqui no hace falta ponerlo despues de nada, esto sale de ahi.
+                        } catch (DateTimeException e) {
+                            System.out.println("Has introducido la Fecha Incorrecta! Vuelve a intentarlo");
+                        }
+                    } while (!salir);
+                }
+                case 0 -> System.out.println("Volviendo atrás...");
+
+                default -> {
+                }
+            }
+        }
+        instancia.guardar(postModificar);
+        instancia.cerrar();
+        return postModificar;
+    }
+
+    public static Likes updateLike(int idLike, int eleccionActualizar) throws Exception {
+        Likes like = new Likes();
+        return like;
+    }
+
+    public static Usuarios updateUsuario(int idUsuario, int eleccionActualizar) throws Exception {
+        String nombreNuevo;
+        String apellidoNuevo;
+        String nuevoUsername;
+        String nuevoEmail;
+        String nuevaPassword;
+
+        instancia = new AccesoBD();
+        instancia.abrir();
+        sesion = instancia.get_sesion();
+        Usuarios usuarioModificar = sesion.get(Usuarios.class, idUsuario);
+
+        if (usuarioModificar == null) {
+            instancia.cerrar(); // Cerrar la conexión antes de lanzar la excepción
+            throw new Exception("El usuario con ID " + idUsuario + " no existe.");
+        } else {
+            switch (eleccionActualizar) {
+                case 1 -> {
+                    nombreNuevo = leerString("Introduce el nuevo Nombre: ");
+                    usuarioModificar.setNombre(nombreNuevo);
+                    apellidoNuevo = leerString("Introduce el nuevo Apellido: ");
+                    usuarioModificar.setApellidos(apellidoNuevo);
+                    nuevoUsername = leerString("Introduce el nuevo Username: ");
+                    usuarioModificar.setUsername(nuevoUsername);
+                    nuevaPassword = leerString("Introduce la nueva Contraseña: ");
+                    usuarioModificar.setPassword(nuevaPassword);
+                    nuevoEmail = leerString("Introduce el nuevo Email: ");
+                    usuarioModificar.setEmail(nuevoEmail);
+                }
+                case 2 -> {
+                    nombreNuevo = leerString("Introduce el nuevo Nombre: ");
+                    usuarioModificar.setNombre(nombreNuevo);
+                }
+                case 3 -> {
+                    apellidoNuevo = leerString("Introduce el nuevo Apellido: ");
+                    usuarioModificar.setApellidos(apellidoNuevo);
+                }
+                case 4 -> {
+                    nuevoUsername = leerString("Introduce el nuevo Username: ");
+                    usuarioModificar.setUsername(nuevoUsername);
+                }
+                case 5 -> {
+                    nuevaPassword = leerString("Introduce la nueva Contraseña: ");
+                    usuarioModificar.setPassword(nuevaPassword);
+                }
+                case 6 -> {
+                    nuevoEmail = leerString("Introduce el nuevo Email: ");
+                    usuarioModificar.setEmail(nuevoEmail);
+                }
+                case 0 -> System.out.println("Volviendo atrás...");
+                default -> {
+                }
+            }
+        }
+
+        instancia.guardar(usuarioModificar);
+        instancia.cerrar();
+        return usuarioModificar;
+    }
+
+    public static String leerString(String mensaje) {
+        System.out.println(mensaje);
+        String respuestaUsuario = sc.nextLine();
+        return respuestaUsuario;
+    }
+
+    public static int leerInt(String mensaje) {
+        int respuestaUsuario = 0;
+        boolean success = false;
+        do {
+
+            try {
+                // Dejamos un espacio vacio encima del mensaje
+                System.out.println();
+                System.out.print(mensaje); // Mostramos mensaje
+
+                // Capturamos el input
+                respuestaUsuario = sc.nextInt();
+
+                // Si todo sale bien, salimos por la condición
+                success = true;
+
+            } catch (Exception e) {
+                System.err.println("Debes imprimir un número entero. Vuelve a intentarlo...");
+            } finally {
+                // Limpiamos el Scanner
+                sc.nextLine();
+            }
+
+        } while (!success);
+        return respuestaUsuario;
+    }
+
+    public static String obtenerFecha() {
+        String day;
+        String month;
+        String year;
+        String fecha;
+
+        day = leerString("Día: ");
+        if (day.length() == 1) {
+            day = "0" + day;
+        }
+        month = leerString("Mes: ");
+        if (month.length() == 1) {
+            month = "0" + month;
+        }
+        year = leerString("Año: ");
+
+        fecha = String.format("%s-%s-%s", year, month, day);
+
+        return fecha;
     }
 }

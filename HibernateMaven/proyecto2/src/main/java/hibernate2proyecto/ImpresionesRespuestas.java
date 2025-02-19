@@ -34,6 +34,7 @@ public class ImpresionesRespuestas {
             System.out.println("Username: " + usuario.getUsername());
             System.out.println("Password: " + usuario.getPassword().hashCode());
             System.out.println("Email: " + usuario.getEmail());
+            System.out.println();
         }
     }
 
@@ -47,6 +48,7 @@ public class ImpresionesRespuestas {
         System.out.println("Username: " + usuario.getUsername());
         System.out.println("Password: " + usuario.getPassword().hashCode());
         System.out.println("Email: " + usuario.getEmail());
+        System.out.println();
     }
 
     public static void respuestaShowUsuarioPorParametro(List<Usuarios> listaUsuarios, String columna) {
@@ -210,7 +212,7 @@ public class ImpresionesRespuestas {
         System.out.println("----------------------------------------------------------------");
         if(listaLikes.isEmpty()){
             
-            System.out.println("\nNo hay ningún Post para estos parametros!\n");
+            System.out.println("\nNo hay ningún Like para estos parametros!\n");
         }
         for (Likes like : listaLikes) {
             System.out.println("ID del Like: " + like.getIdLike());

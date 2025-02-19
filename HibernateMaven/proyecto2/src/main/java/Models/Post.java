@@ -47,6 +47,9 @@ public class Post {
     public LocalDate getUpdated_at(){
         return updated_at;
     }
+    public void setUsuario(Usuarios Usuario){
+        this.usuario = Usuario;
+    }
     public void setCreated_at(LocalDate Created_at){
         this.created_at = Created_at;
     }

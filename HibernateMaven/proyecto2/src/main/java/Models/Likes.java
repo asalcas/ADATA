@@ -22,6 +22,11 @@ public class Likes {
     @JoinColumn(name="IdPost", nullable=false)
     private Post post;
 
+    
+    public Likes(){
+        
+    }
+
     public Likes(Usuarios usuario, Post post){
         this.usuario = usuario;
         this.post = post;

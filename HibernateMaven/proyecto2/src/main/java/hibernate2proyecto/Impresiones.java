@@ -10,7 +10,7 @@ public class Impresiones {
         System.out.println("---------------------------------------");
         System.out.println("1. Guardar datos."); // Por hacer
         System.out.println("2. Obtener datos."); // Por hacer
-        System.out.println("3. Insertar datos."); // Por hacer
+        System.out.println("3. Actualizar datos."); // Por hacer
         System.out.println("4. Borrar datos."); // Por hacer
         System.out.println("0. SALIR.");
     }
@@ -45,7 +45,7 @@ public class Impresiones {
         System.out.println("-  Estás en Obtener Datos, seleccione una opción  -");
         System.out.println("---------------------------------------------------");
         System.out.println("1. Obtener datos de los Usuarios.");
-        System.out.println("2. Obtener datos de los Post."); // Por hacer
+        System.out.println("2. Obtener datos de los Post.");
         System.out.println("3. Obtener datos de los Likes."); // Por hacer
         System.out.println("0. SALIR.");
     }
@@ -96,4 +96,46 @@ public class Impresiones {
         System.out.println("0. SALIR.");
     }
 
+    public static void menuActualizar() {
+
+        System.out.println("------------------------------------------------------");
+        System.out.println("-  Estás en Actualizar Datos, seleccione una opción  -");
+        System.out.println("------------------------------------------------------");
+        System.out.println("1. Actualizar datos de los Usuarios.");
+        System.out.println("2. Actualizar datos de los Post."); 
+        System.out.println("3. Actualizar datos de los Likes."); 
+        System.out.println("0. SALIR.");
+
+    }
+    public static void menuActualizarUsuario() {
+        System.out.println("-----------------------------------------------------------");
+        System.out.println("-  Actualizando datos de Usuarios, ¿Qué quieres cambiar?  -");
+        System.out.println("-----------------------------------------------------------");
+        System.out.println("1. Actualizar todo.");
+        System.out.println("2. Actualizar Nombre.");
+        System.out.println("3. Actualizar Apellidos.");
+        System.out.println("4. Actualizar Username.");
+        System.out.println("5. Actualizar Contraseña.");
+        System.out.println("6. Actualizar Email.");
+        System.out.println("0. SALIR.");
+    }
+
+    public static void menuActualizarPost() {
+        System.out.println("-------------------------------------------------------");
+        System.out.println("-  Actualizando datos de Post, ¿Qué quieres cambiar?  -");
+        System.out.println("-------------------------------------------------------");
+        System.out.println("1. Actualizar todo.");
+        System.out.println("2. Actualizar ID del Usuario.");
+        System.out.println("3. Actualizar Fecha de creación.");
+        System.out.println("0. SALIR.");
+    }
+    public static void menuActualizarLikes() {
+        System.out.println("--------------------------------------------------------");
+        System.out.println("-  Actualizando datos de Likes, ¿Qué quieres cambiar?  -");
+        System.out.println("--------------------------------------------------------");
+        System.out.println("1. Actualizar todo.");
+        System.out.println("2. Actualizar ID del Usuario.");
+        System.out.println("3. Actualizar ID del Post.");
+        System.out.println("0. SALIR.");
+    }
 }

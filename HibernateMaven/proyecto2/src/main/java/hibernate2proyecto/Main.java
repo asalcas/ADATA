@@ -24,16 +24,22 @@ public class Main {
             try {
                 switch (opcionSwitch) {
                     case 1:
+                    // TODO QUITAR SCANNERS POR PARAMETROS 
                         verbo = "POST";
                         menuGuardarDatos(sc);
                         break;
                     case 2:
+                    // TODO Quitar SCANNERS por PARAMETROS
                         verbo = "SELECT";
                         Impresiones.menuObtenerDatos();
                         menuObtenerDatos(sc);
                         break;
                     case 3:
                         verbo = "UPDATE";
+                        // TODO ESTAMOS AQUI
+                        Impresiones.menuActualizar();
+                        menuActualizarDatos();
+
                         break;
                     case 4:
                         verbo = "DELETE";
@@ -46,7 +52,7 @@ public class Main {
 
                 }
             } catch (Exception e) {
-                System.err.println("Ha ocurrido un error con la operación: " + verbo);
+                System.err.println("Ha ocurrido un error con la operación: " + verbo + ": " + e.getMessage());
             }
         } while (opcionSwitch != 0);
 
@@ -177,11 +183,11 @@ public class Main {
             case 1:
                 listaLikes = Funciones.obtenerTodosLosLikes();
                 ImpresionesRespuestas.respuestaShowTODOLikes(listaLikes);
-                
+
                 break;
             case 2:
                 Impresiones.selectOperadores();
-                operador = Funciones.selectOperator(sc);
+                operador = Funciones.selectOperator();
                 System.out.print("Introduce el ID de Like con el que quieres realizar la búsqueda: ");
                 inputID = sc.nextInt();
                 sc.nextLine();
@@ -190,7 +196,9 @@ public class Main {
                 break;
             case 3:
                 Impresiones.selectOperadores();
-                operador = Funciones.selectOperator(sc);
+                operador = Funciones.selectOperator();
+                List<Usuarios> listaUsuarios = Funciones.obtenerTodosLosUsuarios();
+                ImpresionesRespuestas.respuestaShowTODOUsuarios(listaUsuarios);
                 System.out.print("Introduce el ID de Usuarios con el que quieres realizar la búsqueda: ");
                 inputID = sc.nextInt();
                 sc.nextLine();
@@ -199,15 +207,18 @@ public class Main {
                 break;
             case 4:
                 Impresiones.selectOperadores();
-                operador = Funciones.selectOperator(sc);
+                operador = Funciones.selectOperator();
+                List<Post> listaPost = Funciones.obtenerTodosLosPost();
+                ImpresionesRespuestas.respuestaShowTODOPost(listaPost);
                 System.out.print("Introduce el ID de Post con el que quieres realizar la búsqueda: ");
+                Funciones.obtenerTodosLosPost();
                 inputID = sc.nextInt();
                 sc.nextLine();
                 listaLikes = Funciones.obtenerLikesPor(inputID, operador, respuestaMenuLikes);
                 ImpresionesRespuestas.respuestaShowLikesPor(listaLikes, respuestaMenuLikes); // POR ID POST
                 break;
             case 0:
-                // amimi
+                System.out.println("Volviendo atras...");
                 break;
 
             default:
@@ -296,7 +307,7 @@ public class Main {
                 // POR ID POST
                 try {
                     Impresiones.selectOperadores();
-                    operador = Funciones.selectOperator(sc);
+                    operador = Funciones.selectOperator();
 
                     System.out.print("Introduce el ID del Post que quieres obtener: ");
                     int idPost = sc.nextInt();
@@ -311,7 +322,7 @@ public class Main {
                 break;
             case 3:
                 Impresiones.selectOperadores();
-                operador = Funciones.selectOperator(sc);
+                operador = Funciones.selectOperator();
                 try {
                     System.out.print("Introduce el ID del Usuario con el que quieres obtener el Post: ");
                     int idUsuario = sc.nextInt();
@@ -326,7 +337,7 @@ public class Main {
             case 4, 5:
 
                 Impresiones.selectOperadores();
-                operador = Funciones.selectOperator(sc);
+                operador = Funciones.selectOperator();
                 if (respuestaSubMenuPost == 4) {
                     System.out.println("Para poder trabajar con la Fecha de creación debes introducir: ");
 
@@ -334,14 +345,7 @@ public class Main {
                     System.out.println("Para poder trabajar con la Fecha de actualización debes introducir: ");
 
                 }
-                System.out.print("Dias: ");
-                day = sc.nextLine().trim();
-                System.out.print("Mes: ");
-                month = sc.nextLine().trim();
-                System.out.print("Año: ");
-                year = sc.nextLine().trim();
-
-                fecha = String.format("%s-%s-%s", year, month, day);
+                fecha = Funciones.obtenerFecha();
                 listaPost = Funciones.obtenerPostPorDATE(fecha, operador, respuestaSubMenuPost);
                 ImpresionesRespuestas.respuestaShowPostPorDate(listaPost, respuestaSubMenuPost);
                 break;
@@ -352,4 +356,36 @@ public class Main {
         }
 
     }
+
+    public static void menuActualizarDatos() throws Exception {
+        int eleccionActualizar;
+        int idUsuario;
+        int idPost;
+        int respuestaMenuActualizar = Funciones.leerInt("Seleccione una opción: ");
+        switch (respuestaMenuActualizar) {
+            case 1 -> {
+                Impresiones.menuActualizarUsuario();
+                eleccionActualizar = Funciones.leerInt("Seleccione una opción: ");
+                List<Usuarios> listaUsuarios = Funciones.obtenerTodosLosUsuarios();
+                ImpresionesRespuestas.respuestaShowTODOUsuarios(listaUsuarios);
+                idUsuario = Funciones.leerInt("Selecciona el ID del Usuario a actualizar: ");
+                Funciones.updateUsuario(idUsuario, eleccionActualizar);
+            }
+            case 2 -> {
+                Impresiones.menuActualizarPost();
+                eleccionActualizar = Funciones.leerInt("Seleccione una opción: ");
+                List<Post> listaPost = Funciones.obtenerTodosLosPost();
+                ImpresionesRespuestas.respuestaShowTODOPost(listaPost);
+                idPost = Funciones.leerInt("Selecciona el ID del Post a actualizar: ");
+                Funciones.updatePost(idPost, eleccionActualizar);
+            }
+
+            case 3 -> {
+                Impresiones.menuActualizarLikes(); 
+            }
+
+            case 0 -> System.out.println("Volviendo atrás...");
+        }
+    }
 }
+
