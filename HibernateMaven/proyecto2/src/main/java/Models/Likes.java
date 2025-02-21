@@ -41,4 +41,12 @@ public class Likes {
     public Post getPost(){
         return post;
     }
+    public void setUsuario(Usuarios Usuario){
+        this.usuario = Usuario;
+    }
+    public void setPost(Post Post){
+        this.post = Post;
+    }
+
 }
+

@@ -177,6 +177,9 @@ public class Funciones {
     }
 
     // #endregion
+    public static void delete(){
+        
+    }
 
     public static String selectOperator() {
         String operador = "";
@@ -206,10 +209,14 @@ public class Funciones {
         } else {
             switch (eleccionActualizar) {
                 case 1 -> {
-                    idUsuario = leerInt("Introduce el ID del nuevo Usuario del Post: ");
+                    idUsuario = leerInt("Introduce el ID del nuevo Usuario del Post: "); 
+                    // Obtengo el id de usuario que quiero que reemplaze al existente
                     nuevoUsuario = obtenerUsuarioPorID(idUsuario);
+                    // obtengo el usuario por ese id
                     postModificar = obtenerPostPorID(idPost);
+                    // con el ID del post que pedi anteriormente saco el objeto a modificar
                     postModificar.setUsuario(nuevoUsuario);
+                    // y le reemplazo el objeto
                     fecha = LocalDate.now();
                     postModificar.setUpdated_at(fecha);
                 }
@@ -248,8 +255,65 @@ public class Funciones {
     }
 
     public static Likes updateLike(int idLike, int eleccionActualizar) throws Exception {
-        Likes like = new Likes();
-        return like;
+        int idUsuario;
+        int idPost;
+        List<Likes> likeLista;
+        Usuarios nuevoUsuario;
+        Post nuevoPost;
+        
+        instancia = new AccesoBD();
+        instancia.abrir();
+        sesion = instancia.get_sesion();
+        Likes likeModificar = sesion.get(Likes.class, idLike);
+        if (likeModificar == null){
+            instancia.cerrar();
+            throw new Exception("El Like con ID " + idLike + " no existe");
+        }else{
+            switch(eleccionActualizar){
+                case 1 -> {
+                    // ACTUALIZAMOS TOOD 
+                    //(IDUSUARIO)
+                    idUsuario = leerInt("Introduce el nuevo ID de Usuario del Like: ");
+                    nuevoUsuario = obtenerUsuarioPorID(idUsuario);
+                    likeLista = obtenerLikesPor(idLike, "=", 2);
+                    likeModificar = likeLista.get(0);
+                    likeModificar.setUsuario(nuevoUsuario);
+                    ImpresionesRespuestas.likeActualizado(likeModificar);
+                    // (IDPOST)
+                    idPost = leerInt("Introduce el nuevo ID de Post del Like: ");
+                    nuevoPost = obtenerPostPorID(idPost);
+                    likeLista = obtenerLikesPor(idLike, "=", 2);
+                    likeModificar = likeLista.get(0);
+                    likeModificar.setPost(nuevoPost);
+                    ImpresionesRespuestas.likeActualizado(likeModificar);
+
+                    
+
+                    
+                    }
+                case 2 -> {
+                    idUsuario = leerInt("Introduce el nuevo ID de Usuario del Like: ");
+                    nuevoUsuario = obtenerUsuarioPorID(idUsuario);
+                    likeLista = obtenerLikesPor(idLike, "=", 2);
+                    likeModificar = likeLista.get(0);
+                    likeModificar.setUsuario(nuevoUsuario);
+                    ImpresionesRespuestas.likeActualizado(likeModificar);
+                }
+                case 3 -> {
+                    idPost = leerInt("Introduce el nuevo ID de Post del Like: ");
+                    nuevoPost = obtenerPostPorID(idPost);
+                    likeLista = obtenerLikesPor(idLike, "=", 2);
+                    likeModificar = likeLista.get(0);
+                    likeModificar.setPost(nuevoPost);
+                    ImpresionesRespuestas.likeActualizado(likeModificar);
+                    
+                }
+                case 0 -> {System.out.println("Volviendo atrás...");}
+            }
+            instancia.guardar(likeModificar);
+            instancia.cerrar();
+        }
+        return likeModificar;
     }
 
     public static Usuarios updateUsuario(int idUsuario, int eleccionActualizar) throws Exception {
