@@ -1,12 +1,16 @@
 package Models;
 
+import java.util.List;
+
 import javax.persistence.Table;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @Table (name = "Usuarios")
@@ -26,6 +30,14 @@ public class Usuarios {
     private String password;
     @Column(name = "Email")
     private String email;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval= true)
+    private List<Post> posts;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval= true)
+    private List<Likes> likes;
+
+
 
     public Usuarios()
     {

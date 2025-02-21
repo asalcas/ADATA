@@ -37,9 +37,11 @@ public class Main {
                         Impresiones.menuActualizar();
                         menuActualizarDatos();
                     }
-                    case 4 -> verbo = "DELETE";
-                    // VERBO DELETE
-
+                    case 4 -> {
+                        verbo = "DELETE";
+                        Impresiones.menuBorrarDatos();
+                        menuBorrarDatos();
+                    }
                     case 0 -> {
                         System.out.println("Nos vemos pronto!");
                         System.out.println("( ^-^)/");
@@ -53,8 +55,72 @@ public class Main {
 
         sc.close();
     }
+
     public static void menuBorrarDatos() throws Exception {
-        
+        String tabla = "";
+        int eleccionCantidad;
+        int eleccionTabla;
+        int idBorrado;
+        boolean estadoBorrado = false;
+
+        eleccionTabla = Funciones.leerInt("Introduce tu elección: ");
+        switch (eleccionTabla) {
+            case 1 -> {
+                tabla = "Usuarios";
+            }
+            case 2 -> {
+                tabla = "Post";
+            }
+            case 3 -> {
+                tabla = "Likes";
+            }
+
+            case 0 -> {
+                System.out.println("Volviendo atrás...");
+            }
+        }
+        if (eleccionTabla > 0 && eleccionTabla <= 3) {
+            Impresiones.menuSeleccionaTablaBorrar(tabla);
+            eleccionCantidad = Funciones.leerInt("Introduce tu elección: ");
+            switch (eleccionCantidad) {
+                case 1 -> {
+                    // Toda la tabla
+                    Funciones.deleteAll(eleccionTabla);
+                }
+                case 2 -> {
+                    try {
+                        switch (eleccionTabla) {
+                            case 1 -> {
+                                List<Usuarios> listaUsuarios = Funciones.obtenerTodosLosUsuarios();
+                                ImpresionesRespuestas.respuestaShowTODOUsuarios(listaUsuarios);
+                            }
+                            case 2 -> {
+                                List<Post> listaPost = Funciones.obtenerTodosLosPost();
+                                ImpresionesRespuestas.respuestaShowTODOPost(listaPost);
+                            }
+                            case 3 -> {
+                                List<Usuarios> listaUsuarios = Funciones.obtenerTodosLosUsuarios();
+                                ImpresionesRespuestas.respuestaShowTODOUsuarios(listaUsuarios);
+                            }
+    
+                        }
+                        idBorrado = Funciones.leerInt("Introduce el ID del registro que quieras ELIMINAR: ");
+                        estadoBorrado = Funciones.deletePorID(idBorrado, eleccionTabla);
+                        if(estadoBorrado == true){
+                            System.out.println("Se ha borrado el Registro de "+tabla+" con exito!");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Ha ocurrido un error en el borrado!: "+ e.getMessage());
+                    }
+                }
+                case 0 -> {
+                    System.out.println("Volviendo atrás...");
+                }
+                
+            }
+            
+        }
+
     }
 
     public static void menuGuardarDatos() throws Exception {
@@ -267,7 +333,8 @@ public class Main {
                 Impresiones.selectOperadores();
                 operador = Funciones.selectOperator();
                 try {
-                    int idUsuario = Funciones.leerInt("Introduce el ID del Usuario con el que quieres obtener el Post: ");
+                    int idUsuario = Funciones
+                            .leerInt("Introduce el ID del Usuario con el que quieres obtener el Post: ");
                     List<Post> postObtenido = Funciones.obtenerPostPor(idUsuario, operador, respuestaSubMenuPost);
                     ImpresionesRespuestas.respuestaShowPostPorIDUsuario(postObtenido);
 
@@ -285,13 +352,14 @@ public class Main {
                     System.out.println("Para poder trabajar con la Fecha de actualización debes introducir: ");
 
                 }
-                try{
+                try {
                     fecha = Funciones.obtenerFecha();
                     listaPost = Funciones.obtenerPostPorDATE(fecha, operador, respuestaSubMenuPost);
                     ImpresionesRespuestas.respuestaShowPostPorDate(listaPost, respuestaSubMenuPost);
-                        
-                }catch(SQLDataException fechaErr){
-                    System.err.println("Has introducido incorrectamente la fecha, vuelve a intentarlo " + fechaErr.getMessage());
+
+                } catch (SQLDataException fechaErr) {
+                    System.err.println(
+                            "Has introducido incorrectamente la fecha, vuelve a intentarlo " + fechaErr.getMessage());
                 }
             }
 
@@ -341,4 +409,5 @@ public class Main {
             case 0 -> System.out.println("Volviendo atrás...");
         }
     }
+
 }

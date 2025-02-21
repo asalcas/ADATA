@@ -177,8 +177,77 @@ public class Funciones {
     }
 
     // #endregion
-    public static void delete(){
+    public static boolean deletePorID(int id, int eleccionTabla) throws Exception{
+        boolean estadoBorrado = false;
+        instancia = new AccesoBD();
+        instancia.abrir();
+        sesion = instancia.get_sesion();
+        try {
+            
+            switch(eleccionTabla){
+                case 1 -> {
+                    // Usuario
+                    
+                    Usuarios usuarioRemove = sesion.get(Usuarios.class, id);
+                    sesion.remove(usuarioRemove);
+                }
+                case 2 -> {
+                    // Post
+                    
+                    Post postRemove = sesion.get(Post.class, id);
+                    sesion.remove(postRemove);
+                }
+                case 3 -> {
+                    // Likes
+                    
+                    Likes likeRemove = sesion.get(Likes.class, id);
+                    sesion.remove(likeRemove);
+                }
+                case 0 ->{
+                    System.out.println("Volviendo atrás...");
+                }
+                
+            }
+            estadoBorrado = true;
+        } catch (Exception e) {
+            System.out.println("Ha ocurrido un error al Eliminar Registros por ID: "+ e.getMessage());
+        }
+        instancia.cerrar();   
+        return estadoBorrado;
+    }
+
+    public static void deleteAll(int eleccionTabla) throws Exception {
+        instancia = new AccesoBD();
+        instancia.abrir();
+        sesion = instancia.get_sesion();
+        switch (eleccionTabla) {
+            case 1 -> {
+                // Borramos todo usuarios
+                List<Usuarios> listaUsuarios = obtenerTodosLosUsuarios();
+                for (Usuarios usuario : listaUsuarios) {
+                    sesion.remove(usuario);
+                }
+            }
+            case 2 -> {
+                // Borramos todo Posts
+                List<Post> listaPosts = obtenerTodosLosPost();
+                for (Post post : listaPosts) {
+                    sesion.remove(post);
+                }
+            }
+            case 3 -> {
+                // Borramos todo Likes
+                List<Likes> listaLikes = obtenerTodosLosLikes();
+                for (Likes like : listaLikes) {
+                    sesion.remove(like);
+                }
+            }
+            case 0 -> {
+                System.out.println("Volviendo atrás...");
+            }
+        }
         
+        instancia.cerrar(); // ERROR CERQUITA DE AQUI
     }
 
     public static String selectOperator() {
