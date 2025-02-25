@@ -38,9 +38,9 @@ public class Post {
     public Post(){
 
     }
-    public Post(Usuarios usuario, LocalDate created_at, LocalDate updated_at){
-        this.usuario = usuario;
-        this.created_at = created_at;
+    public Post(Usuarios Usuario, LocalDate Created_at, LocalDate updated_at){
+        this.usuario = Usuario;
+        this.created_at = Created_at;
         this.updated_at = null;
     }
 

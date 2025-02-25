@@ -64,6 +64,11 @@ public class Main {
         boolean estadoBorrado = false;
 
         eleccionTabla = Funciones.leerInt("Introduce tu elección: ");
+
+        //! PARA ASIGNAR COSAS INTENTAR USAR DICCIONARIOS!
+        
+        // eleccionTabla = [{1 = "Usuarios"}] o algo así
+
         switch (eleccionTabla) {
             case 1 -> {
                 tabla = "Usuarios";
@@ -120,7 +125,6 @@ public class Main {
             }
             
         }
-
     }
 
     public static void menuGuardarDatos() throws Exception {

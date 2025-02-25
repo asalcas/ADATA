@@ -225,21 +225,21 @@ public class Funciones {
                 // Borramos todo usuarios
                 List<Usuarios> listaUsuarios = obtenerTodosLosUsuarios();
                 for (Usuarios usuario : listaUsuarios) {
-                    sesion.remove(usuario);
+                    sesion.remove(usuario); // EL ERROR ESTÁ AQUI EN TEORIA DEBO CREAR UNA SESION POR CADA REMOVE
                 }
             }
             case 2 -> {
                 // Borramos todo Posts
                 List<Post> listaPosts = obtenerTodosLosPost();
                 for (Post post : listaPosts) {
-                    sesion.remove(post);
+                    sesion.remove(post); // EL ERROR ESTÁ AQUI EN TEORIA DEBO CREAR UNA SESION POR CADA REMOVE
                 }
             }
             case 3 -> {
                 // Borramos todo Likes
                 List<Likes> listaLikes = obtenerTodosLosLikes();
                 for (Likes like : listaLikes) {
-                    sesion.remove(like);
+                    sesion.remove(like); // EL ERROR ESTÁ AQUI EN TEORIA DEBO CREAR UNA SESION POR CADA REMOVE
                 }
             }
             case 0 -> {
