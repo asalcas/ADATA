@@ -3,7 +3,6 @@ package hibernate2proyecto;
 import java.sql.SQLDataException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Scanner;
 
 import org.hibernate.PropertyValueException;
 
@@ -13,14 +12,13 @@ import Models.Usuarios;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+
         int opcionSwitch;
         String verbo = "";
 
         do {
             Impresiones.inicio();
-            opcionSwitch = sc.nextInt();
-            sc.nextLine();
+            opcionSwitch = Funciones.leerInt(Colores.ANSI_YELLOW + "Selecciona una opción: " + Colores.ANSI_RESET);
             try {
                 switch (opcionSwitch) {
                     case 1 -> {
@@ -43,17 +41,17 @@ public class Main {
                         menuBorrarDatos();
                     }
                     case 0 -> {
-                        System.out.println("Nos vemos pronto!");
+                        System.out.println(Colores.ANSI_YELLOW + "Nos vemos pronto!" + Colores.ANSI_RESET);
                         System.out.println("( ^-^)/");
                     }
 
                 }
             } catch (Exception e) {
-                System.err.println("Ha ocurrido un error con la operación: " + verbo + ": " + e.getMessage());
+                System.err.println(
+                        Colores.ANSI_RED + "Ha ocurrido un error con la operación: " + verbo + ": " + e.getMessage());
             }
         } while (opcionSwitch != 0);
 
-        sc.close();
     }
 
     public static void menuBorrarDatos() throws Exception {
@@ -61,12 +59,12 @@ public class Main {
         int eleccionCantidad;
         int eleccionTabla;
         int idBorrado;
-        boolean estadoBorrado = false;
+        boolean estadoBorrado;
 
-        eleccionTabla = Funciones.leerInt("Introduce tu elección: ");
+        eleccionTabla = Funciones.leerInt(Colores.ANSI_YELLOW + "Introduce tu elección: " + Colores.ANSI_RESET);
 
-        //! PARA ASIGNAR COSAS INTENTAR USAR DICCIONARIOS!
-        
+        // ! PARA ASIGNAR COSAS INTENTAR USAR DICCIONARIOS!
+
         // eleccionTabla = [{1 = "Usuarios"}] o algo así
 
         switch (eleccionTabla) {
@@ -86,7 +84,7 @@ public class Main {
         }
         if (eleccionTabla > 0 && eleccionTabla <= 3) {
             Impresiones.menuSeleccionaTablaBorrar(tabla);
-            eleccionCantidad = Funciones.leerInt("Introduce tu elección: ");
+            eleccionCantidad = Funciones.leerInt(Colores.ANSI_YELLOW + "Introduce tu elección: " + Colores.ANSI_RESET);
             switch (eleccionCantidad) {
                 case 1 -> {
                     // Toda la tabla
@@ -107,23 +105,26 @@ public class Main {
                                 List<Usuarios> listaUsuarios = Funciones.obtenerTodosLosUsuarios();
                                 ImpresionesRespuestas.respuestaShowTODOUsuarios(listaUsuarios);
                             }
-    
+
                         }
-                        idBorrado = Funciones.leerInt("Introduce el ID del registro que quieras ELIMINAR: ");
+                        idBorrado = Funciones.leerInt(Colores.ANSI_YELLOW
+                                + "Introduce el ID del registro que quieras ELIMINAR: " + Colores.ANSI_RESET);
                         estadoBorrado = Funciones.deletePorID(idBorrado, eleccionTabla);
-                        if(estadoBorrado == true){
-                            System.out.println("Se ha borrado el Registro de "+tabla+" con exito!");
+                        if (estadoBorrado == true) {
+                            System.out.println(Colores.ANSI_GREEN + "Se ha borrado el Registro de " + tabla
+                                    + " con exito!" + Colores.ANSI_RESET);
                         }
                     } catch (Exception e) {
-                        System.out.println("Ha ocurrido un error en el borrado!: "+ e.getMessage());
+                        System.out.println(Colores.ANSI_RED + "Ha ocurrido un error en el borrado!: "
+                                + Colores.ANSI_RESET + e.getMessage());
                     }
                 }
                 case 0 -> {
                     System.out.println("Volviendo atrás...");
                 }
-                
+                    //! ANTES DE REALIZAR UN BORRADO, HE DE AVISAR: MANDA MENSAJE DE AVISO Y UNA RESPUESTA, ya que se borra todo
             }
-            
+
         }
     }
 
@@ -143,16 +144,17 @@ public class Main {
         int likesIDUsuarios;
 
         Impresiones.menuGuardar();
-        int eleccionDatoGuardar = Funciones.leerInt("Introduce tu elección: ");
+        int eleccionDatoGuardar = Funciones
+                .leerInt(Colores.ANSI_YELLOW + "Introduce tu elección: " + Colores.ANSI_RESET);
 
         switch (eleccionDatoGuardar) {
             case 1 -> {
                 Impresiones.guardarDatosUSUARIO();
-                nombre = Funciones.leerString("1. Nombre: ");
-                apellido = Funciones.leerString("2. Apellido: ");
-                username = Funciones.leerString("3. Username: ");
-                password = Funciones.leerString("4. Contraseña: ");
-                email = Funciones.leerString("5. Email: ");
+                nombre = Funciones.leerString(Colores.ANSI_YELLOW + "1. Nombre: " + Colores.ANSI_RESET);
+                apellido = Funciones.leerString(Colores.ANSI_YELLOW + "2. Apellido: " + Colores.ANSI_RESET);
+                username = Funciones.leerString(Colores.ANSI_YELLOW + "3. Username: " + Colores.ANSI_RESET);
+                password = Funciones.leerString(Colores.ANSI_YELLOW + "4. Contraseña: " + Colores.ANSI_RESET);
+                email = Funciones.leerString(Colores.ANSI_YELLOW + "5. Email: ");
                 Usuarios usuarioNuevo = Funciones.guardarUsuarios(nombre, apellido, username, password, email);
                 ImpresionesRespuestas.usuarioGuardado(usuarioNuevo);
             }
@@ -161,7 +163,8 @@ public class Main {
                 ImpresionesRespuestas.respuestaShowTODOUsuarios(listaUsuarios);
                 Impresiones.guardarDatosPOST();
 
-                idUsuarioPOST = Funciones.leerInt("Id del Usuario del post: ");
+                idUsuarioPOST = Funciones
+                        .leerInt(Colores.ANSI_YELLOW + "Id del Usuario del post: " + Colores.ANSI_RESET);
                 Usuarios usuarioPost = Funciones.obtenerUsuarioPorID(idUsuarioPOST);
                 create_at = LocalDate.now();
                 updated_at = null;
@@ -172,7 +175,8 @@ public class Main {
                 List<Usuarios> listaUsuarios = Funciones.obtenerTodosLosUsuarios();
                 ImpresionesRespuestas.respuestaShowTODOUsuarios(listaUsuarios);
                 Impresiones.guardarDatosLikes();
-                likesIDUsuarios = Funciones.leerInt("Introduce el Id del Usuario: ");
+                likesIDUsuarios = Funciones
+                        .leerInt(Colores.ANSI_YELLOW + "Introduce el Id del Usuario: " + Colores.ANSI_RESET);
                 usuarioSeleccionado = Funciones.obtenerUsuarioPorID(likesIDUsuarios);
                 System.out.println();
                 try {
@@ -182,20 +186,26 @@ public class Main {
                 }
                 if (listaPost != null) {
                     ImpresionesRespuestas.respuestaShowTODOPost(listaPost);
-                    likesIDPost = Funciones.leerInt("Introduce el Id del Post al que daremos Like: ");
+                    likesIDPost = Funciones.leerInt(Colores.ANSI_YELLOW
+                            + "Introduce el Id del Post al que daremos Like: " + Colores.ANSI_RESET);
                     postSeleccionado = Funciones.obtenerPostPorID(likesIDPost);
                     try {
                         Likes likeGuardado = Funciones.guardarLikes(usuarioSeleccionado, postSeleccionado);
                         ImpresionesRespuestas.likeGuardado(likeGuardado);
                     } catch (PropertyValueException e) {
                         if ("idPost".equals(e.getPropertyName())) {
-                            System.err.println("\n ERROR: No puedes crear un Like si no tenemos un Post válido!\n");
+                            System.err.println(Colores.ANSI_RED
+                                    + "\n ERROR: No puedes crear un Like si no tenemos un Post válido!\n"
+                                    + Colores.ANSI_RESET);
                         } else if ("idUsuario".equals(e.getPropertyName())) {
-                            System.err.println("\n ERROR: No puedes crear un Like si no tienes un Usuario válido\n!");
+                            System.err.println(Colores.ANSI_RED
+                                    + "\n ERROR: No puedes crear un Like si no tienes un Usuario válido\n!"
+                                    + Colores.ANSI_RESET);
                         }
                     }
                 } else {
-                    System.out.println("La lista de post está vacía, primero debes CREAR un Post. ");
+                    System.out.println(Colores.ANSI_RED + "La lista de post está vacía, primero debes CREAR un Post. "
+                            + Colores.ANSI_RESET);
 
                 }
             }
@@ -205,7 +215,8 @@ public class Main {
     }
 
     public static void menuObtenerDatos() throws Exception {
-        int respuestaMenuUsuario = Funciones.leerInt("Introduce tu elección: ");
+        int respuestaMenuUsuario = Funciones
+                .leerInt(Colores.ANSI_YELLOW + "Introduce tu elección: " + Colores.ANSI_RESET);
         switch (respuestaMenuUsuario) {
             case 1 -> menuObtenerDatosUsuario();
             case 2 -> menuObtenerDatosPost();
@@ -222,7 +233,7 @@ public class Main {
         int inputID;
 
         Impresiones.menuObtenerDatosLikes();
-        respuestaMenuLikes = Funciones.leerInt("Introduce tu elección: ");
+        respuestaMenuLikes = Funciones.leerInt(Colores.ANSI_YELLOW + "Introduce tu elección: " + Colores.ANSI_RESET);
         switch (respuestaMenuLikes) {
             case 1 -> {
                 listaLikes = Funciones.obtenerTodosLosLikes();
@@ -231,7 +242,8 @@ public class Main {
             case 2 -> {
                 Impresiones.selectOperadores();
                 operador = Funciones.selectOperator();
-                inputID = Funciones.leerInt("Introduce el ID de Like con el que quieres realizar la búsqueda: ");
+                inputID = Funciones.leerInt(Colores.ANSI_YELLOW
+                        + "Introduce el ID de Like con el que quieres realizar la búsqueda: " + Colores.ANSI_RESET);
                 listaLikes = Funciones.obtenerLikesPor(inputID, operador, respuestaMenuLikes);
                 ImpresionesRespuestas.respuestaShowLikesPor(listaLikes, respuestaMenuLikes); // POR ID LIKE
             }
@@ -240,7 +252,8 @@ public class Main {
                 operador = Funciones.selectOperator();
                 List<Usuarios> listaUsuarios = Funciones.obtenerTodosLosUsuarios();
                 ImpresionesRespuestas.respuestaShowTODOUsuarios(listaUsuarios);
-                inputID = Funciones.leerInt("Introduce el ID de Usuarios con el que quieres realizar la búsqueda: ");
+                inputID = Funciones.leerInt(Colores.ANSI_YELLOW
+                        + "Introduce el ID de Usuarios con el que quieres realizar la búsqueda: " + Colores.ANSI_RESET);
                 listaLikes = Funciones.obtenerLikesPor(inputID, operador, respuestaMenuLikes);
                 ImpresionesRespuestas.respuestaShowLikesPor(listaLikes, respuestaMenuLikes); // POR ID USUARIO
             }
@@ -250,7 +263,8 @@ public class Main {
                 List<Post> listaPost = Funciones.obtenerTodosLosPost();
                 ImpresionesRespuestas.respuestaShowTODOPost(listaPost);
                 Funciones.obtenerTodosLosPost();
-                inputID = Funciones.leerInt("Introduce el ID de Post con el que quieres realizar la búsqueda: ");
+                inputID = Funciones.leerInt(Colores.ANSI_YELLOW
+                        + "Introduce el ID de Post con el que quieres realizar la búsqueda: " + Colores.ANSI_RESET);
                 listaLikes = Funciones.obtenerLikesPor(inputID, operador, respuestaMenuLikes);
                 ImpresionesRespuestas.respuestaShowLikesPor(listaLikes, respuestaMenuLikes); // POR ID POST
             }
@@ -267,14 +281,16 @@ public class Main {
         String columna = "";
 
         Impresiones.menuObtenerDatosUsuarios();
-        int respuestaSubMenuUsuario = Funciones.leerInt("Introduce tu elección: ");
+        int respuestaSubMenuUsuario = Funciones
+                .leerInt(Colores.ANSI_YELLOW + "Introduce tu elección: " + Colores.ANSI_RESET);
         switch (respuestaSubMenuUsuario) {
             case 1 -> {
                 List<Usuarios> listaUsuarios = Funciones.obtenerTodosLosUsuarios();
                 ImpresionesRespuestas.respuestaShowTODOUsuarios(listaUsuarios);
             }
             case 2 -> {
-                int idUsuario = Funciones.leerInt("Introduce un ID para realizar la busqueda: ");
+                int idUsuario = Funciones.leerInt(
+                        Colores.ANSI_YELLOW + "Introduce un ID para realizar la busqueda: " + Colores.ANSI_RESET);
                 Usuarios usuario = Funciones.obtenerUsuarioPorID(idUsuario);
                 ImpresionesRespuestas.respuestaShowUsuarioPorID(usuario);
             }
@@ -286,18 +302,22 @@ public class Main {
                         case 5 -> columna = "Username";
                         case 6 -> columna = "Email";
                     }
-                    inputUsuario = Funciones.leerString("Introduce un String para realizar la busqueda: ");
+                    inputUsuario = Funciones.leerString(Colores.ANSI_YELLOW
+                            + "Introduce un String para realizar la busqueda: " + Colores.ANSI_RESET);
 
                     List<Usuarios> listaUsuariosPorParametros = Funciones.obtenerUsuariosPor(inputUsuario, columna);
                     ImpresionesRespuestas.respuestaShowUsuarioPorParametro(listaUsuariosPorParametros, columna);
                 } catch (Exception e) {
-                    System.err.println("Has introducido una opción erronea, vuelve a intentarlo más tarde.");
+                    System.err.println(
+                            Colores.ANSI_RED + "Has introducido una opción erronea, vuelve a intentarlo más tarde."
+                                    + Colores.ANSI_RESET);
                 }
             }
 
             case 0 -> System.out.println("Volviendo atrás...");
 
-            default -> System.err.println("Has introducido una opción erronea, vuelve a intentarlo más tarde.");
+            default -> System.err.println(Colores.ANSI_RED
+                    + "Has introducido una opción erronea, vuelve a intentarlo más tarde." + Colores.ANSI_RESET);
         }
     }
 
@@ -307,7 +327,7 @@ public class Main {
         List<Post> listaPost;
         String fecha;
         Impresiones.menuObtenerDatosPost();
-        respuestaSubMenuPost = Funciones.leerInt("Introduce tu elección: ");
+        respuestaSubMenuPost = Funciones.leerInt(Colores.ANSI_YELLOW + "Introduce tu elección: " + Colores.ANSI_RESET);
 
         switch (respuestaSubMenuPost) {
             case 1 -> {
@@ -315,7 +335,7 @@ public class Main {
                     listaPost = Funciones.obtenerTodosLosPost();
                     ImpresionesRespuestas.respuestaShowTODOPost(listaPost);
                 } catch (Exception e) {
-                    System.err.println("\nLa lista de Post está vacía!\n");
+                    System.err.println(Colores.ANSI_RED + "\nLa lista de Post está vacía!\n" + Colores.ANSI_RESET);
                 }
             }
 
@@ -325,12 +345,13 @@ public class Main {
                     Impresiones.selectOperadores();
                     operador = Funciones.selectOperator();
 
-                    int idPost = Funciones.leerInt("Introduce el ID del Post que quieres obtener: ");
+                    int idPost = Funciones.leerInt(Colores.ANSI_YELLOW
+                            + "Introduce el ID del Post que quieres obtener: " + Colores.ANSI_RESET);
                     List<Post> postObtenido = Funciones.obtenerPostPor(idPost, operador, respuestaSubMenuPost);
                     ImpresionesRespuestas.respuestaShowPostPorIDPost(postObtenido);
 
                 } catch (Exception e) {
-                    System.out.println("\nNo existe ese Post!\n");
+                    System.out.println(Colores.ANSI_RED + "\nNo existe ese Post!\n" + Colores.ANSI_RESET);
                 }
             }
             case 3 -> {
@@ -338,22 +359,27 @@ public class Main {
                 operador = Funciones.selectOperator();
                 try {
                     int idUsuario = Funciones
-                            .leerInt("Introduce el ID del Usuario con el que quieres obtener el Post: ");
+                            .leerInt(Colores.ANSI_YELLOW
+                                    + "Introduce el ID del Usuario con el que quieres obtener el Post: "
+                                    + Colores.ANSI_RESET);
                     List<Post> postObtenido = Funciones.obtenerPostPor(idUsuario, operador, respuestaSubMenuPost);
                     ImpresionesRespuestas.respuestaShowPostPorIDUsuario(postObtenido);
 
                 } catch (Exception e) {
-                    System.out.println("\nNo existe ese Post!\n");
+                    System.out.println(Colores.ANSI_RED + "\nNo existe ese Post!\n" + Colores.ANSI_RESET);
                 }
             }
             case 4, 5 -> {
                 Impresiones.selectOperadores();
                 operador = Funciones.selectOperator();
                 if (respuestaSubMenuPost == 4) {
-                    System.out.println("Para poder trabajar con la Fecha de creación debes introducir: ");
+                    System.out.println(Colores.ANSI_YELLOW
+                            + "Para poder trabajar con la Fecha de creación debes introducir: " + Colores.ANSI_RESET);
 
                 } else if (respuestaSubMenuPost == 5) {
-                    System.out.println("Para poder trabajar con la Fecha de actualización debes introducir: ");
+                    System.out.println(
+                            Colores.ANSI_YELLOW + "Para poder trabajar con la Fecha de actualización debes introducir: "
+                                    + Colores.ANSI_RESET);
 
                 }
                 try {
@@ -362,12 +388,15 @@ public class Main {
                     ImpresionesRespuestas.respuestaShowPostPorDate(listaPost, respuestaSubMenuPost);
 
                 } catch (SQLDataException fechaErr) {
-                    System.err.println(
-                            "Has introducido incorrectamente la fecha, vuelve a intentarlo " + fechaErr.getMessage());
+                    System.err.println(Colores.ANSI_RED +
+                            "Has introducido incorrectamente la fecha, vuelve a intentarlo " + Colores.ANSI_RESET
+                            + fechaErr.getMessage());
                 }
             }
 
             default -> {
+                System.out.println(Colores.ANSI_RED + "Has introducido una respuesta inválida, vuelve a intentarlo."
+                        + Colores.ANSI_RESET);
             }
         }
 
@@ -378,33 +407,40 @@ public class Main {
         int idUsuario;
         int idPost;
         int idLike;
-        int respuestaMenuActualizar = Funciones.leerInt("Seleccione una opción: ");
+        int respuestaMenuActualizar = Funciones
+                .leerInt(Colores.ANSI_YELLOW + "Seleccione una opción: " + Colores.ANSI_RESET);
         switch (respuestaMenuActualizar) {
             case 1 -> {
                 Impresiones.menuActualizarUsuario();
-                eleccionActualizar = Funciones.leerInt("Seleccione una opción: ");
+                eleccionActualizar = Funciones
+                        .leerInt(Colores.ANSI_YELLOW + "Seleccione una opción: " + Colores.ANSI_RESET);
                 List<Usuarios> listaUsuarios = Funciones.obtenerTodosLosUsuarios();
                 ImpresionesRespuestas.respuestaShowTODOUsuarios(listaUsuarios);
-                idUsuario = Funciones.leerInt("Selecciona el ID del Usuario a actualizar: ");
+                idUsuario = Funciones.leerInt(
+                        Colores.ANSI_YELLOW + "Selecciona el ID del Usuario a actualizar: " + Colores.ANSI_RESET);
                 Usuarios usuarioGuardado = Funciones.updateUsuario(idUsuario, eleccionActualizar);
                 ImpresionesRespuestas.usuarioActualizado(usuarioGuardado);
             }
             case 2 -> {
                 Impresiones.menuActualizarPost();
-                eleccionActualizar = Funciones.leerInt("Seleccione una opción: ");
+                eleccionActualizar = Funciones
+                        .leerInt(Colores.ANSI_YELLOW + "Seleccione una opción: " + Colores.ANSI_RESET);
                 List<Post> listaPost = Funciones.obtenerTodosLosPost();
                 ImpresionesRespuestas.respuestaShowTODOPost(listaPost);
-                idPost = Funciones.leerInt("Selecciona el ID del Post a actualizar: ");
+                idPost = Funciones
+                        .leerInt(Colores.ANSI_YELLOW + "Selecciona el ID del Post a actualizar: " + Colores.ANSI_RESET);
                 Post postGuardado = Funciones.updatePost(idPost, eleccionActualizar);
                 ImpresionesRespuestas.postActualizado(postGuardado);
             }
 
             case 3 -> {
                 Impresiones.menuActualizarLikes();
-                eleccionActualizar = Funciones.leerInt("Selecciona una opción: ");
+                eleccionActualizar = Funciones
+                        .leerInt(Colores.ANSI_YELLOW + "Selecciona una opción: " + Colores.ANSI_RESET);
                 List<Likes> listaLikes = Funciones.obtenerTodosLosLikes();
                 ImpresionesRespuestas.respuestaShowTODOLikes(listaLikes);
-                idLike = Funciones.leerInt("Escribe el ID del Like a actualizar: ");
+                idLike = Funciones
+                        .leerInt(Colores.ANSI_YELLOW + "Escribe el ID del Like a actualizar: " + Colores.ANSI_RESET);
                 Likes likeActualizado = Funciones.updateLike(idLike, eleccionActualizar);
                 ImpresionesRespuestas.likeActualizado(likeActualizado);
 
