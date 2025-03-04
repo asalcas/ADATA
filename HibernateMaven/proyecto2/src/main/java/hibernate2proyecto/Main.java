@@ -210,7 +210,7 @@ public class Main {
                 }
             }
             case 0 -> System.out.println("Volviendo atras...");
-            default -> throw new AssertionError();
+            default -> System.out.println("La opción no es correcta");
         }
     }
 
